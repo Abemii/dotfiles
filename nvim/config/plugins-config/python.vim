@@ -239,10 +239,27 @@ augroup END
 " code running
 let g:pymode_run=1
 let g:pymode_run_bind='<F5>'
-let g:ale_sign_column_always=0
-let g:ale_emit_conflict_warnings=0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
+
+" Linting (ale)
+let g:ale_sign_column_always = 1
+let g:ale_completion_enabled = 0
+let g:ale_set_highlights = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+    \ 'python': ['pyls'],
+    \ 'rust': ['rls'],
+    \ 'latex': ['chktex', 'lacheck']
+    \}
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+    \ 'python': ['autopep8'],
+    \ 'rust': ['rustfmt'],
+    \}
+nmap <F5> :ALEFix<CR>
+let g:ale_emit_conflict_warnings=0
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 

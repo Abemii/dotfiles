@@ -1,62 +1,58 @@
 call plug#begin(plugged_path)
+
 " Make sure you use single quotes
 " Add all your plugins here
 
-"-------------------=== General ===-------------
-" Completion
-Plug 'maralla/completor.vim'
+" ====================
+" -- Auto Complete ---
+" ====================
+Plug 'maralla/completor.vim'              " completion
 
-" " Fuzzy finder
-" Plug '/bin/fzf'
-" Plug 'junegunn/fzf.vim'
+" ====================
+" -- Auto Pairs ------
+" ====================
+Plug 'jiangmiao/auto-pairs'               " pairs
+Plug 'tpope/vim-surround'                 " surroundings
 
-" Pairs
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
+" ====================
+" -- Comment Out -----
+" ====================
+Plug 'tpope/vim-commentary'               " Comment codes
 
-" Comment codes
-Plug 'tpope/vim-commentary'
 
-" Git wrapper
-" Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'                 " Git wrapper
 
-" Status line
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'            " Very cool status line
 
-" Tree explorer
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'                " Tree explorer
 
-" Tagbar
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'                  " Where am I (funtions)
 
-" Markdown
-Plug 'iamcco/markdown-preview.vim'
-Plug 'iamcco/mathjax-support-for-mkdp'
+" ====================
+" -- Markdown --------
+" ====================
+Plug 'iamcco/markdown-preview.vim'        " Markdown Preview
+Plug 'iamcco/mathjax-support-for-mkdp'    " Markdown Preview (Math)
 
-" LaTeX
-Plug 'lervag/vimtex'
+" ====================
+" == LaTeX ===========
+" ====================
+Plug 'lervag/vimtex'                      " LaTeX
+Plug 'thinca/vim-quickrun'                " LaTeX
 
 " Python Syntax
 Plug 'scrooloose/syntastic'
 
-" " Python auto completion
-" Plug 'davidhalter/jedi-vim'
-
-" Auto completion
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" Python auto completion
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'zchee/deoplete-jedi'
 
 " Color Scheme
-Plug 'jacoborus/tender.vim'
-Plug 'jdkanani/vim-material-theme'
+" Plug 'jacoborus/tender.vim'
+" Plug 'jdkanani/vim-material-theme'
 
 "-------------------=== Code/Project navigation ===-------------
 
@@ -92,7 +88,7 @@ Plug 'Raimondi/delimitMate'               " Auto-close brackets
 "-------------------=== Languages support ===-----------------------
 Plug 'scrooloose/nerdcommenter'           " Easy code documentation
 Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'                           " Asynchronous Code Check
 
 "-------------------=== Python ===----------------------------------
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)

@@ -1,11 +1,4 @@
 "---------- Editor Preferences ----------"
-" Color scheme
-if (has("termguicolors"))
-    set termguicolors
-endif
-syntax enable
-set background=dark
-color material-theme
 
 " Show line number
 set number
@@ -61,11 +54,6 @@ set guifont=DroidSansMono\ Nerd\ Font\ 12
 if (has("termguicolors"))
    set termguicolors
 endif
-
-colorscheme onehalfdark
-" colorscheme ayu
-" let ayucolor="dark"
-syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog='/usr/bin/python'
