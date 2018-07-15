@@ -58,7 +58,7 @@ endif
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog='/usr/bin/python'
-let g:python3_host_prog='/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin/python'
+let g:python3_host_prog=substitute(system('which python3'),"\n","","")
 set shell=/usr/local/bin/fish
 set number                                " show line numbers
 set ruler
