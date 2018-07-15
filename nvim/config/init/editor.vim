@@ -48,7 +48,8 @@ set encoding=utf8
 set t_Co=256
 let base16colorspace=256
 set background=dark
-set guifont=DroidSansMono\ Nerd\ Font\ 12
+" set guifont=DroidSansMono\ Nerd\ Font\ 12
+set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 " NOTE: This is only compatible with Guake 3.X.
 " Check issue: https://github.com/Guake/guake/issues/772
 if (has("termguicolors"))

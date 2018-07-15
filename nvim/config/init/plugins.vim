@@ -1,22 +1,13 @@
 call plug#begin(plugged_path)
 
-" Make sure you use single quotes
-" Add all your plugins here
-
-" ====================
-" -- Auto Complete ---
-" ====================
+"--------------------=== Auto Complete ===--------------------
 Plug 'maralla/completor.vim'              " completion
 
-" ====================
-" -- Auto Pairs ------
-" ====================
+"--------------------=== Auto Pairs ===--------------------
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
 
-" ====================
 " -- Comment Out -----
-" ====================
 Plug 'tpope/vim-commentary'               " Comment codes
 
 
@@ -26,17 +17,12 @@ Plug 'vim-airline/vim-airline'            " Very cool status line
 
 Plug 'scrooloose/nerdtree'                " Tree explorer
 
-Plug 'majutsushi/tagbar'                  " Where am I (funtions)
 
-" ====================
 " -- Markdown --------
-" ====================
 Plug 'iamcco/markdown-preview.vim'        " Markdown Preview
 Plug 'iamcco/mathjax-support-for-mkdp'    " Markdown Preview (Math)
 
-" ====================
 " == LaTeX ===========
-" ====================
 Plug 'lervag/vimtex'                      " LaTeX
 Plug 'thinca/vim-quickrun'                " LaTeX
 
@@ -50,9 +36,6 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'zchee/deoplete-jedi'
 
-" Color Scheme
-" Plug 'jacoborus/tender.vim'
-" Plug 'jdkanani/vim-material-theme'
 
 "-------------------=== Code/Project navigation ===-------------
 
@@ -78,8 +61,8 @@ Plug 'chriskempson/base16-vim'            " Base 16 colors
 Plug 'ryanoasis/vim-devicons'             " Dev Icons
 Plug 'arcticicestudio/nord-vim'           " Nord colorscheme
 Plug 'ayu-theme/ayu-vim'                  " Ayu colorscheme
-Plug 'sonph/onehalf', {'rtp': 'vim/'}     " One1/2 colorschme
 Plug 'mhartington/oceanic-next'           " Oceanic-next colorscheme
+Plug 'sonph/onehalf', {'rtp': 'vim/'}     " One1/2 colorschme
 
 "-------------------=== Snippets support ===------------------------
 Plug 'honza/vim-snippets'                 " snippets repo
