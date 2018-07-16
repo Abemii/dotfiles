@@ -31,11 +31,11 @@ nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impu
 " --------------------------
 " Airline settings - uncomment if you want to use vim-airline over lightline
 " --------------------------
-" let g:airline#extensions#tabline#enabled=1
-" let g:airline#extensions#tabline#formatter='unique_tail'
-" let g:airline_powerline_fonts=1
-" let g:airline#extensions#ale#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " --------------------
 " Lightline settings
@@ -151,6 +151,7 @@ let g:DevIconsEnableFolderPatternMatching = 1
 
 " enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
 let g:DevIconsEnableFolderExtensionPatternMatching = 0
+
 
 " -----------------------
 " SnipMate settings

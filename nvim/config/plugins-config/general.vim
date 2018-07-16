@@ -2,7 +2,7 @@
 " Color Scheme
 colorscheme onehalfdark
 
-" Completion
+" Auto Complete
 let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
 let g:completor_html_omni_trigger = '<?[a-z].*$'
 let g:completor_php_omni_trigger = '([$\w]+|use\s*|->[$\w]*|::[$\w]*|implements\s*|extends\s*|class\s+[$\w]+|new\s*)$'
