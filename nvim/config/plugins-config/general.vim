@@ -66,5 +66,8 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 " deoplete-jedi settings
 " let g:python3_host_prog = ''
 
+
+
 syntax enable                             " enable syntaax highlighting
+
 

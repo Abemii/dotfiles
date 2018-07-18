@@ -33,6 +33,9 @@ set ignorecase
 " Show whitespaces at eol
 autocmd BufNewFile,BufRead * match Error /\s\+$/
 
+" map leader
+let mapleader = "\<Space>"
+
 
 
 "-------------------

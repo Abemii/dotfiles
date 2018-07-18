@@ -31,3 +31,25 @@ let g:vimtex_compiler_latexmk = {
     \   '-interaction=nonstopmode',
     \ ],
     \}
+
+" quickrun config
+let g:quickrun_config['tex'] = {
+    \   'command' : 'latexmk',
+    \   'srcfile' : expand("%"),
+    \   'cmdopt'  : '-pdfdvi',
+    \   'hook/sweep/files' : [
+    \                        '%S:p:r.aux',
+    \                        '%S:p:r.bbl',
+    \                        '%S:p:r.blg',
+    \                        '%S:p:r.dvi',
+    \                        '%S:p:r.fdb_latexmk',
+    \                        '%S:p:r.fls',
+    \                        '%S:p:r.log',
+    \                        '%S:p:r.out'
+    \                        ],
+    \   'exec' : '%c %o %a %s',
+    \ }
+
+" vim-latex-live-viewer config
+let g:livepreview_previewer = 'open -a Skim'
+let g:livepreview_engine = 'latexmk'

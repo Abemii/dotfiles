@@ -24,7 +24,11 @@ Plug 'iamcco/mathjax-support-for-mkdp'    " Markdown Preview (Math)
 
 " == LaTeX ===========
 Plug 'lervag/vimtex'                      " LaTeX
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
+" -- build -------------
 Plug 'thinca/vim-quickrun'                " LaTeX
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
 " Python Syntax
 Plug 'scrooloose/syntastic'
