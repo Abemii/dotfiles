@@ -2,7 +2,7 @@
 
 " Show line number
 set number
-set mouse=a
+set mouse=v
 
 set guicursor=
 set clipboard+=unnamedplus
@@ -60,9 +60,9 @@ if (has("termguicolors"))
 endif
 
 "let g:loaded_python_provider=1
-let g:python2_host_prog='/usr/bin/python'
+let g:python2_host_prog=''
 let g:python3_host_prog=substitute(system('which python3'),"\n","","")
-set shell=/usr/local/bin/fish
+set shell=$FISH_HOME/local/bin/fish
 set number                                " show line numbers
 set ruler
 set ttyfast                               " terminal acceleration
