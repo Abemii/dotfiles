@@ -40,8 +40,8 @@ nmap <F8> :TagbarToggle<CR>
 
 
 
-" syntastic
-let g:syntastic_python_checkers = ['pydocstyle', 'pycodestyle', 'pyflakes']
+" " syntastic
+" let g:syntastic_python_checkers = ['pydocstyle', 'pycodestyle', 'pyflakes']
 
 "  jedi setting
 " Disable AutoComplPop

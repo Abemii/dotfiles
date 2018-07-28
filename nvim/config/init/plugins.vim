@@ -30,8 +30,9 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 Plug 'thinca/vim-quickrun'                " LaTeX
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
-" Python Syntax
-Plug 'scrooloose/syntastic'
+" This is the culprit of slowing the vim when saved
+" " Python Syntax
+" Plug 'scrooloose/syntastic'
 
 " Python auto completion
 Plug 'davidhalter/jedi-vim'

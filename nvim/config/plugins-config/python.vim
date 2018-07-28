@@ -197,7 +197,7 @@ let g:CtrlSpaceSaveWorkspaceOnExit = 1
 " -----------------------
 
 " python executables for different plugins
-let g:pymode_python='python'
+let g:pymode_python='python3'
 
 " lints
 let g:pymode_lint=0
@@ -250,7 +250,7 @@ let g:ale_set_highlights = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-    \ 'python': ['pyls'],
+    \ 'python': ['flake8'],
     \ 'rust': ['rls'],
     \ 'latex': ['chktex', 'lacheck']
     \}
@@ -261,9 +261,15 @@ let g:ale_fixers = {
     \}
 nmap <F5> :ALEFix<CR>
 let g:ale_emit_conflict_warnings=0
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 1
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
+
