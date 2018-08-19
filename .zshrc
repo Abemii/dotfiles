@@ -84,6 +84,9 @@ export ENHANCD_HOOK_AFTER_CD=ls
 
 if [[ ! -d ~/.zplug  ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
+    if [ $? = 128 ]; then
+        scp -r abemi@pec4130a.hpc.vpl.nii.ac.jp:/home/abemi/.zplug ~/.zplug
+    fi
 fi
 
 source ~/.zplug/init.zsh
