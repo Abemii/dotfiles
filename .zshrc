@@ -20,44 +20,49 @@ if [ `echo $hn | grep 'Mac'` ]; then
     alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
     alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-elif [ `echo $hn | grep 'hpc'` ]; then
-#deleted
-    alias topgpu='watch -n1 nvidia-smi'
-    alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
 
     # my home dir of external storage
 #deleted
     
+    # neovim
+#deleted
+
     # path for python (anaconda)
     export PATH=$EXT_HOME/anaconda3/bin:$PATH
     
     export XAUTHORITY=$EXT_HOME/.Xauthority
     
 #deleted
+
+    if [ `echo $hn | grep 'pec4130'` ]; then
+    	alias topgpu='watch -n1 nvidia-smi'
+    	alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
     
-    # path for cudnn
-    export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
-    export CPATH=$HOME/.cudnn/active/cuda/include:$CPATH
-    export LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LIBRARY_PATH
-    
-    # path for chainer
-    export PATH=/usr/local/cuda-8.0/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
-    export CFLAGS=-I$HOME/.cudnn/active/cuda/include
-    export LDFLAGS=-L$HOME/.cudnn/active/cuda/lib64
-    export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
-    
-    # path for nccl
-    export NCCL_ROOT=$EXT_HOME/nccl
-    export CPATH=$NCCL_ROOT/include:$CPATH
-    export LD_LIBRARY_PATH=$NCCL_ROOT/lib/:$LD_LIBRARY_PATH
-    export LIBRARY_PATH=$NCCL_ROOT/lib/:$LIBRARY_PATH
-    
-    # path for openmpi
-    export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
-    export PATH=$EXT_HOME/openmpi/bin:$PATH
-    
+        # path for cudnn
+        export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+        export CPATH=$HOME/.cudnn/active/cuda/include:$CPATH
+        export LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LIBRARY_PATH
+        
+        # path for chainer
+        export PATH=/usr/local/cuda-8.0/bin:$PATH
+        export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+        export CFLAGS=-I$HOME/.cudnn/active/cuda/include
+        export LDFLAGS=-L$HOME/.cudnn/active/cuda/lib64
+        export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+        
+        # path for nccl
+        export NCCL_ROOT=$EXT_HOME/nccl
+        export CPATH=$NCCL_ROOT/include:$CPATH
+        export LD_LIBRARY_PATH=$NCCL_ROOT/lib/:$LD_LIBRARY_PATH
+        export LIBRARY_PATH=$NCCL_ROOT/lib/:$LIBRARY_PATH
+        
+        # path for openmpi
+        export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
+        export PATH=$EXT_HOME/openmpi/bin:$PATH
+        
 #deleted
+    fi
     
     # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
     # export LD_LIBRARY_PATH="$EXT_HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
