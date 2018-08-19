@@ -139,8 +139,10 @@ bindkey "^N" history-beginning-search-forward-end
 # alias
 alias diff="colordiff"
 alias ls="ls -F --color"
-alias vim='/usr/local/bin/nvim'
-alias ssh='autossh -M 0'
+if [ `echo $hn | grep 'Mac'` ]; then
+    alias vim='/usr/local/bin/nvim'
+    alias ssh='autossh -M 0'
+fi
 
 alias nvvp='/Developer/NVIDIA/CUDA-9.2/bin/nvvp'
 alias quitjupyter="kill '(pgrep jupyter)'"
