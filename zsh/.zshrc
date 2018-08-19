@@ -1,19 +1,75 @@
 # # profiling
 # zmodload zsh/zprof && zprof
 
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+hn=$(hostname)
+if [ `echo $hn | grep 'Mac'` ]; then
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+    export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
+    export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
+    
+    # python
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+
+    # sshfs
+#deleted
+    alias sshfsh='sshfs home:/media/abemi/ボリューム/Users/nattsun/ ~/mph'
+
+    # software launch from commad line
+    alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
+    alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+elif [ `echo $hn | grep 'hpc'` ]; then
+#deleted
+    alias topgpu='watch -n1 nvidia-smi'
+    alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+
+    # my home dir of external storage
+#deleted
+    
+    # path for python (anaconda)
+    export PATH=$EXT_HOME/anaconda3/bin:$PATH
+    
+    export XAUTHORITY=$EXT_HOME/.Xauthority
+    
+#deleted
+    
+    # path for cudnn
+    export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+    export CPATH=$HOME/.cudnn/active/cuda/include:$CPATH
+    export LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LIBRARY_PATH
+    
+    # path for chainer
+    export PATH=/usr/local/cuda-8.0/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+    export CFLAGS=-I$HOME/.cudnn/active/cuda/include
+    export LDFLAGS=-L$HOME/.cudnn/active/cuda/lib64
+    export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+    
+    # path for nccl
+    export NCCL_ROOT=$EXT_HOME/nccl
+    export CPATH=$NCCL_ROOT/include:$CPATH
+    export LD_LIBRARY_PATH=$NCCL_ROOT/lib/:$LD_LIBRARY_PATH
+    export LIBRARY_PATH=$NCCL_ROOT/lib/:$LIBRARY_PATH
+    
+    # path for openmpi
+    export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
+    export PATH=$EXT_HOME/openmpi/bin:$PATH
+    
+#deleted
+    
+    # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
+    # export LD_LIBRARY_PATH="$EXT_HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+    
+    export XDG_CONFIG_HOME=$EXT_HOME/.config
+fi
+
 
 export LANG=ja_JP.UTF-8
 export XMODIFIERS=@im=uim
 export GTK_IM_MODULE=uim
 
-export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
-export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
-
-# python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 # enhancd config
 export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
@@ -84,14 +140,6 @@ alias ssh='autossh -M 0'
 alias nvvp='/Developer/NVIDIA/CUDA-9.2/bin/nvvp'
 alias quitjupyter="kill '(pgrep jupyter)'"
 
-# sshfs
-#deleted
-alias sshfsh='sshfs home:/media/abemi/ボリューム/Users/nattsun/ ~/mph'
-
-# software launch from commad line
-alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
 # color scheme
 eval `dircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 
@@ -103,4 +151,8 @@ fi
 # profiler
 if (which zprof > /dev/null 2>&1) ;then
     zprof
+fi
+
+if [[ -n $"EXT_HOME" ]]; then
+    cd $EXT_HOME
 fi
