@@ -1,0 +1,1 @@
+/Users/abemi/.config/fisherman/shellder/fish_prompt.fish

@@ -1,0 +1,1 @@
+/Users/abemi/.config/fisherman/ghq/completions/ghq.fish

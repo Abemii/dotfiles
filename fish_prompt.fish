@@ -1,1 +1,0 @@
-/Users/abemi/.config/fisherman/pure/fish_prompt.fish

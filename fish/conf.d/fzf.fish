@@ -1,0 +1,1 @@
+/Users/abemi/.config/fisherman/fzf/conf.d/fzf.fish

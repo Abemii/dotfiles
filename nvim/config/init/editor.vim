@@ -1,4 +1,4 @@
-"---------- Editor Preferences ----------"
+"$FISH_HOME---------- Editor Preferences ----------"
 
 " Show line number
 set number
@@ -62,7 +62,7 @@ endif
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
 let g:python3_host_prog=substitute(system('which python3'),"\n","","")
-set shell=$FISH_HOME/local/bin/fish
+set shell=/usr/local/bin/fish
 set number                                " show line numbers
 set ruler
 set ttyfast                               " terminal acceleration
