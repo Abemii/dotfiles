@@ -43,10 +43,10 @@ let mapleader = "\<Space>"
 "------------
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
 set encoding=utf8
 set t_Co=256
 let base16colorspace=256
@@ -55,9 +55,9 @@ set background=dark
 set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 " NOTE: This is only compatible with Guake 3.X.
 " Check issue: https://github.com/Guake/guake/issues/772
-if (has("termguicolors"))
-   set termguicolors
-endif
+" if (has("termguicolors"))
+"    set termguicolors
+" endif
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''

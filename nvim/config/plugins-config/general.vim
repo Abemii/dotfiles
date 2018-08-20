@@ -2,6 +2,20 @@
 " Color Scheme
 colorscheme onehalfdark
 
+if !has('gui_running')
+    augroup seiya
+        " for guake terminal
+        autocmd!
+        autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight Folded ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight TablineSel ctermbg=none guibg=none
+    augroup END
+endif
+
 " Auto Complete
 let g:completor_css_omni_trigger = '([\w-]+|@[\w-]*|[\w-]+:\s*[\w-]*)$'
 let g:completor_html_omni_trigger = '<?[a-z].*$'

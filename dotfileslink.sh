@@ -6,4 +6,7 @@ if [ `echo $hn | grep 'Mac'` ]; then
 elif [ `echo $hn | grep 'hpc'` ]; then
     ln -sf $EXT_HOME/dotfiles/nvim/config/ $EXT_HOME/.config/nvim 
     # ln -sf $EXT_HOME/dotfiles/fish_prompt.fish $EXT_HOME/.config/fish/functions/fish_prompt.fish
+elif [ `echo $hn | grep 'ubuntu'` ]; then
+    ln -sf ~/dotfiles/nvim/config/ ~/.config/nvim
+    ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 fi
