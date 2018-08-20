@@ -68,6 +68,19 @@ elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
     # export LD_LIBRARY_PATH="$EXT_HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
     
     export XDG_CONFIG_HOME=$EXT_HOME/.config
+elif [ `echo $hn | grep 'ubuntu'` ]; then
+
+    alias tmux="TERM=screen-256color-bce tmux"
+    
+    # fish
+    # exec fish
+    
+    # added by Anaconda3 installer
+    export PATH="/home/member/anaconda3/bin:$PATH"
+    . /home/member/anaconda3/etc/profile.d/conda.sh
+
+    alias topgpu='watch -n1 nvidia-smi'
+    alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
 fi
 
 
