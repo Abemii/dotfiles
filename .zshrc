@@ -1,5 +1,7 @@
 # # profiling
 # zmodload zsh/zprof && zprof
+#
+autoload -U promptinit; promptinit
 
 hn=$(hostname)
 if [ `echo $hn | grep 'Mac'` ]; then
@@ -62,6 +64,10 @@ elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
         export PATH=$EXT_HOME/openmpi/bin:$PATH
         
 #deleted
+        
+        # path for cuda-9.2
+        export PATH=$EXT_HOME/cuda-9.2/bin:$PATH
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$EXT_HOME/cuda-9.2/lib64/
     fi
     
     # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
@@ -115,7 +121,9 @@ zplug "zsh-users/zsh-history-substring-search", defer:2
 
 # prompt
 zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "Abemii/pure", use:pure.zsh, from:github, as:theme
+setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # color theme
 zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
