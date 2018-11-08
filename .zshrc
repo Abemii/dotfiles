@@ -22,7 +22,7 @@ if [ `echo $hn | grep 'Mac'` ]; then
     alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
     alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
+elif [ `echo $hn | grep -e 'hpc.vpl.nii.ac.jp' -e 'dgx1'` ]; then
 
     # my home dir of external storage
 #deleted
@@ -37,7 +37,7 @@ elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
     
 #deleted
 
-    if [ `echo $hn | grep 'pec4130'` ]; then
+    if [ `echo $hn | grep -e 'pec4130' -e 'dgx1'` ]; then
     	alias topgpu='watch -n1 nvidia-smi'
     	alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
     
@@ -46,9 +46,15 @@ elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
         export CPATH=$HOME/.cudnn/active/cuda/include:$CPATH
         export LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LIBRARY_PATH
         
-        # path for chainer
+        # path for cuda-8.0
         export PATH=/usr/local/cuda-8.0/bin:$PATH
         export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+        
+        # path for cuda-9.1
+        export PATH=/usr/local/cuda/bin:$PATH
+        export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+        
+        # path for chainer
         export CFLAGS=-I$HOME/.cudnn/active/cuda/include
         export LDFLAGS=-L$HOME/.cudnn/active/cuda/lib64
         export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
@@ -63,11 +69,6 @@ elif [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
         export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
         export PATH=$EXT_HOME/openmpi/bin:$PATH
         
-#deleted
-        
-        # path for cuda-9.2
-        export PATH=$EXT_HOME/cuda-9.2/bin:$PATH
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$EXT_HOME/cuda-9.2/lib64/
     fi
     
     # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
