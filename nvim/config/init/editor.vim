@@ -1,4 +1,6 @@
-"$FISH_HOME---------- Editor Preferences ----------"
+"-------------------
+" General settings
+"------------
 
 " Show line number
 set number
@@ -17,12 +19,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" 1 tab is 4 spaces
-set shiftwidth=4
-set tabstop=4
-set smarttab
-" Use spaces instead of tabs
-set expandtab
+" Make split and vsplit put the new buffer below and on the right of the current buffer respectively.
+set splitbelow
+set splitright
 
 " Wrap lines
 set wrap
@@ -37,10 +36,6 @@ autocmd BufNewFile,BufRead * match Error /\s\+$/
 let mapleader = "\<Space>"
 
 
-
-"-------------------
-" General settings
-"------------
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
 " set guicursor=n-v-c:block-Cursor
@@ -108,3 +103,24 @@ set laststatus=2
 nmap <F9> :bprev<CR>
 nmap <F10> :bnext<CR>
 nmap <silent> <leader>q: SyntasticCheck # <CR> :bp <BAR> bd #<CR>
+
+" ---------------------
+" Window / Tab settings
+" ---------------------
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sw <C-w>w
+
+nnoremap sH <C-w>H
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sR <C-w>R
+
+nnoremap s= <C-w>=
+nnoremap s> <C-w>>
+nnoremap s< <C-w><
+nnoremap s+ <C-w>+
+nnoremap s- <C-w>-

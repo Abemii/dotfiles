@@ -83,6 +83,6 @@ Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints..
 Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
+Plug 'junegunn/fzf.vim'
 
 call plug#end()

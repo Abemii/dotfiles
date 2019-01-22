@@ -232,9 +232,9 @@ let g:pymode_syntax_docstrings=g:pymode_syntax_all
 augroup vimrc_autocmds
     autocmd!
     autocmd FileType python,rst,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python,rst,c,cpp match Excess /\%81v.*/
+    " autocmd FileType python,rst,c,cpp match Excess /\%81v.*/
     autocmd FileType python,rst,c,cpp set nowrap
-    autocmd FileType python,rst,c,cpp set colorcolumn=8
+    autocmd FileType python,rst,c,cpp set colorcolumn=80
 augroup END
 
 " code running

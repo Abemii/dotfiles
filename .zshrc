@@ -8,7 +8,7 @@ if [ `echo $hn | grep 'Mac'` ]; then
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
     export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
-    
+
     # python
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
@@ -22,72 +22,62 @@ if [ `echo $hn | grep 'Mac'` ]; then
     alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
     alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-elif [ `echo $hn | grep -e 'hpc.vpl.nii.ac.jp' -e 'dgx1'` ]; then
+# elif [ `echo $hn | grep -e 'hpc.vpl.nii.ac.jp' -e 'dgx1' -e 'per740'` ]; then
+#deleted
 
     # my home dir of external storage
 #deleted
-    
+
     # neovim
 #deleted
 
     # path for python (anaconda)
     export PATH=$EXT_HOME/anaconda3/bin:$PATH
-    
+
     export XAUTHORITY=$EXT_HOME/.Xauthority
-    
+
 #deleted
 
-    if [ `echo $hn | grep -e 'pec4130' -e 'dgx1'` ]; then
-    	alias topgpu='watch -n1 nvidia-smi'
-    	alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
-    
+    # if [ `echo $hn | grep -e 'pec4130' -e 'dgx1' -e 'per740'` ]; then
+#deleted
+
+        alias topgpu='watch -n1 nvidia-smi'
+        alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+
         # path for cudnn
         export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
         export CPATH=$HOME/.cudnn/active/cuda/include:$CPATH
         export LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LIBRARY_PATH
-        
+
         # path for cuda-8.0
         export PATH=/usr/local/cuda-8.0/bin:$PATH
         export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
-        
+
         # path for cuda-9.1
         export PATH=/usr/local/cuda/bin:$PATH
         export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-        
+
         # path for chainer
         export CFLAGS=-I$HOME/.cudnn/active/cuda/include
         export LDFLAGS=-L$HOME/.cudnn/active/cuda/lib64
         export LD_LIBRARY_PATH=$HOME/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
-        
+
         # path for nccl
         export NCCL_ROOT=$EXT_HOME/nccl
         export CPATH=$NCCL_ROOT/include:$CPATH
         export LD_LIBRARY_PATH=$NCCL_ROOT/lib/:$LD_LIBRARY_PATH
         export LIBRARY_PATH=$NCCL_ROOT/lib/:$LIBRARY_PATH
-        
+
         # path for openmpi
         export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
         export PATH=$EXT_HOME/openmpi/bin:$PATH
-        
+
     fi
-    
+
     # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
     # export LD_LIBRARY_PATH="$EXT_HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
-    
+
     export XDG_CONFIG_HOME=$EXT_HOME/.config
-elif [ `echo $hn | grep 'ubuntu'` ]; then
-
-    alias tmux="TERM=screen-256color-bce tmux"
-    
-    # fish
-    # exec fish
-    
-    # added by Anaconda3 installer
-    export PATH="/home/member/anaconda3/bin:$PATH"
-    . /home/member/anaconda3/etc/profile.d/conda.sh
-
-    alias topgpu='watch -n1 nvidia-smi'
-    alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
 fi
 
 
