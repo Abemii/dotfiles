@@ -2,6 +2,12 @@
 " General settings
 "------------
 
+" Map semicolon to colon
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " Show line number
 set number
 set mouse=v
@@ -35,24 +41,13 @@ autocmd BufNewFile,BufRead * match Error /\s\+$/
 " map leader
 let mapleader = "\<Space>"
 
-
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
-" set guicursor=n-v-c:block-Cursor
-" set guicursor+=i:ver100-iCursor
-" set guicursor+=n-v-c:blinkon0
-" set guicursor+=i:blinkwait10
 set encoding=utf8
 set t_Co=256
 let base16colorspace=256
 set background=dark
-" set guifont=DroidSansMono\ Nerd\ Font\ 12
 set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
-" NOTE: This is only compatible with Guake 3.X.
-" Check issue: https://github.com/Guake/guake/issues/772
-" if (has("termguicolors"))
-"    set termguicolors
-" endif
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
@@ -86,23 +81,8 @@ set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
 set autoread
 set autowrite
 
-" Uncomment it if you want to use mouse
-" if has('mouse')
-"     set mouse=a
-" endif
-
 " By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
 set noshowmode
-
-" -----------------------
-" Tab / Buffers settings
-" ----------------------
-tab sball
-set switchbuf=useopen
-set laststatus=2
-nmap <F9> :bprev<CR>
-nmap <F10> :bnext<CR>
-nmap <silent> <leader>q: SyntasticCheck # <CR> :bp <BAR> bd #<CR>
 
 " ---------------------
 " Window / Tab settings

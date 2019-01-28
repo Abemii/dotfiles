@@ -19,8 +19,7 @@ Plug 'scrooloose/nerdtree'                " Tree explorer
 
 
 " -- Markdown --------
-Plug 'iamcco/markdown-preview.vim'        " Markdown Preview
-Plug 'iamcco/mathjax-support-for-mkdp'    " Markdown Preview (Math)
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
 " == LaTeX ===========
 Plug 'lervag/vimtex'                      " LaTeX
