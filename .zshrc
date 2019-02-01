@@ -165,7 +165,7 @@ alias nvvp='/Developer/NVIDIA/CUDA-9.2/bin/nvvp'
 alias quitjupyter="kill '(pgrep jupyter)'"
 
 # color scheme
-eval `gdircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
+eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 
 # zcompile
 if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
