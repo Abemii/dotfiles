@@ -1,9 +1,9 @@
 #~/bin/sh
 hn=$(hostname)
-if [ `echo $hn | grep 'Mac'` ]; then
-    ln -sf ~/dotfiles/nvim/config/ ~/.config/nvim
-    # ln -sf ~/dotfiles/.zshrc ~/.zshrc
-    ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
+if [ `echo $hn | grep 'mac'` ]; then
+    ln -sf ~/dotfiles/nvim/config/ ~/.config/nvim 
+    ln -sf ~/dotfiles/nvim/init.vim ~/.config/nvim 
+    ln -sf ~/dotfiles/.zshrc ~/.zshrc
 else
     ln -sf $EXT_HOME/dotfiles/nvim/config/ $EXT_HOME/.config/nvim 
     ln -sf $EXT_HOME/dotfiles/nvim/init.vim $EXT_HOME/.config/nvim 

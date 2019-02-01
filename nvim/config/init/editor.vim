@@ -9,14 +9,14 @@ vnoremap ; :
 vnoremap : ;
 
 " Swap key map for moving display lines and logical lines
-nnoremap gh h
-nnoremap gj j
-nnoremap gk k
-nnoremap gl l
-nnoremap h gh
-nnoremap j gj
-nnoremap k gk
-nnoremap l gl
+" nnoremap gh h
+" nnoremap gj j
+" nnoremap gk k
+" nnoremap gl l
+" nnoremap h gh
+" nnoremap j gj
+" nnoremap k gk
+" nnoremap l gl
 
 " Show line number
 set number
@@ -62,7 +62,7 @@ set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
 let g:python3_host_prog=substitute(system('which python3'),"\n","","")
-set shell=/usr/local/bin/fish
+set shell=/usr/local/bin/zsh
 set number                                " show line numbers
 set ruler
 set ttyfast                               " terminal acceleration

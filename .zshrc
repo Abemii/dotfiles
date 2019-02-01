@@ -4,10 +4,13 @@
 autoload -U promptinit; promptinit
 
 hn=$(hostname)
-if [ `echo $hn | grep 'Mac'` ]; then
+if [ `echo $hn | grep 'mac'` ]; then
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
     export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
+
+    # my home dir of external storage
+    export EXT_HOME='/Users/abemi/'
 
     # python
     export PYENV_ROOT="$HOME/.pyenv"
@@ -151,11 +154,10 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # alias
-alias diff="colordiff"
-alias ls="ls -F --color"
+# alias diff="colordiff"
+# alias ls="ls -F --color"
 alias history="history -E 1"
-if [ `echo $hn | grep 'Mac'` ]; then
-    alias vim='/usr/local/bin/nvim'
+if [ `echo $hn | grep 'mac'` ]; then
     alias ssh='autossh -M 0'
 fi
 
@@ -163,7 +165,7 @@ alias nvvp='/Developer/NVIDIA/CUDA-9.2/bin/nvvp'
 alias quitjupyter="kill '(pgrep jupyter)'"
 
 # color scheme
-eval `dircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
+eval `gdircolors $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 
 # zcompile
 if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
