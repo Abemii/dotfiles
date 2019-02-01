@@ -8,6 +8,16 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+" Swap key map for moving display lines and logical lines
+nnoremap gh h
+nnoremap gj j
+nnoremap gk k
+nnoremap gl l
+nnoremap h gh
+nnoremap j gj
+nnoremap k gk
+nnoremap l gl
+
 " Show line number
 set number
 set mouse=v
