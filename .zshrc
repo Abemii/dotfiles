@@ -22,7 +22,6 @@ if [ `echo $hn | grep 'Mac'` ]; then
     alias ds9='/Applications/SAOImageDS9.app/Contents/MacOS/ds9'
     alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-# elif [ `echo $hn | grep -e 'hpc.vpl.nii.ac.jp' -e 'dgx1' -e 'per740'` ]; then
 #deleted
 
     # my home dir of external storage
@@ -34,11 +33,11 @@ if [ `echo $hn | grep 'Mac'` ]; then
     # path for python (anaconda)
     export PATH=$EXT_HOME/anaconda3/bin:$PATH
 
+    # path for ctags
+    export PATH=$EXT_HOME/ctags-5.8:$PATH
+
     export XAUTHORITY=$EXT_HOME/.Xauthority
 
-#deleted
-
-    # if [ `echo $hn | grep -e 'pec4130' -e 'dgx1' -e 'per740'` ]; then
 #deleted
 
         alias topgpu='watch -n1 nvidia-smi'
@@ -154,6 +153,7 @@ bindkey "^N" history-beginning-search-forward-end
 # alias
 alias diff="colordiff"
 alias ls="ls -F --color"
+alias history="history -E 1"
 if [ `echo $hn | grep 'Mac'` ]; then
     alias vim='/usr/local/bin/nvim'
     alias ssh='autossh -M 0'
