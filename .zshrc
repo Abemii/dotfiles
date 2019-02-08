@@ -3,8 +3,7 @@
 #
 autoload -U promptinit; promptinit
 
-hn=$(hostname)
-if [ `echo $hn | grep 'mac'` ]; then
+if [ `uname` = 'Darwin' ]; then
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
     export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
@@ -30,19 +29,13 @@ if [ `echo $hn | grep 'mac'` ]; then
     # my home dir of external storage
 #deleted
 
-    # neovim
-#deleted
+    alias nvim='eval ${EXT_HOME}/nvim.appimage'
 
-    # path for python (anaconda)
     export PATH=$EXT_HOME/anaconda3/bin:$PATH
-
-    # path for ctags
     export PATH=$EXT_HOME/ctags-5.8:$PATH
-
     export XAUTHORITY=$EXT_HOME/.Xauthority
 
-#deleted
-
+    if [ `lspci | grep -i nvidia` ]; then
         alias topgpu='watch -n1 nvidia-smi'
         alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
 
@@ -73,12 +66,7 @@ if [ `echo $hn | grep 'mac'` ]; then
         # path for openmpi
         export LD_LIBRARY_PATH=$EXT_HOME/openmpi/lib:$LD_LIBRARY_PATH
         export PATH=$EXT_HOME/openmpi/bin:$PATH
-
     fi
-
-    # export PATH="$EXT_HOME/.linuxbrew/bin:$PATH"
-    # export LD_LIBRARY_PATH="$EXT_HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
-
     export XDG_CONFIG_HOME=$EXT_HOME/.config
 fi
 
@@ -87,18 +75,15 @@ export LANG=ja_JP.UTF-8
 export XMODIFIERS=@im=uim
 export GTK_IM_MODULE=uim
 
-
 # enhancd config
 export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
 export ENHANCD_HOOK_AFTER_CD=ls
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# install zplug if it does not exist.
 if [[ ! -d ~/.zplug  ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
-    if [ $? = 128 ] && [ `echo $hn | grep 'hpc.vpl.nii.ac.jp'` ]; then
-        scp -r abemi@pec4130a.hpc.vpl.nii.ac.jp:/home/abemi/.zplug ~/.zplug
-    fi
 fi
 
 source ~/.zplug/init.zsh
@@ -154,15 +139,14 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 # alias
-# alias diff="colordiff"
-# alias ls="ls -F --color"
+alias diff="colordiff"
+alias ls="ls -F --color"
 alias history="history -E 1"
-if [ `echo $hn | grep 'mac'` ]; then
+if [ `uname` = "Darwin" ]; then
     alias ssh='autossh -M 0'
 fi
 
-alias nvvp='/Developer/NVIDIA/CUDA-9.2/bin/nvvp'
-alias quitjupyter="kill '(pgrep jupyter)'"
+
 
 # color scheme
 eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
