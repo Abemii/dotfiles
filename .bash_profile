@@ -9,5 +9,6 @@
 
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
+#deleted
 export SHELL=/bin/zsh
 exec /bin/zsh -l
