@@ -1,11 +1,5 @@
 
 " -----------------------
-" Neomake settings
-" -----------------------
-call neomake#configure#automake('w')
-let g:neomake_open_list=2
-
-" -----------------------
 " Deoplete settings
 " -----------------------
 let g:deoplete#enable_at_startup=1
