@@ -3,13 +3,13 @@
 #
 autoload -U promptinit; promptinit
 
-if [ `uname` = 'Darwin' ]; then
+if [ `uname` = 'Darwin' ]; then  # my local pc
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-    export PATH=$PATH:/Users/abemi/.pyenv/versions/anaconda3-5.0.0/bin
+    export PATH=$PATH:$HOME/.pyenv/versions/anaconda3-5.0.0/bin
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
 
-    # my home dir of external storage
-    export EXT_HOME='/Users/abemi/'
+    # this is originally for home dir of external file server, but here for common configs
+    export EXT_HOME=$HOME
 
     # python
     export PYENV_ROOT="$HOME/.pyenv"
@@ -26,17 +26,15 @@ if [ `uname` = 'Darwin' ]; then
 
 #deleted
 
-    # my home dir of external storage
-#deleted
-
+    # export EXT_HOME=/path/to/external/home/dir
     alias nvim='eval ${EXT_HOME}/nvim.appimage'
 
     export PATH=$EXT_HOME/anaconda3/bin:$PATH
     export PATH=$EXT_HOME/ctags-5.8:$PATH
     export XAUTHORITY=$EXT_HOME/.Xauthority
 
-    if [ `lspci | grep -i nvidia` ]; then
-        alias topgpu='watch -n1 nvidia-smi'
+    if [ "`lspci | grep -i nvidia`" ]; then
+        alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
         alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
 
         # path for cudnn
@@ -74,10 +72,6 @@ fi
 export LANG=ja_JP.UTF-8
 export XMODIFIERS=@im=uim
 export GTK_IM_MODULE=uim
-
-# enhancd config
-export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
-export ENHANCD_HOOK_AFTER_CD=ls
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -146,7 +140,9 @@ if [ `uname` = "Darwin" ]; then
     alias ssh='autossh -M 0'
 fi
 
-
+# enhancd config
+export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+export ENHANCD_HOOK_AFTER_CD=ls
 
 # color scheme
 eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
