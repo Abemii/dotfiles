@@ -12,16 +12,12 @@ vnoremap : ;
 noremap j gj
 noremap k gk
 
-" Show line number
-set number
-set mouse=v
-
 set guicursor=
-set clipboard+=unnamedplus
 set foldmethod=indent
 
-" highlight search matches
-set hlsearch
+" search settings
+set incsearch                           " incremental search
+set hlsearch                           " highlight search results
 
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -55,13 +51,13 @@ set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
-let g:python3_host_prog=substitute(system('which python3'),"\n","","")
-let OSTYPE = system('uname')
-if OSTYPE == "Linux\n"
-    set shell=/usr/bin/zsh
-elseif OSTYPE == "Darwin\n"
-    set shell=/usr/local/bin/zsh
-endif
+" let g:python3_host_prog=substitute(system('which python3'),"\n","","")
+#deleted
+set shell=/bin/zsh
+
+set hidden
+set showtabline=0
+
 set number                                " show line numbers
 set ruler
 set ttyfast                               " terminal acceleration
@@ -93,6 +89,8 @@ set autowrite
 " By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
 set noshowmode
 
+syntax enable                             " enable syntaax highlighting
+
 " ---------------------
 " Window / Tab settings
 " ---------------------
@@ -113,3 +111,4 @@ nnoremap s> <C-w>>
 nnoremap s< <C-w><
 nnoremap s+ <C-w>+
 nnoremap s- <C-w>-
+

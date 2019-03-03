@@ -1,75 +1,32 @@
+" -----------------------
+" Neomake settings
+" -----------------------
+" call neomake#configure#automake('w')
+" let g:neomake_open_list=2
+
+
+" -----------------------
+" Jedi settings
+" -----------------------
+let g:jedi#popup_on_dot = 0  " Disable AutoComplPop
+let g:jedi#popup_select_first = 0
+autocmd FileType pytthon setlocal completeopt-=preview
 
 " -----------------------
 " Deoplete settings
 " -----------------------
-let g:deoplete#enable_at_startup=1
-
-" -----------------------
-" Search settings
-" -----------------------
-set incsearch	                            " incremental search
-set hlsearch	                            " highlight search results
-
-" ---------------------------
-" Comfortable Motion settings
-" ---------------------------
-let g:comfortable_motion_scroll_down_key="j"
-let g:comfortable_motion_scroll_up_key="k"
-let g:comfortable_motion_no_default_key_mappings=1
-let g:comfortable_motion_impulse_multiplier=25  " Feel free to increase/decrease this value.
-nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
-
-" --------------------------
-" Airline settings - uncomment if you want to use vim-airline over lightline
-" --------------------------
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter='unique_tail'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-
-" --------------------
-" Lightline settings
-" ---------------------
-let g:lightline = {
-    \ 'colorscheme': 'one',
-    \ 'active': {
-    \   'left': [ ['mode', 'paste'],
-    \             ['gitbranch', 'readonly', 'filename', 'modified'] ],
-    \  },
-    \  'component': {
-    \     'lineinfo': ' %3l:%-2v',
-    \  },
-    \  'component_function': {
-    \     'gitbranch': 'gitbranch#name'
-    \  }
-    \ }
-let g:lightline.colorscheme = 'one'
-
-"------------------------
-" NERDTree settings
-" -----------------------
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
-let NERDTreeWinSize=35
-let NERDTreeChDirMode=2
-let g:NERDTreeHijackNetrw=0
-let NERDTreeCascadeOpenSingleChildDir=1
-autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
-nmap " :NERDTreeToggle<CR>
-
-" -----------------------
-" TagBar
-" -----------------------
-let g:tagbar_autofocus=0
-let g:tagbar_width=42
-" Always open TagBar when open python files. I don't like it much so let's
-" comment it.
-" autocmd BufEnter *.py :call tagbar#autoopen(0)
-autocmd BufWinLeave *.py :TagbarClose
-nmap <F8> :TagbarToggle<CR>
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#max_list = 10000
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 
 " -----------------------
 " NERDComment settings
@@ -97,60 +54,9 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " -----------------------
-" DevIcon settings
-" -----------------------
-" loading the plugin 
-let g:webdevicons_enable = 1
-
-" adding the flags to NERDTree 
-let g:webdevicons_enable_nerdtree = 1
-
-" adding to vim-airline's tabline
-" let g:webdevicons_enable_airline_tabline = 1
-
-" adding to vim-airline's statusline
-" let g:webdevicons_enable_airline_statusline = 1
-
-" turn on/off file node glyph decorations (not particularly useful)
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-
-" use double-width(1) or single-width(0) glyphs 
-" only manipulates padding, has no effect on terminal or set(guifont) font
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-
-" whether or not to show the nerdtree brackets around flags 
-let g:webdevicons_conceal_nerdtree_brackets = 0
-
-" the amount of space to use after the glyph character (default ' ')
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-
-" Force extra padding in NERDTree so that the filetype icons line up vertically
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
-
-" change the default character when no match found
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
-
-" set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
-" disabled by default with no value
-let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-
-" enable folder/directory glyph flag (disabled by default with 0)
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-" enable open and close folder/directory glyph flags (disabled by default with 0)
-let g:DevIconsEnableFoldersOpenClose = 1
-
-" enable pattern matching glyphs on folder/directory (enabled by default with 1)
-let g:DevIconsEnableFolderPatternMatching = 1
-
-" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
-let g:DevIconsEnableFolderExtensionPatternMatching = 0
-
-
-" -----------------------
 " SnipMate settings
 " -----------------------
-let g:snippets_dir='~/.config/nvim/plugged/vim-snippets/snippets/'
+let g:snippets_dir='$EXT_HOME/.config/nvim/plugged/vim-snippets/snippets/'
 
 " ----------------------------
 " Rainbow Parentheses Autoload
@@ -232,28 +138,37 @@ augroup vimrc_autocmds
 augroup END
 
 " code running
-let g:pymode_run=1
-let g:pymode_run_bind='<F5>'
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope = 0
+" let g:pymode_run=1
+" let g:pymode_run_bind='<F5>'
+" let g:pymode_rope_lookup_project = 0
+" let g:pymode_rope = 0
 
 " Linting (ale)
 let g:ale_sign_column_always = 1
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '=='
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_completion_enabled = 0
 let g:ale_set_highlights = 0
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_linters = {
-    \ 'python': ['flake8'],
+    \ 'python': ['flake8', 'pylint'],
     \ 'rust': ['rls'],
-    \ 'latex': ['chktex', 'lacheck']
-    \}
+    \ 'latex': ['chktex', 'lacheck'],
+    \ }
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
-    \ 'python': ['autopep8'],
+    \ 'python': ['autopep8', 'isort'],
     \ 'rust': ['rustfmt'],
-    \}
-nmap <F5> :ALEFix<CR>
+    \ }
+let g:ale_python_flake8_executable = g:python3_host_prog
+let g:ale_python_flake8_options = '-m flake8'
+let g:ale_pyhton_autopep8_executable = g:python3_host_prog
+let g:ale_python_autopep8_options = '-m autopep8'
+let g:ale_python_isort_executable = g:python3_host_prog
+let g:ale_pythn_isort_options = '-m isort'
 let g:ale_emit_conflict_warnings=0
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_set_loclist = 0

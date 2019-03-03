@@ -7,6 +7,7 @@ Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookma
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plug 'majutsushi/tagbar'                  " Class/module browser
+Plug 'szw/vim-tags'                       " Ctags generator for Vim
 Plug 'tpope/vim-fugitive'                 " Git wrapper
 
 "--------------------=== Fancy things ===----------------------------
@@ -30,13 +31,14 @@ Plug 'scrooloose/nerdcommenter'           " Easy code documentation
 Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
 Plug 'w0rp/ale'                           " Asynchronous Code Check
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
-Plug 'jmcantrell/vim-virtualenv'
+" Plug 'jmcantrell/vim-virtualenv'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'maralla/completor.vim'              " completion
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
+" Plug 'neomake/neomake'
 
 "--------------------=== Markdown ===-----------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
