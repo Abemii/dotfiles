@@ -51,8 +51,7 @@ set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
-" let g:python3_host_prog=substitute(system('which python3'),"\n","","")
-#deleted
+let g:python3_host_prog=expand('$EXT_HOME/anaconda3/envs/neovim/bin/python3')
 set shell=/bin/zsh
 
 set hidden
@@ -90,6 +89,8 @@ set autowrite
 set noshowmode
 
 syntax enable                             " enable syntaax highlighting
+
+set laststatus=2
 
 " ---------------------
 " Window / Tab settings

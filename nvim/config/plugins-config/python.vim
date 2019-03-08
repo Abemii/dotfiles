@@ -1,9 +1,3 @@
-" -----------------------
-" Neomake settings
-" -----------------------
-" call neomake#configure#automake('w')
-" let g:neomake_open_list=2
-
 
 " -----------------------
 " Jedi settings
@@ -32,31 +26,20 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 " NERDComment settings
 " -----------------------
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims=1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
+let g:NERDSpaceDelims=1                      " Add spaces after comment delimiters by default
+let g:NERDCompactSexyComs = 1                " Use compact syntax for prettified multi-line comments
+let g:NERDDefaultAlign = 'left'              " Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDAltDelims_java = 1                 " Set a language to use its alternate delimiters by default
+let g:NERDCustomDelimiters = {
+    \ 'c': { 'left': '/**','right': '*/' }, 
+    \ }                                      " Add your own custom formats or override the defaults
+let g:NERDCommentEmptyLines = 1              " Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDTrimTrailingWhitespace = 1         " Enable trimming of trailing whitespace when uncommenting
 
 " -----------------------
 " SnipMate settings
 " -----------------------
-let g:snippets_dir='$EXT_HOME/.config/nvim/plugged/vim-snippets/snippets/'
+let g:snippets_dir=expand('$EXT_HOME/.config/nvim/plugged/vim-snippets/snippets/')
 
 " ----------------------------
 " Rainbow Parentheses Autoload
@@ -175,6 +158,7 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 1
+
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 

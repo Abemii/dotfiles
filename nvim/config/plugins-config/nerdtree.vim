@@ -15,6 +15,8 @@ let g:NERDTreeDirArrowCollapsible = '▼'
 
 let g:NERDTreeMinimalUI = 1
 
+let g:NERDTreeShowHidden = 1
+
 " nerdtree shortcut
 nnoremap " :NERDTreeToggle<CR>
 
