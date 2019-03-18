@@ -4,12 +4,12 @@
 autoload -U promptinit; promptinit
 
 if [ `uname` = 'Darwin' ]; then  # my local pc
+    # this is originally for home dir of external file server, but here for common configs
+    export EXT_HOME=$HOME
+
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
     export PATH="$EXT_HOME/anaconda3/bin:$PATH"
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
-
-    # this is originally for home dir of external file server, but here for common configs
-    export EXT_HOME=$HOME
 
     # sshfs
 #deleted
