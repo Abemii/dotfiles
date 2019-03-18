@@ -54,4 +54,7 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+"--------------------=== Hatena Blog ===--------------------
+Plug 'mattn/webapi-vim' | Plug 'Shougo/unite.vim' | Plug 'moznion/hateblo.vim'
+
 call plug#end()
