@@ -4,7 +4,7 @@
 " -----------------------
 let g:jedi#popup_on_dot = 0  " Disable AutoComplPop
 let g:jedi#popup_select_first = 0
-autocmd FileType pytthon setlocal completeopt-=preview
+autocmd FileType python setlocal completeopt-=preview
 
 " -----------------------
 " Deoplete settings
