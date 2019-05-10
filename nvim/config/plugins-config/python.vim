@@ -4,7 +4,7 @@
 " -----------------------
 let g:jedi#popup_on_dot = 0  " Disable AutoComplPop
 let g:jedi#popup_select_first = 0
-autocmd FileType pytthon setlocal completeopt-=preview
+autocmd FileType python setlocal completeopt-=preview
 
 " -----------------------
 " Deoplete settings
@@ -130,28 +130,28 @@ augroup END
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '=='
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '%s [%linter%]'
 let g:ale_completion_enabled = 0
 let g:ale_set_highlights = 0
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-    \ 'python': ['flake8', 'pylint'],
-    \ 'rust': ['rls'],
+    \ 'python': ['pylint'],
     \ 'latex': ['chktex', 'lacheck'],
     \ }
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
     \ 'python': ['autopep8', 'isort'],
-    \ 'rust': ['rustfmt'],
     \ }
-let g:ale_python_flake8_executable = g:python3_host_prog
-let g:ale_python_flake8_options = '-m flake8'
-let g:ale_pyhton_autopep8_executable = g:python3_host_prog
-let g:ale_python_autopep8_options = '-m autopep8'
-let g:ale_python_isort_executable = g:python3_host_prog
-let g:ale_pythn_isort_options = '-m isort'
+let g:ale_python_pylint_options = '--max-line-length=120'
+" let g:ale_python_flake8_executable = g:python3_host_prog
+" let g:ale_python_flake8_options = '-m flake8'
+" let g:ale_python_flake8_args = '--max-line-length=120'
+" let g:ale_pyhton_autopep8_executable = g:python3_host_prog
+" let g:ale_python_autopep8_options = '-m autopep8'
+" let g:ale_python_isort_executable = g:python3_host_prog
+" let g:ale_pythn_isort_options = '-m isort'
 let g:ale_emit_conflict_warnings=0
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_set_loclist = 0
