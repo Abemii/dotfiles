@@ -8,7 +8,7 @@ if [ `uname` = 'Darwin' ]; then  # my local pc
     export EXT_HOME=$HOME
 
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-    export PATH="$EXT_HOME/anaconda3/bin:$PATH"
+    export PATH="$EXT_HOME/.anaconda3/bin:$PATH"
     export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-darwin
 
     # sshfs
@@ -24,7 +24,7 @@ if [ `uname` = 'Darwin' ]; then  # my local pc
     # export EXT_HOME=/path/to/external/home/dir
     alias nvim='eval ${EXT_HOME}/nvim.appimage'
 
-    export PATH=$EXT_HOME/anaconda3/bin:$PATH
+    export PATH=$EXT_HOME/.anaconda3/bin:$PATH
     export PATH=$EXT_HOME/ctags-5.8:$PATH
     export XAUTHORITY=$EXT_HOME/.Xauthority
 
