@@ -123,6 +123,16 @@ if [ ! -d "/Applications/Bitwarden.app" ]; then
     brew cask install bitwarden
 fi
 
+## install nkf
+if ! { type nkf > /dev/null 2>&1; } then
+    brew install nkf
+fi
+
+## install LINE
+if [ ! -d "/Applications/LINE.app" ]; then
+    mas insatall 539883307
+fi
+
 
 # MacOS settings
 
