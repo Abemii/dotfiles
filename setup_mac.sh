@@ -128,9 +128,11 @@ if ! { type nkf > /dev/null 2>&1; } then
     brew install nkf
 fi
 
-## install LINE
-if [ ! -d "/Applications/LINE.app" ]; then
-    mas insatall 539883307
+## install uplatex
+if ! { type uplatex > /dev/null 2>&1; } then
+    brew cask install mactex-no-gui
+    sudo tlmgr update --self --all
+    sudo tlmgr paper a4
 fi
 
 
@@ -218,3 +220,4 @@ fi
 ln -s ~/.dotfiles/nvim/ ~/.config/
 
 echo "finished."
+
