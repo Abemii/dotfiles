@@ -1,5 +1,4 @@
-# # profiling
-# zmodload zsh/zprof && zprof
+# ZSHRC
 #
 autoload -U promptinit; promptinit
 
