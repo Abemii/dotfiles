@@ -219,5 +219,8 @@ else
 fi
 ln -s ~/.dotfiles/nvim/ ~/.config/
 
+# tmux settings
+ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+
 echo "finished."
 
