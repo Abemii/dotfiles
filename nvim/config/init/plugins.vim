@@ -31,14 +31,13 @@ Plug 'scrooloose/nerdcommenter'           " Easy code documentation
 Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
 Plug 'w0rp/ale'                           " Asynchronous Code Check
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
-" Plug 'jmcantrell/vim-virtualenv'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'maralla/completor.vim'              " completion
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
-" Plug 'neomake/neomake'
+Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
 
 "--------------------=== Markdown ===-----------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}

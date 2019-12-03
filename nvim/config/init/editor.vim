@@ -78,7 +78,7 @@ set noswapfile
 set backspace=indent,eol,start            " backspace removes all
 
 set scrolloff=20
-set clipboard=unnamed                     " use system clipboard
+set clipboard=unnamedplus                 " use system clipboard
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
 
 " Auto update
