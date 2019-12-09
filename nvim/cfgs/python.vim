@@ -39,7 +39,7 @@ let g:NERDTrimTrailingWhitespace = 1         " Enable trimming of trailing white
 " -----------------------
 " SnipMate settings
 " -----------------------
-let g:snippets_dir='$HOME.'/.config/nvim/plugged/vim-snippets/snippets/'
+let g:snippets_dir=$HOME.'/.config/nvim/plugged/vim-snippets/snippets/'
 
 " ----------------------------
 " Rainbow Parentheses Autoload

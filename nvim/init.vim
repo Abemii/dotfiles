@@ -11,9 +11,9 @@ let plugged_path=join([config_nvim_path,'plugged'],'')
 set rtp+=plugged_path
 
 set runtimepath+=config_nvim_path
-runtime! config/init/editor.vim
-runtime! config/init/plugins.vim
-runtime! config/plugins-config/*.vim
+runtime! base.vim
+runtime! plug.vim
+runtime! cfgs/*.vim
 
 filetype plugin indent on
 
