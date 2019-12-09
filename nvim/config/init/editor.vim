@@ -51,8 +51,8 @@ set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 
 "let g:loaded_python_provider=1
 let g:python2_host_prog=''
-let g:python3_host_prog=expand('$EXT_HOME/.anaconda3/envs/neovim/bin/python3')
-set shell=/bin/zsh
+let g:python3_host_prog=$HOME.'/.anaconda3/envs/neovim/bin/python3'
+set shell=$SHELL
 
 set hidden
 set showtabline=0
