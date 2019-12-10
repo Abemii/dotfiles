@@ -1,3 +1,7 @@
+" --------------------
+"  Vim-Plug settings
+" --------------------
+
 call plug#begin(plugged_path)
 
 "-------------------=== Code/Project navigation ===-------------
