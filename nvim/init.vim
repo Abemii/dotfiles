@@ -7,7 +7,7 @@ if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 endif
 
 let config_nvim_path=$HOME.'/.config/nvim/'
-let plugged_path=join([config_nvim_path,'plugged'],'')
+let plugged_path=config_nvim_path.'plugged'
 set rtp+=plugged_path
 
 set runtimepath+=config_nvim_path
