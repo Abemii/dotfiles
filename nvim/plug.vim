@@ -9,7 +9,7 @@ Plug 'scrooloose/nerdtree'                " Project and file navigation
 Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
 Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
-Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
+" Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plug 'majutsushi/tagbar'                  " Class/module browser
 Plug 'szw/vim-tags'                       " Ctags generator for Vim
 Plug 'tpope/vim-fugitive'                 " Git wrapper
@@ -42,6 +42,7 @@ Plug 'maralla/completor.vim'              " completion
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
 Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
+Plug 'terryma/vim-multiple-cursors'       " multiple selection
 
 "--------------------=== Markdown ===-----------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
