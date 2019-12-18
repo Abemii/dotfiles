@@ -14,13 +14,13 @@ fi
 # zsh settings
 if ! { cat /etc/shells | grep zsh > /dev/null 2>&1; } then
     echo "change default shell to zsh...."
-    sudo apt-get install zsh
+    sudo apt install zsh
     sudo sh -c "echo $(which zsh) >> /etc/shells"
     chsh -s $(which zsh)
 else
     echo "default shell is already set to zsh."
 fi
-ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
 
 # install nvim
 curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
