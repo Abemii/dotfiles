@@ -23,6 +23,7 @@ zplug "chrissicool/zsh-256color"
 zplug "Tarrasch/zsh-colors"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "ascii-soup/zsh-url-highlighter"
+zplug "zsh-users/zsh-autosuggestions"
 
 # ZSH port of Fish shell's history search feature
 zplug "zsh-users/zsh-history-substring-search", defer:2
@@ -73,6 +74,20 @@ alias diff="colordiff"
 alias ls="ls -F --color"
 alias history="history -E 1"
 alias ssh='autossh -M 0'
+alias nvim='~/.dotfiles/nvim.appimage'
+
+alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
+alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+
+alias pbcopy='xsel --clipboard --input'
+
+
+# path for cuda
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export CPATH=/usr/local/cuda/bin${CPATH:+:${CPATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+
 
 # enhancd config
 export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
