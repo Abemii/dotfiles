@@ -1,13 +1,16 @@
 # ZSHRC
 #
-autoload -U promptinit; promptinit
+autoload -Uz promptinit && promptinit
 
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
 export PATH="$HOME/.anaconda3/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export LANG=en_US.UTF-8
 export XMODIFIERS=@im=uim
 export GTK_IM_MODULE=uim
+
+export XDG_CONFIG_HOME=$HOME/.config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -23,14 +26,15 @@ zplug "chrissicool/zsh-256color"
 zplug "Tarrasch/zsh-colors"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "ascii-soup/zsh-url-highlighter"
+zplug "zsh-users/zsh-autosuggestions"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # ZSH port of Fish shell's history search feature
 zplug "zsh-users/zsh-history-substring-search", defer:2
 
 # prompt
 zplug "mafredri/zsh-async", from:github
-# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "Abemii/pure", use:pure.zsh, from:github, as:theme
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # color theme
@@ -82,7 +86,7 @@ export ENHANCD_HOOK_AFTER_CD=ls
 eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 
 # zcompile
-if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
+if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
 
