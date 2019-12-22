@@ -2,7 +2,6 @@
 #
 autoload -Uz promptinit && promptinit
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
 export PATH="$HOME/.anaconda3/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -13,6 +12,10 @@ export GTK_IM_MODULE=uim
 export XDG_CONFIG_HOME=$HOME/.config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+####################
+# ZPLUG CONFIGURE
+####################
 
 # install zplug if it does not exist.
 if [[ ! -d ~/.zplug  ]]; then
