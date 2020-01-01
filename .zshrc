@@ -1,6 +1,6 @@
 autoload -Uz promptinit && promptinit
 
-export PATH="$HOME/.anaconda3/bin:$PATH"
+# export PATH="$HOME/.anaconda3/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export LANG=en_US.UTF-8
@@ -40,10 +40,14 @@ setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # color theme
 zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
+eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
 
 # enhancd
 zplug "b4b4r07/enhancd", use:init.sh
+ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+ENHANCD_HOOK_AFTER_CD=ls
 
+# check updates
 if [ ! ~/.zplug/last_zshrc_check_time -nt ~/.zshrc ]; then
     touch ~/.zplug/last_zshrc_check_time
     if ! zplug check --verbose; then
@@ -73,18 +77,49 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
+# env dependent settings
+case ${OSTYPE} in
+  darwin*)
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
+    alias python=python3
+    alias pip=pip3
+    ;;
+  linux*)
+    alias nvim='eval $HOME/nvim.appimage'
+    if [ "`lspci | grep -i nvidia`" ]; then
+      alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
+      alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+      
+      # path for cuda
+      export CUDA_PATH=/usr/local/cuda
+      export PATH=$CUDA_PATH/bin${PATH:+:${PATH}}
+      export CPATH=$CUDA_PATH/include${CPATH:+:${CPATH}}
+      export LD_LIBRARY_PATH=$CUDA_PATH/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    fi
+    ;;
+esac
+
 # alias
-alias diff="colordiff"
+alias diff="${commands[colordiff]:-diff} -u"
 alias ls="ls -F --color"
 alias history="history -E 1"
-alias ssh='autossh -M 0'
-
-# enhancd config
-export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
-export ENHANCD_HOOK_AFTER_CD=ls
-
-# color scheme
-eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
+if type autossh > /dev/null 2>&1; then
+    alias ssh='autossh -M 0'
+fi
+alias pbcopy=${commands[pbcopy]:-"xsel --clipboard --input"}
+## git
+alias gs='git status'
+alias ga='git add'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias gca='git commit --amend --no-edit'
+alias gp='git push'
+alias gd='git diff'
+alias gt='git tree'
+alias gm='git merge'
+## zsh
+alias sz='source ~/.zshrc'
+alias vz='vi ~/.zshrc'
 
 # zcompile
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
