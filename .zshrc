@@ -1,5 +1,3 @@
-# ZSHRC
-#
 autoload -Uz promptinit && promptinit
 
 export PATH="$HOME/.anaconda3/bin:$PATH"
