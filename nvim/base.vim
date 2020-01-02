@@ -40,7 +40,6 @@ nnoremap s< <C-w><
 nnoremap s+ <C-w>+
 nnoremap s- <C-w>-
 
-
 " --------------------
 " General settings
 " --------------------
@@ -94,6 +93,13 @@ set expandtab                                    " expand tabs into spaces
 set autoindent                                   " indent when moving to the next line
 set backspace=indent,eol,start                   " backspace removes all
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:.   " Indent guides settings
+
+" auto comment off
+augroup auto_comment_off
+    autocmd!
+    autocmd BufEnter * setlocal formatoptions-=r
+    autocmd BufEnter * setlocal formatoptions-=o
+augroup END
 
 " Auto update
 set autoread
