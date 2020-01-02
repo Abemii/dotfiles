@@ -1,0 +1,146 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator
+
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty it self.
+env:
+  # TERM env customization. Default is xterm-256color
+  # Note: the default TERM value `xterm-256color` does not
+  # specify all features alacritty supports. This does pose
+  # a few issues with programs relying on terminfo and the
+  # `tput` command
+  TERM: xterm-256color
+
+# Window dimensions in character columns and lines
+# (changes require restart)
+dimensions:
+  columns: 120
+  lines: 60
+
+# The FreeType rasterizer needs to know the device DPI for best results
+# (changes require restart)
+dpi:
+  x: 90.0
+  y: 90.0
+
+# Display tabs using this many cells (changes require restart)
+tabspaces: 4
+
+# When true, bold text is drawn using the bright variant of colors.
+draw_bold_text_with_bright_colors: true
+
+# Font configuration (changes require restart)
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: SauseCodePro Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    # family: Source Han Code JP
+    family: SauseCodePro Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    # family: Source Han Code JP
+    family: SauseCodePro Nerd Font
+    # Style can be specified to pick a specific face.
+    style: Italic
+
+  # Point size of the font
+  size: 14.0
+  # Offset is the extra space around each character. offset.y can be thought of
+  # as modifying the linespacing, and offset.x as modifying the letter spacing.
+  # offset:
+  #   x: 2.0
+  #   y: -11.0
+
+  # OS X only: use thin stroke font rendering. Thin strokes are suitable
+  # for retina displays, but for non-retina you probably want this set to
+  # false.
+  use_thin_strokes: true
+
+# Should display the render timer
+debug.render_timer: false
+
+# Use custom cursor colors. If true, display the cursor in the cursor.foreground
+# and cursor.background colors, otherwise invert the colors of the cursor.
+custom_cursor_colors: false
+
+# Colors (Solarized Dark)
+colors:
+  # Default colors
+  primary:
+    background: '0x002b36' # base03
+    foreground: '0x839496' # base0
+
+  # Cursor colors
+  cursor:
+    text:   '0x002b36' # base03
+    cursor: '0x839496' # base0
+
+  # Normal colors
+  normal:
+    black:   '0x073642' # base02
+    red:     '0xdc322f' # red
+    green:   '0x859900' # green
+    yellow:  '0xb58900' # yellow
+    blue:    '0x268bd2' # blue
+    magenta: '0xd33682' # magenta
+    cyan:    '0x2aa198' # cyan
+    white:   '0xeee8d5' # base2
+
+  # Bright colors
+  bright:
+    black:   '0x002b36' # base03
+    red:     '0xcb4b16' # orange
+    green:   '0x586e75' # base01
+    yellow:  '0x657b83' # base00
+    blue:    '0x839496' # base0
+    magenta: '0x6c71c4' # violet
+    cyan:    '0x93a1a1' # base1
+    white:   '0xfdf6e3' # base3
+
+# Visual Bell
+#
+# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
+# rung, the terminal background will be set to white and transition back to the
+# default background color. You can control the rate of this transition by
+# setting the `duration` property (represented in milliseconds). You can also
+# configure the transition function by setting the `animation` property.
+#
+# Possible values for `animation`
+# `Ease`
+# `EaseOut`
+# `EaseOutSine`
+# `EaseOutQuad`
+# `EaseOutCubic`
+# `EaseOutQuart`
+# `EaseOutQuint`
+# `EaseOutExpo`
+# `EaseOutCirc`
+# `Linear`
+#
+# To completely disable the visual bell, set its duration to 0.
+#
+visual_bell:
+  animation: EaseOutExpo
+  duration: 0
+
+hide_cursor_when_typing: false
+
+background_opacity: 0.97
+
+# Shell
+#
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login
