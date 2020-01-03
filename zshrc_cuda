@@ -1,6 +1,14 @@
 autoload -U promptinit; promptinit
 
-export PATH="$HOME/.anaconda3/bin:$PATH"
+# export PATH="$HOME/.anaconda3/bin:$PATH"
+alias python=python3.7
+export PATH=$PATH:$HOME/.local/bin
+export GOPATH=/usr/local/go
+export PATH=$PATH::$GOPATH/bin
+
+# direnv
+export EDITOR=nvim
+eval "$(direnv hook zsh)"
 
 export LANG=en_US.UTF-8
 export XMODIFIERS=@im=uim
@@ -72,7 +80,7 @@ alias diff="colordiff"
 alias ls="ls -F --color"
 alias history="history -E 1"
 alias ssh='autossh -M 0'
-alias nvim='~/.dotfiles/nvim.appimage'
+alias nvim='~/nvim.appimage'
 
 alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
 alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
@@ -104,3 +112,4 @@ if (which zprof > /dev/null 2>&1) ;then
     zprof
 fi
 
+echo -e "[36m`figlet -f slant DRIZZLE-PC`[m"
