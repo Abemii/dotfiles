@@ -1,7 +1,11 @@
 autoload -Uz promptinit && promptinit
 
-# export PATH="$HOME/.anaconda3/bin:$PATH"
+export PATH="$HOME/.anaconda3/bin:$PATH"  # commented out by conda initialize
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# direnv
+export EDITOR=nvim
+eval "$(direnv hook zsh)"
 
 export LANG=en_US.UTF-8
 export XMODIFIERS=@im=uim
@@ -10,6 +14,7 @@ export GTK_IM_MODULE=uim
 export XDG_CONFIG_HOME=$HOME/.config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 ####################
 # ZPLUG CONFIGURE
@@ -81,15 +86,16 @@ bindkey "^N" history-beginning-search-forward-end
 case ${OSTYPE} in
   darwin*)
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
-    alias python=python3
-    alias pip=pip3
     ;;
   linux*)
+    export PATH=$PATH:$HOME/.local/bin
+    export GOPATH=/usr/local/go
+    export PATH=$PATH::$GOPATH/bin
     alias nvim='eval $HOME/nvim.appimage'
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
     if [ "`lspci | grep -i nvidia`" ]; then
       alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
       alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
-      
       # path for cuda
       export CUDA_PATH=/usr/local/cuda
       export PATH=$CUDA_PATH/bin${PATH:+:${PATH}}
@@ -130,5 +136,4 @@ fi
 if (which zprof > /dev/null 2>&1) ;then
     zprof
 fi
-
 
