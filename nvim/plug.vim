@@ -44,6 +44,9 @@ Plug 'tpope/vim-surround'                 " surroundings
 Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
 Plug 'terryma/vim-multiple-cursors'       " multiple selection
 
+"--------------------=== Conquer of Completion (COC) ===-----------------------
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 "--------------------=== Markdown ===-----------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
