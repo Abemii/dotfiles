@@ -1,6 +1,11 @@
 autoload -Uz promptinit && promptinit
 
-export PATH="$HOME/.anaconda3/bin:$PATH"  # commented out by conda initialize
+export PATH="$HOME/.anaconda3/bin:$PATH"
+# alias python=python3.7
+# alias pip=pip3
+export PATH=$PATH:$HOME/.local/bin
+export GOPATH=/usr/local/go
+export PATH=$PATH::$GOPATH/bin
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # direnv
@@ -94,13 +99,14 @@ case ${OSTYPE} in
     alias nvim='eval $HOME/nvim.appimage'
     export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
     if [ "`lspci | grep -i nvidia`" ]; then
-      alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
-      alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
-      # path for cuda
-      export CUDA_PATH=/usr/local/cuda
-      export PATH=$CUDA_PATH/bin${PATH:+:${PATH}}
-      export CPATH=$CUDA_PATH/include${CPATH:+:${CPATH}}
-      export LD_LIBRARY_PATH=$CUDA_PATH/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+        alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
+        alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
+        # path for cuda
+        export CUDA_PATH=/usr/local/cuda
+        export PATH=$CUDA_PATH/bin${PATH:+:${PATH}}
+        export CPATH=$CUDA_PATH/include${CPATH:+:${CPATH}}
+        export LD_LIBRARY_PATH=$CUDA_PATH/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+        [ -f ~/.zshrc.cuda ] && source ~/.zshrc.cuda
     fi
     ;;
 esac
@@ -126,6 +132,8 @@ alias gm='git merge'
 ## zsh
 alias sz='source ~/.zshrc'
 alias vz='vi ~/.zshrc'
+## jupyter 
+alias jl='jupyter lab'
 
 # zcompile
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then

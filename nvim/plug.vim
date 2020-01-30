@@ -38,11 +38,13 @@ Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints..
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-clang'
 Plug 'maralla/completor.vim'              " completion
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
 Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
 Plug 'terryma/vim-multiple-cursors'       " multiple selection
+Plug 'rhysd/vim-clang-format'
 
 "--------------------=== Conquer of Completion (COC) ===-----------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

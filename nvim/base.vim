@@ -37,8 +37,8 @@ nnoremap sR <C-w>R
 nnoremap s= <C-w>=
 nnoremap s> <C-w>>
 nnoremap s< <C-w><
-nnoremap s+ <C-w>+
-nnoremap s- <C-w>-
+nnoremap s+ <C-w>+5
+nnoremap s- <C-w>-5
 
 " --------------------
 " General settings
