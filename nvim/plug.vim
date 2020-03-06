@@ -61,4 +61,8 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+"--------------------=== neoterm ===--------------------
+Plug 'kassio/neoterm'
+
+
 call plug#end()
