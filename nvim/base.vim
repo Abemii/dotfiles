@@ -107,3 +107,4 @@ set autowrite
 
 syntax enable                                    " enable syntaax highlighting
 
+set pumblend=20
