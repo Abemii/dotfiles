@@ -8,7 +8,7 @@ let g:quickrun_config = {
         \ 'outputter/error/success' : 'buffer',
         \ 'outputter/error/error'   : 'quickfix',
         \ 'outputter/buffer/split' : ':botright 8sp',
-    \ }, 
+    \ },
     \ 'tex' : {
         \ 'command' : 'latexmk',
         \ 'outputter' : 'error',
@@ -27,6 +27,15 @@ let g:quickrun_config = {
         \                      '%S:p:r.out'
         \                      ],
         \ 'exec': '%c %o %a %s',
+    \ },
+    \ 'cpp' : {
+        \ 'command': 'g++',
+        \ 'input': 'input',
+        \ 'runner': 'system'
+    \ },
+    \ 'python' : {
+        \ 'command': 'python',
+        \ 'cmdopt': '-u'
     \ }
 \}
 

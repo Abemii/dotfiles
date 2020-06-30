@@ -61,12 +61,26 @@ highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
 let base16colorspace=256
 set background=dark
-set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
+" set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 " Make split and vsplit put the new buffer below and on the right of the current buffer respectively.
 set splitbelow
 set splitright
 set encoding=utf8
 set t_Co=256
+set pumblend=10                                  " transparent
+
+if !has('gui_running')
+    augroup guake
+        autocmd!
+        autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight Folded ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=none guibg=none
+        autocmd VimEnter,ColorScheme * highlight TablineSel ctermbg=none guibg=none
+    augroup END
+endif
 
 " Search/Replace
 set incsearch                                    " incremental search
@@ -105,6 +119,5 @@ augroup END
 set autoread
 set autowrite
 
-syntax enable                                    " enable syntaax highlighting
+syntax enable                                    " enable syntax highlighting
 
-set pumblend=20
