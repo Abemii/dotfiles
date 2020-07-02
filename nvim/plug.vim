@@ -41,6 +41,7 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " syntax highlight for py
 " Markdown 
 " --------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'jszakmeister/markdown2ctags'
 
 " --------------------
 " Build 

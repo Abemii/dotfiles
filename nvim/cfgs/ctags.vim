@@ -43,7 +43,7 @@ augroup END
 " Add support for markdown files in tagbar.
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : '/home/abemi/.config/nvim/cfgs/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsbin' : $HOME . '/.config/nvim/plugged/markdown2ctags/markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes --sro=»',
     \ 'kinds' : [
         \ 's:sections',
