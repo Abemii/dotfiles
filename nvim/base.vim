@@ -35,10 +35,15 @@ nnoremap sL <C-w>L
 nnoremap sR <C-w>R
 
 nnoremap s= <C-w>=
-nnoremap s> <C-w>>
-nnoremap s< <C-w><
-nnoremap s+ <C-w>+
-nnoremap s- <C-w>-
+nnoremap s> 5<C-w>>
+nnoremap s< 5<C-w><
+nnoremap s+ 5<C-w>+
+nnoremap s- 5<C-w>-
+
+nnoremap st :tabnew<CR>
+nnoremap sn gt
+nnoremap sp gT
+
 
 " --------------------
 " General settings
