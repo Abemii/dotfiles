@@ -12,9 +12,9 @@ cd dotfiles
 # ./setup.sh
 
 # create symboliclink
-ln -s $(pwd)/nvim/config/ ~/.config/nvim 
-ln -s $(pwd)/nvim/init.vim ~/.config/nvim 
+ln -s $(pwd)/nvim ~/.config
 ln -s $(pwd)/.zshrc ~/.zshrc
+ln -s $(pwd)/.tmux.conf ~/.tmux.conf
 ```
 
 ## nvim
