@@ -144,9 +144,21 @@ if $ISMAC; then
     fi
 fi
 
-echo -e "\e[32mGlobal settings\e[m"
+if $ISLINUX; then
+    # to save yanked to clipboard in neovim
+    if ! { type xclip > /dev/null 2>&1; } then
+        sudp apt install -y xclip
+    fi
 
-if ISMAC; then
+    # for pbcopy alias
+    if ! { type xsel > /dev/null 2>&1; } then
+        sudp apt install -y xsel
+    fi
+fi
+
+
+if $ISMAC; then
+    echo -e "\e[32mMac Global settings\e[m"
     ## global settings
     defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
     defaults write -g NSInitialToolTipDelay -integer 0
