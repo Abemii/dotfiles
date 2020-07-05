@@ -131,6 +131,7 @@ alias gpo='git push origin'
 alias gd='git diff'
 alias gt='git tree'
 alias gm='git merge'
+alias grs='git reset --staged'
 ## zsh
 alias sz='source ~/.zshrc'
 alias vz='vi ~/.zshrc'
