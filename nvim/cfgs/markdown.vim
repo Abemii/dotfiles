@@ -20,3 +20,15 @@ let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 let g:mkdp_port = '8890'
 let g:mkdp_page_title = '${name}'
+
+" mdpdf
+function! Mdpdf() abort
+  if expand('%:e') != 'md'
+    return
+  endif
+  let l:command = 'mdpdf ' . expand('%:p')
+  call system(l:command)
+  call system('open ' . expand('%:r') . '.pdf')
+endfunction
+
+command! Mdpdf call Mdpdf()
