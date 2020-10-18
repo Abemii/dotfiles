@@ -29,7 +29,6 @@ Plug 'vim-airline/vim-airline-themes'     " Very cool status line theme
 " --------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdcommenter'           " Easy code documentation
-Plug 'dense-analysis/ale'                           " Asynchronous Code Check (do not use coc for lint/fix)
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
 Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
