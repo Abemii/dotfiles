@@ -174,3 +174,11 @@ let g:neoterm_autoscroll=1
 tnoremap <silent> <C-w> <C-\><C-n><C-w>
 nnoremap <silent> <C-n> :TREPLSendLine<CR>j0
 vnoremap <silent> <C-n> V:TREPLSendSelection<CR>'>j0
+
+" ----------------------------
+" heavenshell/vim-pydocstring
+" ----------------------------
+" keymap
+nmap <silent> <C-_> <Plug>(pydocstring)
+" formatter
+let g:pydocstring_formatter = 'google'
