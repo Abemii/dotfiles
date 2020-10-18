@@ -93,7 +93,7 @@ set hlsearch                                     " highlight search results
 set ignorecase                                   " Ignore case when searching
 
 let g:python2_host_prog=''
-let g:python3_host_prog=$HOME.'/.anaconda3/envs/neovim/bin/python3'
+let g:python3_host_prog=$PYTHON3_HOST_PROG
 set shell=$SHELL
 
 " File processing
