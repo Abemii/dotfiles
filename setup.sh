@@ -315,7 +315,7 @@ if [ ! -d ~/.config ]; then
 fi
 
 if [ ! -L ~/.config/nvim ]; then
-    ln -s ~/.dotfiles/nvim/ ~/.config/
+    ln -s $(pwd)/nvim/ ~/.config/
 fi
 
 # echo "PlugInstall"
@@ -416,7 +416,7 @@ fi
 echo -e "\e[32mSetup tmux\e[m"
 echo "create symbolic link to ~/.tmux.conf" 
 if [ ! -L ~/.tmux.conf ]; then
-    ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+    ln -s $(pwd)/.tmux.conf ~/.tmux.conf
 fi
 
 
