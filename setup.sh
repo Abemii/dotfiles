@@ -21,10 +21,11 @@ IS_SUDOER=false
 if $IS_LINUX; then
     if `id $USER | grep "sudo" > /dev/null 2>&1`; then
         IS_SUDOER=true
-        INSTALL_PATH="${HOME}/local"
         echo -e "\e[32mYou are sudoer.\e[m"
     else
         echo -e "\e[31mYou are not sudoer.\e[m"
+        INSTALL_PATH="${HOME}/local"
+        echo "INSTALL_PATH=${INSTALL_PATH}"
     fi
 fi
 
@@ -317,8 +318,8 @@ if [ ! -L ~/.config/nvim ]; then
     ln -s ~/.dotfiles/nvim/ ~/.config/
 fi
 
-echo "PlugInstall"
-nvim +PlugInstall +qa
+# echo "PlugInstall"
+# nvim +PlugInstall +qa
 
 function build_ctags_from_source () {
     INSTALL_DIR=$1
