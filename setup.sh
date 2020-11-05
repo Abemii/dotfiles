@@ -430,6 +430,8 @@ if ! { type node > /dev/null 2>&1; } then
             tar Jxf node-${NODE_VERSION}-linux-x64.tar.xz
             rsync -avzP node-${NODE_VERSION}-linux-x64/* $INSTALL_PATH/
         popd
+    elif $IS_LINUX && $IS_SUDOER; then
+        sudo apt install -y nodejs npm
     fi
 fi
 
