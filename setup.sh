@@ -153,12 +153,12 @@ fi
 if $IS_LINUX && $IS_SUDOER; then
     # to save yanked to clipboard in neovim
     if ! { type xclip > /dev/null 2>&1; } then
-        sudp apt install -y xclip
+        sudo apt install -y xclip
     fi
 
     # for pbcopy alias
     if ! { type xsel > /dev/null 2>&1; } then
-        sudp apt install -y xsel
+        sudo apt install -y xsel
     fi
 fi
 
@@ -303,7 +303,7 @@ if ! { conda env list | grep neovim > /dev/null 2>&1; } then
     echo "create conda env for neovim...."
     conda create -y --name neovim python=3.8
     source activate neovim
-    conda install -y -c conda-forge neovim jedi flake8 isort black
+    conda install -y -c conda-forge neovim jedi flake8 isort black yapf
     conda deactivate
 else
     echo "conda neovim env already exists."
@@ -405,7 +405,7 @@ function build_tmux_from_source () {
 echo -e "\e[32mInstall tmux\e[m"
 if ! { type tmux > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install tmux
+        sudo apt install -y tmux
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_tmux_from_source $INSTALL_PATH
     elif $IS_MAC; then
@@ -419,6 +419,19 @@ if [ ! -L ~/.tmux.conf ]; then
     ln -s $(pwd)/.tmux.conf ~/.tmux.conf
 fi
 
+
+# install node
+echo -e "\e[32mInstall node\e[m"
+if ! { type node > /dev/null 2>&1; } then
+    if $IS_LINUX && ! $IS_SUDOER; then
+        NODE_VERSION="v12.19.0"
+        wget https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz -P tmp
+        pushd tmp
+            tar Jxf node-${NODE_VERSION}-linux-x64.tar.xz
+            rsync -avzP node-${NODE_VERSION}-linux-x64/* $INSTALL_PATH/
+        popd
+    fi
+fi
 
 echo -e "\e[32mFinished\e[m"
 

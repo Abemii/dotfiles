@@ -136,6 +136,10 @@ RPROMPT='%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}'
 
 alias station='eval $HOME/Station-1.65.0-x86_64.AppImage'
 
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # zcompile
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
