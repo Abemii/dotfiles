@@ -1,13 +1,14 @@
 autoload -Uz promptinit && promptinit
 
-export PATH=$HOME/anaconda3/bin:$PATH
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/local/bin
+[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/anaconda3
+export PATH=$ANACONDA_PATH/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/local/bin:$PATH
 export GOPATH=/usr/local/go
-export PATH=$PATH::$GOPATH/bin
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$GOPATH/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR=nvim
-export PYTHON3_HOST_PROG=${HOME}/anaconda3/envs/neovim/bin/python
+export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -93,7 +94,6 @@ case ${OSTYPE} in
         export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
         ;;
     linux*)
-        alias nvim='eval $HOME/nvim.appimage'
         if [ "`lspci | grep -i nvidia`" ]; then
             alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
             alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
@@ -149,3 +149,20 @@ fi
 if (which zprof > /dev/null 2>&1) ;then
     zprof
 fi
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('${ANACONDA_PATH}/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "${ANACONDA_PATH}/etc/profile.d/conda.sh" ]; then
+        . "${ANACONDA_PATH}/etc/profile.d/conda.sh"
+    else
+        export PATH="${ANACONDA_PATH}/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
