@@ -62,10 +62,11 @@ ENHANCD_HOOK_AFTER_CD=ls
 if [ ! ~/.zplug/last_zshrc_check_time -nt ~/.zshrc ]; then
     touch ~/.zplug/last_zshrc_check_time
     if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
+        # printf "Install? [y/N]: "
+        # if read -q; then
+        #     echo; zplug install
+        # fi
+        zplug install
     fi
 fi
 
@@ -94,7 +95,7 @@ case ${OSTYPE} in
         export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # $(brew --prefix coreutils)
         ;;
     linux*)
-        if [ "`lspci | grep -i nvidia`" ]; then
+        if `type lspci >/dev/null 2>&1 && lspci | grep -i nvidia >/dev/null 2>&1`; then
             alias topgpu='watch -n1 "nvidia-smi | sed -e '\''1,7d'\'' -e '\''s/[-+]/ /g'\'' -e '\''/^ /d'\''"'
             alias psgpu='nvidia-smi | grep MiB | grep -v Default | awk "// {print \$3}" | xargs -I{} ps u {} | grep -v USER'
             # path for cuda
