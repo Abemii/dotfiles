@@ -58,11 +58,6 @@ if $IS_MAC; then
         brew install wget
     fi
 
-    echo "Install htop"
-    if ! { type htop > /dev/null 2>&1; } then
-        brew install htop
-    fi
-
     echo "Install iterm2"
     if ! { brew cask list | grep iterm2 > /dev/null 2>&1; } then
         brew cask install iterm2
@@ -265,10 +260,12 @@ fi
 # install nvim
 echo -e "\e[32mInstall nvim\e[m"
 if ! { type nvim > /dev/null 2>&1; } then
-    if $IS_LINUX; then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install -y neovim
+    elif $IS_LINUX && ! $IS_SUDOER; then
         wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P $HOME
         chmod u+x $HOME/nvim.appimage
-        alias nvim='eval $HOME/nvim.appimage'
+        echo "alias nvim='eval $HOME/nvim.appimage'" >> ~/.zshrc.local
     elif $IS_MAC; then
         brew install neovim
     fi
@@ -435,5 +432,58 @@ if ! { type node > /dev/null 2>&1; } then
     fi
 fi
 
-echo -e "\e[32mFinished\e[m"
 
+# install htop
+echo -e "\e[32mInstall htop\e[m"
+if ! { type htop > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install htop
+    elif $IS_MAC; then
+        brew install htop
+    fi
+fi
+
+
+# install nvtop
+echo -e "\e[32mInstall nvtop\e[m"
+if ! { type nvtop > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install nvtop
+    fi
+fi
+
+
+function build_ag_from_source () {
+    INSTALL_DIR=$1
+
+    mkdir -p tmp
+    pushd tmp
+        # install ctags
+        AG_VERSION="2.2.0"
+        wget https://geoff.greer.fm/ag/releases/the_silver_searcher-${AG_VERSION}.tar.gz
+        tar zxf the_silver_searcher-${AG_VERSION}.tar.gz
+        pushd the_silver_searcher-${AG_VERSION}
+            # mkdir build
+            # pushd build
+                ./configure --prefix=$INSTALL_DIR
+                make
+                make install
+            # popd
+        popd
+    popd
+}
+
+# install silversearcher-ag
+echo -e "\e[32mInstall htop\e[m"
+if ! { type ag > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install silversearcher-ag
+    elif $IS_LINUX && ! $IS_SUDOER; then
+        build_ag_from_source $INSTALL_PATH
+    elif $IS_MAC; then
+        brew install ag
+    fi
+fi
+
+
+echo -e "\e[32mFinished\e[m"
