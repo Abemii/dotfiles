@@ -94,7 +94,7 @@ set ignorecase                                   " Ignore case when searching
 
 let g:python2_host_prog=''
 let g:python3_host_prog=$PYTHON3_HOST_PROG
-set shell=$SHELL
+set shell=zsh
 
 " File processing
 set hidden                                       " can open new file even if current file is not saved
