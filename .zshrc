@@ -11,7 +11,7 @@ export EDITOR=nvim
 export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python
 
 # direnv
-eval "$(direnv hook zsh)"
+type direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 export LANG=en_US.UTF-8
 export XMODIFIERS=@im=uim
