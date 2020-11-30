@@ -183,3 +183,21 @@ vnoremap <silent> <C-n> V:TREPLSendSelection<CR>'>j0
 nmap <silent> <C-_> <Plug>(pydocstring)
 " formatter
 let g:pydocstring_formatter = 'google'
+
+
+" ----------------------------
+" Zoom / Restore window.
+" ----------------------------
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <leader><leader> :ZoomToggle<CR>
