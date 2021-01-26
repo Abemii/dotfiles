@@ -7,7 +7,7 @@ let g:tagbar_width=25
 " comment it.
 " autocmd BufEnter *.py :call tagbar#autoopen(0)
 autocmd BufWinLeave *.py :TagbarClose
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 let g:tagbar_map_togglesort = "r"
 

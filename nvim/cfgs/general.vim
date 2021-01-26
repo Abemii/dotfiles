@@ -102,7 +102,7 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 0
 " NERDTree settings
 " -----------------------
 let g:NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
-let g:NERDTreeWinSize=25
+let g:NERDTreeWinSize=35
 let g:NERDTreeChDirMode=2
 let g:NERDTreeHijackNetrw=0
 let g:NERDTreeCascadeOpenSingleChildDir=1
@@ -172,6 +172,7 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:neoterm_default_mod='belowright'
 let g:neoterm_size=10
 let g:neoterm_autoscroll=1
+let g:neoterm_fixedsize=1
 tnoremap <silent> <C-w> <C-\><C-n><C-w>
 nnoremap <silent> <C-n> :TREPLSendLine<CR>j0
 vnoremap <silent> <C-n> V:TREPLSendSelection<CR>'>j0

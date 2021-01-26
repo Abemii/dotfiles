@@ -34,8 +34,8 @@ Plug 'tpope/vim-surround'                 " surroundings
 Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
 Plug 'terryma/vim-multiple-cursors'       " multiple selection
 Plug 'kamykn/spelunker.vim'               " spell check
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " syntax highlight for python
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion of pydocstring
+Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
 
 " --------------------
 " Markdown 
