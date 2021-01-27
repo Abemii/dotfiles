@@ -8,7 +8,7 @@ export GOPATH=/usr/local/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR=nvim
-export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python
+[[ ! -v PYTHON3_HOST_PROG ]] && export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python # for neovim in docker container
 
 # direnv
 type direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
@@ -150,6 +150,8 @@ fi
 if (which zprof > /dev/null 2>&1) ;then
     zprof
 fi
+
+setopt extended_history
 
 
 # >>> conda initialize >>>
