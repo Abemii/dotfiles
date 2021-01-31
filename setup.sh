@@ -274,7 +274,7 @@ fi
 
 # install python3 (anaconda)
 echo -e "\e[32mInstall anaconda\e[m"
-conda_dst="~/anaconda3"
+conda_dst="${HOME}/anaconda3"
 if [ ! -d $conda_dst ]; then
     echo "install anaconda3 ...."
     if $IS_MAC; then
@@ -339,7 +339,7 @@ function build_ctags_from_source () {
 }
 
 
-echo "install ctags for majutsushi/tagbar"
+echo -e "\e[32mInstall ctags for majutsushi/tagbar\e[m"
 if ! { type ctags > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y exuberant-ctags
@@ -444,13 +444,13 @@ if ! { type htop > /dev/null 2>&1; } then
 fi
 
 
-# install nvtop
-echo -e "\e[32mInstall nvtop\e[m"
-if ! { type nvtop > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install nvtop
-    fi
-fi
+# # install nvtop
+# echo -e "\e[32mInstall nvtop\e[m"
+# if ! { type nvtop > /dev/null 2>&1; } then
+#     if $IS_LINUX && $IS_SUDOER; then
+#         sudo apt install nvtop
+#     fi
+# fi
 
 
 function build_ag_from_source () {
@@ -474,7 +474,7 @@ function build_ag_from_source () {
 }
 
 # install silversearcher-ag
-echo -e "\e[32mInstall htop\e[m"
+echo -e "\e[32mInstall silversearcher-ag\e[m"
 if ! { type ag > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install silversearcher-ag
@@ -482,6 +482,28 @@ if ! { type ag > /dev/null 2>&1; } then
         build_ag_from_source $INSTALL_PATH
     elif $IS_MAC; then
         brew install ag
+    fi
+fi
+
+
+# install filezilla
+echo -e "\e[32mInstall filezilla\e[m"
+if ! { type filezilla > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install filezilla
+    elif $IS_MAC; then
+        brew install filezilla
+    fi
+fi
+
+
+# install quicktile
+echo -e "\e[32mInstall quicktile\e[m"
+if ! { type quicktile > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt-get install python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
+        sudo pip3 install https://github.com/ssokolow/quicktile/archive/master.zip
+        ln -s $(pwd)/quicktile.cfg ~/.config/
     fi
 fi
 
