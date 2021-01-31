@@ -339,7 +339,7 @@ function build_ctags_from_source () {
 }
 
 
-echo "install ctags for majutsushi/tagbar"
+echo -e "\e[32mInstall ctags for majutsushi/tagbar\e[m"
 if ! { type ctags > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y exuberant-ctags

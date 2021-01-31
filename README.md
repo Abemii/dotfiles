@@ -24,9 +24,29 @@ ln -s $(pwd)/.tmux.conf ~/.tmux.conf
 In nvim,
 
 ```
-CocInstall coc-json coc-python
+CocInstall coc-json coc-python coc-highlight
 ```
 
 ## zsh
 
 ## tmux
+
+## NVIDIA
+
+### Ubuntu 20.04
+
+- nvidia-driver
+
+GUI: Software & Updates -> Additional Drivers -> NVIDIA Corporation: xx
+
+- cuda-toolkit
+
+Install CUDA10.1
+
+```bash
+sudo apt install nvidia-cuda-toolkit
+```
+
+## Docker
+
+Create zsh + neovim env in the project docker container.
