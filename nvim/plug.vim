@@ -36,6 +36,7 @@ Plug 'terryma/vim-multiple-cursors'       " multiple selection
 Plug 'kamykn/spelunker.vim'               " spell check
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion of pydocstring
 Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
+Plug 'APZelos/blamer.nvim'                " VS Code's GitLens
 
 " --------------------
 " Markdown 

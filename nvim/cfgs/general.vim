@@ -203,3 +203,11 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <leader><leader> :ZoomToggle<CR>
+
+
+" ----------------------------
+" APZelos/blamer.nvim
+" ----------------------------
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
+let g:blamer_prefix = ' > '
