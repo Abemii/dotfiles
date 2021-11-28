@@ -153,7 +153,8 @@ let g:NERDCompactSexyComs = 1                " Use compact syntax for prettified
 let g:NERDDefaultAlign = 'left'              " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDAltDelims_java = 1                 " Set a language to use its alternate delimiters by default
 let g:NERDCustomDelimiters = {
-    \ 'c': { 'left': '/**','right': '*/' }, 
+    \ 'c': { 'left': '/**','right': '*/' },
+    \ 'prototxt': { 'left': '#' },
     \ }                                      " Add your own custom formats or override the defaults
 let g:NERDCommentEmptyLines = 1              " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDTrimTrailingWhitespace = 1         " Enable trimming of trailing whitespace when uncommenting
@@ -202,3 +203,11 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <leader><leader> :ZoomToggle<CR>
+
+
+" ----------------------------
+" APZelos/blamer.nvim
+" ----------------------------
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
+let g:blamer_prefix = ' > '

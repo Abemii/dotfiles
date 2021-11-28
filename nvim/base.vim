@@ -51,7 +51,6 @@ nnoremap sp gT
 
 " window settings
 set number                                       " show line numbers
-set cursorline                                   " show line under the cursor's line
 set laststatus=2                                 " always show status line
 set showmatch                                    " show matching part of bracket parts (), [], {}
 set ruler                                        " show cursor place at the bottom bar.
@@ -60,13 +59,12 @@ set showtabline=0
 set scrolloff=20
 autocmd BufNewFile,BufRead * match Error /\s\+$/ " Show whitespaces at eol
 set foldmethod=indent                            " more indent means a higher fold level
-set wrap                                         " Wrap lines
+set nowrap                                       " Wrap lines
 set guicursor=                                   " no special cursor in neovim
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
 let base16colorspace=256
 set background=dark
-" set guifont=RictyDiscordForPowerline\ Nerd\ Font:h14
 " Make split and vsplit put the new buffer below and on the right of the current buffer respectively.
 set splitbelow
 set splitright
