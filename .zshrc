@@ -75,6 +75,15 @@ zplug load
 # vi keybind
 bindkey -v
 
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+    echo "$CUTBUFFER" | xsel --clipboard --input
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 # command history
 HISTFILE=~/.zsh_history
 HISTSIZE=6000000

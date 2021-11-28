@@ -37,11 +37,12 @@ Plug 'kamykn/spelunker.vim'               " spell check
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion of pydocstring
 Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
 Plug 'APZelos/blamer.nvim'                " VS Code's GitLens
+Plug 'antoyo/vim-licenses'
 
 " --------------------
 " Markdown 
 " --------------------
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jszakmeister/markdown2ctags'
 
 " --------------------
