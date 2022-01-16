@@ -19,13 +19,14 @@
   },
   "jedi.enable": true,
   "jedi.executable.command": "~/anaconda3/envs/neovim/bin/jedi-language-server",
+  "jedi.diagnostics.enable": true,
   "diagnostic.enable": true,
   "diagnostic.errorSign": "!!",
   "diagnostic.warningSign": "==",
-  "diagnostic-languageserver.filetypes": {
-      "python": "flake8"
-  },
   "diagnostic-languageserver.enable": true,
+  "diagnostic-languageserver.filetypes": {
+    "python": "flake8"
+  },
   "diagnostic-languageserver.linters": {
     "flake8": {
       "sourceName": "flake8",
@@ -63,15 +64,15 @@
   },
   "diagnostic-languageserver.formatters": {
     "black": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/black",
+      "command": "~/anaconda3/envs/neovim/bin/black",
       "args": ["-q", "-"]
     },
     "isort": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/isort",
+      "command": "~/anaconda3/envs/neovim/bin/isort",
       "args": ["-q", "-"]
     },
     "docformatter": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/docformatter",
+      "command": "~/anaconda3/envs/neovim/bin/docformatter",
       "args": ["-"]
     }
   }

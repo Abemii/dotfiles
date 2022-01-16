@@ -120,7 +120,6 @@ let g:NERDTreeShowHidden = 1
 " nerdtree shortcut
 nnoremap " :NERDTreeToggle<CR>
 
-
 " -----------------------
 " EasyAlign settings
 " -----------------------

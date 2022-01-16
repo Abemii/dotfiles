@@ -22,6 +22,8 @@ export XDG_CONFIG_HOME=$HOME/.config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
+# [[ -f ~/.config/gnome-terminal/onehalfdark.sh ]] && source ~/.config/gnome-terminal/onehalfdark.sh
+
 ####################
 # ZPLUG CONFIGURE
 ####################
