@@ -278,11 +278,14 @@ conda_dst="${HOME}/anaconda3"
 if [ ! -d $conda_dst ]; then
     echo "install anaconda3 ...."
     if $IS_MAC; then
-        anaconda_installer="Anaconda3-2019.07-MacOSX-x86_64.sh"
+        anaconda_installer=Miniconda3-latest-MacOSX-x86_64.sh
+        # anaconda_installer="Anaconda3-2019.07-MacOSX-x86_64.sh"
     elif $IS_LINUX; then
-        anaconda_installer="Anaconda3-2019.07-Linux-x86_64.sh"
+        anaconda_installer=Miniconda3-latest-Linux-x86_64.sh
+        # anaconda_installer="Anaconda3-2019.07-Linux-x86_64.sh"
     fi
-    wget https://repo.anaconda.com/archive/$anaconda_installer -P tmp
+    # wget https://repo.anaconda.com/archive/$anaconda_installer -P tmp
+    wget https://repo.anaconda.com/miniconda/$anaconda_installer -P tmp
     bash tmp/$anaconda_installer -b -p $conda_dst
 
     echo "update conda ...."
@@ -300,7 +303,7 @@ if ! { conda env list | grep neovim > /dev/null 2>&1; } then
     echo "create conda env for neovim...."
     conda create -y --name neovim python=3.8
     source activate neovim
-    conda install -y -c conda-forge neovim jedi flake8 isort black yapf
+    conda install -y -c conda-forge neovim jedi flake8 isort black yapf jedi-language-server
     conda deactivate
 else
     echo "conda neovim env already exists."
@@ -481,7 +484,7 @@ if ! { type ag > /dev/null 2>&1; } then
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_ag_from_source $INSTALL_PATH
     elif $IS_MAC; then
-        brew install ag
+        brew install the_silver_searcher
     fi
 fi
 

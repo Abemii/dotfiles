@@ -8,8 +8,9 @@ call plug#begin(plugged_path)
 Plug 'scrooloose/nerdtree'                " Project and file navigation
 Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
-Plug 'majutsushi/tagbar'                  " Class/module browser
-Plug 'szw/vim-tags'                       " Ctags generator for Vim
+" Plug 'majutsushi/tagbar'                  " Class/module browser
+" Plug 'szw/vim-tags'                       " Ctags generator for Vim
+Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in Vim/NeoVim.
 Plug 'tpope/vim-fugitive'                 " Git wrapper
 Plug 'kassio/neoterm'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
