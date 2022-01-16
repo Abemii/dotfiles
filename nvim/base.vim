@@ -122,5 +122,10 @@ augroup END
 set autoread
 set autowrite
 
-syntax enable                                    " enable syntax highlighting
+" Automatically check file updates when enter in window.
+augroup vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
+augroup END
 
+syntax enable                                    " enable syntax highlighting
