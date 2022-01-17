@@ -30,7 +30,6 @@
       "args": [
         "--ignore=E402,C901,W503,W504,E116,E702,C0103,C0114,C0115,C0116,C0103,C0301,W0613,W0102,R0903,R0902,R0914,R0915,R0205,W0703,W0702,W0603",
         "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
-        "--max-line-length=88",
         "-"
       ],
       "offsetLine": 0,
@@ -54,21 +53,31 @@
       }
     }
   },
-  "diagnostic-languageserver.formatFiletypes": {
-    "python": ["black", "isort", "docformatter"]
-  },
-  "diagnostic-languageserver.formatters": {
-    "black": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/black",
-      "args": ["-q", "-"]
-    },
-    "isort": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/isort",
-      "args": ["-q", "-"]
-    },
-    "docformatter": {
-      "command": "/home/abemi/anaconda3/envs/neovim/bin/docformatter",
-      "args": ["-"]
-    }
-  }
+  // "diagnostic-languageserver.formatFiletypes": {
+  //   "python": ["black", "isort", "docformatter"]
+  // },
+  // "diagnostic-languageserver.formatters": {
+  //   "black": {
+  //     "command": "/home/abemi/anaconda3/envs/neovim/bin/black",
+  //     "args": ["-q", "--skip-string-normalization", "--line-length 119", "-"]
+  //   },
+  //   "isort": {
+  //     "command": "/home/abemi/anaconda3/envs/neovim/bin/isort",
+  //     "args": ["-q", "-"]
+  //   },
+  //   "docformatter": {
+  //     "command": "/home/abemi/anaconda3/envs/neovim/bin/docformatter",
+  //     "args": ["-"]
+  //   }
+  // },
+  "pyright.enable": true,
+  // "python.formatting.provider": "black",
+  // "python.formatting.blackPath": "/home/abemi/anaconda3/envs/neovim/bin/black",
+  // "python.formatting.blackArgs": ["-q", "--skip-string-normalization", "--line-length 119", "-"],
+  "python.sortImports.path": "/home/abemi/anaconda3/envs/neovim/bin/isort",
+  "python.sortImports.args": ["-q", "-"],
+  "python.linting.enabled": false,
+  "pyright.disableCompletion": true,
+  "pyright.disableDiagnostics": true,
+  "pyright.organizeImports.provider": "isort"
 }

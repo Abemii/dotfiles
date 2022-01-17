@@ -39,6 +39,7 @@ Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion 
 Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
 Plug 'APZelos/blamer.nvim'                " VS Code's GitLens
 Plug 'antoyo/vim-licenses'
+Plug 'smbl64/vim-black-macchiato'         " partial formatter for python
 
 " --------------------
 " Markdown 

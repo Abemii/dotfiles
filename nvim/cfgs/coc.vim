@@ -160,3 +160,10 @@ let g:coc_global_extensions = [
     \'coc-vimlsp',
     \'coc-sh',
     \]
+
+" ---------------------
+" black-macchiato
+" ---------------------
+let g:black_macchiato_path = fnamemodify( g:python3_host_prog, ':h') . '/black-macchiato'
+autocmd FileType python xmap <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
+autocmd FileType python nmap <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
