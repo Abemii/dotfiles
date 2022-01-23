@@ -79,10 +79,10 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>r <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-xmap <leader>F  <Plug>(coc-format)
-nmap <leader>F  <Plug>(coc-format)
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+xmap <leader>F <Plug>(coc-format)
+nmap <leader>F <Plug>(coc-format)
 
 augroup mygroup
   autocmd!
@@ -164,6 +164,6 @@ let g:coc_global_extensions = [
 " ---------------------
 " black-macchiato
 " ---------------------
+autocmd FileType python xmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
+autocmd FileType python nmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
 let g:black_macchiato_path = fnamemodify( g:python3_host_prog, ':h') . '/black-macchiato'
-autocmd FileType python xmap <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
-autocmd FileType python nmap <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)

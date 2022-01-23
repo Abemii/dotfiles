@@ -1,19 +1,18 @@
 filetype off
 
+let config_nvim_path = $XDG_CONFIG_HOME . '/nvim'
+
 " auto-install vim-plug
-if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob(config_nvim_path . '/autoload/plug.vim'))
+  silent !curl -fLo config_nvim_path . '/autoload/plug.vim' --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall
 endif
 
-let config_nvim_path=$HOME.'/.config/nvim/'
-let plugged_path=config_nvim_path.'plugged'
-set rtp+=plugged_path
+let plugged_path = config_nvim_path . '/plugged'
 
-set runtimepath+=config_nvim_path
-runtime! base.vim
-runtime! plug.vim
-runtime! cfgs/*.vim
+ru base.vim
+ru plug.vim
+ru! cfgs/*.vim
 
 filetype plugin indent on
-
