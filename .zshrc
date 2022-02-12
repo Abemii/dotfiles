@@ -19,60 +19,46 @@ export GTK_IM_MODULE=uim
 
 export XDG_CONFIG_HOME=$HOME/.config
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # [[ -f ~/.config/gnome-terminal/onehalfdark.sh ]] && source ~/.config/gnome-terminal/onehalfdark.sh
 
 ####################
-# ZPLUG CONFIGURE
+# ZINIT CONFIGURE
 ####################
-
-# install zplug if it does not exist.
-if [[ ! -d ~/.zplug  ]]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-source ~/.zplug/init.zsh
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# syntax
-zplug "chrissicool/zsh-256color"
-zplug "Tarrasch/zsh-colors"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "ascii-soup/zsh-url-highlighter"
-zplug "zsh-users/zsh-autosuggestions"
+zinit light "chrissicool/zsh-256color"
+zinit light "zdharma-continuum/fast-syntax-highlighting"
+zinit ice wait'!0'; zinit light "ascii-soup/zsh-url-highlighter"
+zinit ice wait'!0'; zinit light "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # ZSH port of Fish shell's history search feature
-zplug "zsh-users/zsh-history-substring-search", defer:2
+zinit ice wait'!0'; zinit light "zsh-users/zsh-history-substring-search"
 
 # prompt
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zinit light "mafredri/zsh-async"
+zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
-# color theme
-zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
-eval `${commands[dircolors]:-"gdircolors"} $ZPLUG_HOME/repos/seebi/dircolors-solarized/dircolors.256dark`
-
-# enhancd
-zplug "b4b4r07/enhancd", use:init.sh
-ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+# enhancd -  A next-generation cd command with an interactive filter
+zinit light "b4b4r07/enhancd"
+ENHANCD_FILTER=fzf; export ENHANCD_FILTER
 ENHANCD_HOOK_AFTER_CD=ls
 
-# check updates
-if [ ! ~/.zplug/last_zshrc_check_time -nt ~/.zshrc ]; then
-    touch ~/.zplug/last_zshrc_check_time
-    if ! zplug check --verbose; then
-        # printf "Install? [y/N]: "
-        # if read -q; then
-        #     echo; zplug install
-        # fi
-        zplug install
-    fi
-fi
-
-zplug load
+# interactive jq
+zinit ice wait'!0'; zinit light "reegnz/jq-zsh-plugin"
 
 # vi keybind
 bindkey -v
@@ -99,6 +85,8 @@ zle -N history-beginning-search-bachward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # env dependent settings
 case ${OSTYPE} in
@@ -138,13 +126,8 @@ alias gd='git diff'
 alias gt='git tree'
 alias gm='git merge'
 alias grs='git reset --staged'
-## zsh
-alias sz='source ~/.zshrc'
-alias vz='vi ~/.zshrc'
-## jupyter 
-alias jl='jupyter lab'
 
-RPROMPT='%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}'
+# RPROMPT='%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}'
 
 alias station='eval $HOME/Station-1.65.0-x86_64.AppImage'
 
@@ -157,12 +140,17 @@ if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
 
-# profiler
-if (which zprof > /dev/null 2>&1) ;then
-    zprof
-fi
+# # profiler
+# if (which zprof > /dev/null 2>&1) ;then
+#     zprof
+# fi
 
 setopt extended_history
+
+setopt extended_glob
+setopt equals
+setopt magic_equal_subst
+setopt numeric_glob_sort
 
 
 # >>> conda initialize >>>
@@ -179,4 +167,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-

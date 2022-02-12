@@ -1,20 +1,3 @@
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -159,11 +142,15 @@ let g:coc_global_extensions = [
     \'coc-explorer',
     \'coc-vimlsp',
     \'coc-sh',
+    \'coc-lua',
     \]
 
 " ---------------------
 " black-macchiato
 " ---------------------
-autocmd FileType python xmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
-autocmd FileType python nmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
-let g:black_macchiato_path = fnamemodify( g:python3_host_prog, ':h') . '/black-macchiato'
+augroup black_macchiato
+    autocmd!
+    autocmd FileType python xmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
+    autocmd FileType python nmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
+    let g:black_macchiato_path = fnamemodify( g:python3_host_prog, ':h') . '/black-macchiato'
+augroup END

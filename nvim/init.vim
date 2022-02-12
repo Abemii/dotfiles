@@ -14,5 +14,6 @@ let plugged_path = config_nvim_path . '/plugged'
 ru base.vim
 ru plug.vim
 ru! cfgs/*.vim
+ru! cfgs/*.lua
 
 filetype plugin indent on

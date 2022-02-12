@@ -63,41 +63,32 @@ set nowrap                                       " Wrap lines
 set guicursor=                                   " no special cursor in neovim
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
-let base16colorspace=256
-set background=dark
-" Make split and vsplit put the new buffer below and on the right of the current buffer respectively.
+
+" split settings
 set splitbelow
 set splitright
-set encoding=utf8
-set t_Co=256
-set pumblend=10                                  " transparent
 
-if !has('gui_running')
-    augroup guake
-        autocmd!
-        autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight Folded ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight EndOfBuffer ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=none guibg=none
-        autocmd VimEnter,ColorScheme * highlight TablineSel ctermbg=none guibg=none
-    augroup END
-endif
+set encoding=utf8                                " encoding
+set pumblend=10                                  " transparent
+set winblend=20
+set termguicolors
 
 " Search/Replace
 set incsearch                                    " incremental search
 set hlsearch                                     " highlight search results
 set ignorecase                                   " Ignore case when searching
 
-let g:python2_host_prog=''
-let g:python3_host_prog=$PYTHON3_HOST_PROG
+let g:python2_host_prog='python2'
+let g:python3_host_prog = empty($PYTHON3_HOST_PROG) ? 'python3' : $PYTHON3_HOST_PROG
 set shell=zsh
 
 " File processing
 set hidden                                       " can open new file even if current file is not saved
 set nobackup                                     " no backup files
 set noswapfile
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 
 set ttyfast                                      " terminal acceleration
 set clipboard=unnamedplus                        " use system clipboard
@@ -124,8 +115,8 @@ set autowrite
 
 " Automatically check file updates when enter in window.
 augroup vimrc-checktime
-  autocmd!
-  autocmd WinEnter * checktime
+    autocmd!
+    autocmd WinEnter * checktime
 augroup END
 
 syntax enable                                    " enable syntax highlighting
