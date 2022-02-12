@@ -2,7 +2,19 @@
 "  Vim-Plug settings
 " --------------------
 
-call plug#begin(plugged_path)
+" Install vim-plug if not found
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin()
 
 "-------------------=== Code/Project navigation ===-------------
 " Plug 'scrooloose/nerdtree'                " Project and file navigation
@@ -50,7 +62,7 @@ Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion 
 Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
 " Plug 'APZelos/blamer.nvim'                " VS Code's GitLens
 " Plug 'antoyo/vim-licenses'
-Plug 'smbl64/vim-black-macchiato'         " partial formatter for python
+Plug 'Abemii/vim-black-macchiato', {'branch': 'fix_avoid_overwrite'}     " partial formatter for python
 
 " --------------------
 " Markdown 
