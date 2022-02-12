@@ -40,12 +40,12 @@ autoload -Uz _zinit
 
 zinit light "chrissicool/zsh-256color"
 zinit light "zdharma-continuum/fast-syntax-highlighting"
-zinit ice wait'!0'; zinit light "ascii-soup/zsh-url-highlighter"
-zinit ice wait'!0'; zinit light "zsh-users/zsh-autosuggestions"
+zinit light "ascii-soup/zsh-url-highlighter"
+zinit light "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # ZSH port of Fish shell's history search feature
-zinit ice wait'!0'; zinit light "zsh-users/zsh-history-substring-search"
+zinit light "zsh-users/zsh-history-substring-search"
 
 # prompt
 zinit light "mafredri/zsh-async"
@@ -58,7 +58,7 @@ ENHANCD_FILTER=fzf; export ENHANCD_FILTER
 ENHANCD_HOOK_AFTER_CD=ls
 
 # interactive jq
-zinit ice wait'!0'; zinit light "reegnz/jq-zsh-plugin"
+zinit light "reegnz/jq-zsh-plugin"
 
 # vi keybind
 bindkey -v
