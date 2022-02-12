@@ -1,18 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -Ce
+
+echoI () {
+    echo -e "\e[32m$1\e[m"
+}
+
+echoE () {
+    echo -e "\e[31m$1\e[m"
+}
 
 # ostype
 IS_LINUX=false
 IS_MAC=false
 if [ "`uname`" == "Darwin" ]; then
     IS_MAC=true
-    echo -e "\e[32mMac\e[m"
+    echoI "MacOS"
 elif [ "`uname`" == "Linux" ]; then
     IS_LINUX=true
-    echo -e "\e[32mLinux\e[m"
+    echoI "LInux"
 else
-    echo -e "\e[31mFAIL\e[m"
+    echoE "FAIL"
     exit 1
 fi
 
@@ -21,31 +29,23 @@ IS_SUDOER=false
 if $IS_LINUX; then
     if `id $USER | grep "sudo" > /dev/null 2>&1`; then
         IS_SUDOER=true
-        echo -e "\e[32mYou are sudoer.\e[m"
+        echoI "You are sudoer."
     else
-        echo -e "\e[31mYou are not sudoer.\e[m"
+        echoE "You are not sudoer."
         INSTALL_PATH="${HOME}/local"
         echo "INSTALL_PATH=${INSTALL_PATH}"
     fi
 fi
 
+exit 0
+
 # install software
-echo -e "\e[32mInstall software\e[m"
+echoI "Install software"
 
 if $IS_MAC; then
     echo "Install homebrew"
     if ! { type brew > /dev/null 2>&1; }; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
-    fi
-
-    echo "Install cask"
-    if ! { brew list | grep cask > /dev/null 2>&1; } then
-        brew install cask
-    fi
-
-    echo "Install mas"
-    if ! { type mas > /dev/null 2>&1; } then
-        brew install mas
     fi
 
     echo "Install coreutils"
@@ -60,73 +60,32 @@ if $IS_MAC; then
 
     echo "Install iterm2"
     if ! { brew cask list | grep iterm2 > /dev/null 2>&1; } then
-        brew cask install iterm2
-    fi
-
-    echo "Install ricty font"
-    if ! { brew list | grep ricty > /dev/null 2>&1; } then
-        brew tap sanemat/font
-        brew install ricty
-    fi
-
-    echo "Install imagemagick"
-    if ! { brew list | grep imagemagick > /dev/null 2>&1; } then
-        brew install imagemagick
+        brew install --cask iterm2
     fi
 
     echo "Install firefox"
     if [ ! -d "/Applications/Firefox.app" ]; then
-        brew cask install firefox
-    fi
-
-    echo "Install slack"
-    if [ ! -d "/Applications/Slack.app" ]; then
-        brew cask install slack
+        brew install --cask firefox
     fi
 
     echo "Install google-japanese-ime"
     if ! { brew cask list | grep google-japanese-ime > /dev/null 2>&1; } then
-        brew cask install google-japanese-ime
+        brew install --cask google-japanese-ime
     fi
 
     echo "Install scroll-reverser"
     if ! { brew cask list | grep scroll-reverser > /dev/null 2>&1; } then
-        brew cask install scroll-reverser
-    fi
-
-    echo "Install libreoffice"
-    if [ ! -d "/Applications/LibreOffice.app" ]; then
-        brew cask install libreoffice
+        brew install --cask scroll-reverser
     fi
 
     echo "Install karabiner-elements"
     if ! { brew cask list | grep karabiner-elements > /dev/null 2>&1; } then
-        brew cask install karabiner-elements
-    fi
-
-    echo "Install skype"
-    if [ ! -d "/Applications/Skype.app" ]; then
-        brew cask install skype
+        brew install --cask  karabiner-elements
     fi
 
     echo "Install dropbox"
     if [ ! -d "/Applications/Dropbox.app" ]; then
-        brew cask install dropbox
-    fi
-
-    echo "Install magnet (id: 441258766)"
-    if [ ! -d "/Applications/Magnet.app" ]; then
-        mas install 441258766
-    fi
-
-    echo "Install autossh"
-    if ! { type autossh > /dev/null 2>&1; } then
-        brew install autossh
-    fi
-
-    echo "Install gimp"
-    if [ ! -d "/Applications/GIMP-2.10.app" ]; then
-        brew cask install gimp
+        brew install --cask dropbox
     fi
 
     echo "Install ip"
@@ -134,15 +93,6 @@ if $IS_MAC; then
         brew install iproute2mac
     fi
 
-    echo "Install bitwarden"
-    if [ ! -d "/Applications/Bitwarden.app" ]; then
-        brew cask install bitwarden
-    fi
-
-    echo "Install nkf"
-    if ! { type nkf > /dev/null 2>&1; } then
-        brew install nkf
-    fi
 fi
 
 if $IS_LINUX && $IS_SUDOER; then
@@ -159,7 +109,7 @@ fi
 
 
 if $IS_MAC; then
-    echo -e "\e[32mMac Global settings\e[m"
+    echoI "Mac Global settings"
     ## no crash report
     defaults write com.apple.CrashReporter DialogType -string "none"
 
@@ -223,7 +173,7 @@ function build_zsh_from_source () {
 
 # install zsh and set as default shell
 if ! { type zsh > /dev/null 2>&1; } then
-    echo -e "\e[31mZSH is not installed. \e[32mInstall zsh....\e[m"
+    echoI "ZSH is not installed. Install zsh...."
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y zsh
         echo "change default shell to zsh...."
@@ -244,21 +194,21 @@ if ! { type zsh > /dev/null 2>&1; } then
 fi
 
 if { echo $SHELL | grep zsh > /dev/null 2>&1; } then
-    echo -e "\e[32mdefault shell is set to zsh\e[m"
+    echoI "default shell is set to zsh"
 else
-    echo -e "\e[31mdefault shell is not set to zsh. \e[32mset zsh as default\e[m"
+    echoI "default shell is not set to zsh. set zsh as default"
     export SHELL=$(which zsh)
 fi
 
 # create symlink to zshrc
 if [ ! -L ~/.zshrc ]; then
-    echo -e "\e[32mcreate symbolic link to ~/.zshrc\e[m"
+    echoI "create symbolic link to ~/.zshrc"
     ln -s $(pwd)/.zshrc ~/.zshrc
 fi
 
 
 # install nvim
-echo -e "\e[32mInstall nvim\e[m"
+echoI "Install nvim"
 if ! { type nvim > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y neovim
@@ -273,7 +223,7 @@ fi
 
 
 # install python3 (anaconda)
-echo -e "\e[32mInstall anaconda\e[m"
+echoI "Install anaconda"
 conda_dst="${HOME}/anaconda3"
 if [ ! -d $conda_dst ]; then
     echo "install anaconda3 ...."
@@ -297,7 +247,7 @@ fi
 
 
 # neovim settings
-echo -e "\e[32mSetup nvim\e[m"
+echoI "Setup nvim"
 
 if ! { conda env list | grep neovim > /dev/null 2>&1; } then
     echo "create conda env for neovim...."
@@ -309,7 +259,7 @@ else
     echo "conda neovim env already exists."
 fi
 
-echo "create symbolic link to ~/.config/nvim" 
+echoI "create symbolic link to ~/.config/nvim" 
 if [ ! -d ~/.config ]; then
     mkdir ~/.config
 fi
@@ -318,16 +268,14 @@ if [ ! -L ~/.config/nvim ]; then
     ln -s $(pwd)/nvim/ ~/.config/
 fi
 
-# echo "PlugInstall"
-# nvim +PlugInstall +qa
 
-function build_ctags_from_source () {
+function build_exuberant_ctags_from_source () {
     INSTALL_DIR=$1
+    CTAGS_VERSION="5.8"
 
     mkdir -p tmp
     pushd tmp
         # install ctags
-        CTAGS_VERSION="5.8"
         wget http://prdownloads.sourceforge.net/ctags/ctags-${CTAGS_VERSION}.tar.gz
         tar zxf ctags-${CTAGS_VERSION}.tar.gz
         pushd ctags-${CTAGS_VERSION}
@@ -341,13 +289,27 @@ function build_ctags_from_source () {
     popd
 }
 
+function build_universal_ctags_from_source () {
+    INSTALL_DIR=$1
+    CTAGS_VERSION="p5.9.20220206.0"
 
-echo -e "\e[32mInstall ctags for majutsushi/tagbar\e[m"
+    git clone --depth 1 -b ${CTAGS_VERSION} https://github.com/universal-ctags/ctags.git /tmp/ctags
+    pushd /tmp/ctags
+        ./autogen.sh
+        ./configure --prefix=${INSTALL_DIR}
+        make
+        make install # may require extra privileges depending on where to install
+    popd
+}
+
+echoI "Install ctags"
 if ! { type ctags > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install -y exuberant-ctags
+        # sudo apt install -y exuberant-ctags
+        sudo apt install -y universal-ctags
     elif $IS_LINUX && ! $IS_SUDOER; then
-        build_ctags_from_source $INSTALL_PATH
+        # build_exuberant_ctags_from_source $INSTALL_PATH
+        build_universal_ctags_from_source $INSTALL_PATH
     elif $IS_MAC; then
         brew install ctags
     fi
@@ -356,11 +318,13 @@ fi
 
 function build_tmux_from_source () {
     INSTALL_DIR=$1
+    OPENSSL_VERSION="1.1.1c"
+    LIBEVENT_VERSION="2.1.12-stable"
+    TMUX_VERSION="3.1b"
 
     mkdir -p tmp
     pushd tmp
         # install openssl
-        OPENSSL_VERSION="1.1.1c"
         wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
         tar zxf openssl-${OPENSSL_VERSION}.tar.gz
         pushd openssl-${OPENSSL_VERSION}
@@ -373,7 +337,6 @@ function build_tmux_from_source () {
         popd
 
         # install libevent
-        LIBEVENT_VERSION="2.1.12-stable"
         wget https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz --no-check-certificate
         tar zxf libevent-${LIBEVENT_VERSION}.tar.gz
         pushd libevent-${LIBEVENT_VERSION}
@@ -386,7 +349,6 @@ function build_tmux_from_source () {
         popd
 
         # install tmux
-        TMUX_VERSION="3.1b"
         wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz --no-check-certificate
         tar zxf tmux-${TMUX_VERSION}.tar.gz
         pushd tmux-${TMUX_VERSION}
@@ -401,8 +363,8 @@ function build_tmux_from_source () {
     popd
 }
 
-# tmux settings
-echo -e "\e[32mInstall tmux\e[m"
+
+echoI "Install tmux"
 if ! { type tmux > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y tmux
@@ -413,31 +375,39 @@ if ! { type tmux > /dev/null 2>&1; } then
     fi
 fi
 
-echo -e "\e[32mSetup tmux\e[m"
+
+echoI "Setup tmux"
 echo "create symbolic link to ~/.tmux.conf" 
 if [ ! -L ~/.tmux.conf ]; then
     ln -s $(pwd)/.tmux.conf ~/.tmux.conf
 fi
 
 
-# install node
-echo -e "\e[32mInstall node\e[m"
+function install_node () {
+    INSTALL_DIR=$1
+    NODE_VERSION=${2:-v16.14.0}
+    wget https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz -P tmp
+    pushd tmp
+        tar Jxf node-${NODE_VERSION}-linux-x64.tar.xz
+        rsync -avzP node-${NODE_VERSION}-linux-x64/* $INSTALL_DIR/
+    popd
+}
+
+
+echoI "Install node"
 if ! { type node > /dev/null 2>&1; } then
     if $IS_LINUX && ! $IS_SUDOER; then
-        NODE_VERSION="v12.19.0"
-        wget https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz -P tmp
-        pushd tmp
-            tar Jxf node-${NODE_VERSION}-linux-x64.tar.xz
-            rsync -avzP node-${NODE_VERSION}-linux-x64/* $INSTALL_PATH/
-        popd
+        install_node $INSTALL_PATH
     elif $IS_LINUX && $IS_SUDOER; then
         sudo apt install -y nodejs npm
+        sudo npm install n -g -y
+        sudo n stable
+        sudo apt purge -y nodejs npm
     fi
 fi
 
 
-# install htop
-echo -e "\e[32mInstall htop\e[m"
+echoI "Install htop"
 if ! { type htop > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install htop
@@ -448,7 +418,7 @@ fi
 
 
 # # install nvtop
-# echo -e "\e[32mInstall nvtop\e[m"
+# echoI "Install nvtop"
 # if ! { type nvtop > /dev/null 2>&1; } then
 #     if $IS_LINUX && $IS_SUDOER; then
 #         sudo apt install nvtop
@@ -458,11 +428,11 @@ fi
 
 function build_ag_from_source () {
     INSTALL_DIR=$1
+    AG_VERSION=${2:-2.2.0}
 
     mkdir -p tmp
     pushd tmp
         # install ctags
-        AG_VERSION="2.2.0"
         wget https://geoff.greer.fm/ag/releases/the_silver_searcher-${AG_VERSION}.tar.gz
         tar zxf the_silver_searcher-${AG_VERSION}.tar.gz
         pushd the_silver_searcher-${AG_VERSION}
@@ -476,8 +446,8 @@ function build_ag_from_source () {
     popd
 }
 
-# install silversearcher-ag
-echo -e "\e[32mInstall silversearcher-ag\e[m"
+
+echoI "Install silversearcher-ag (ag)"
 if ! { type ag > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install silversearcher-ag
@@ -489,8 +459,29 @@ if ! { type ag > /dev/null 2>&1; } then
 fi
 
 
-# install filezilla
-echo -e "\e[32mInstall filezilla\e[m"
+function install_rg () {
+    INSTALL_DIR=$1
+    RG_VERSION=${2:-13.0.0}
+
+    wget https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -P /tmp
+    pushd /tmp
+        tar zxf ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz
+        cp ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl/rg ${INSTALL_DIR}/bin/
+    popd
+}
+
+
+echoI "Install ripgrep (rg)"
+if ! { type rg > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install ripgrep
+    elif $IS_LINUX && ! $IS_SUDOER; then
+        install_rg $INSTALL_PATH
+    fi
+fi
+
+
+echoI "Install filezilla"
 if ! { type filezilla > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt install filezilla
@@ -500,8 +491,7 @@ if ! { type filezilla > /dev/null 2>&1; } then
 fi
 
 
-# install quicktile
-echo -e "\e[32mInstall quicktile\e[m"
+echoI "Install quicktile"
 if ! { type quicktile > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo apt-get install python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
@@ -511,4 +501,43 @@ if ! { type quicktile > /dev/null 2>&1; } then
 fi
 
 
-echo -e "\e[32mFinished\e[m"
+echoI "Install nkf"
+if ! { type nkf > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install nkf
+    elif $IS_MAC; then
+        brew install nkf
+    fi
+fi
+
+
+echoI "Install autossh"
+if ! { type autossh > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install autossh
+    elif $IS_MAC; then
+        brew install autossh
+    fi
+fi
+
+
+echoI "Install gimp"
+if $IS_LINUX && ! { type gimp >/dev/null 2>&1; } then
+    if $IS_SUDOER; then
+        sudo apt install gimp
+    fi
+elif $IS_MAC && [ ! -d "/Applications/GIMP-2.10.app" ]; then
+    brew install --cask gimp
+fi
+
+
+echoI "Install imagemagick"
+if ! { type convert > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install imagemagick
+    elif $IS_MAC; then
+        brew install imagemagick
+    fi
+fi
+
+echoI "Finished"
