@@ -22,27 +22,27 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Window / Tab settings
-nnoremap sh <C-w>h
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sw <C-w>w
-
-nnoremap sH <C-w>H
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sR <C-w>R
-
-nnoremap s= <C-w>=
-nnoremap s> 5<C-w>>
-nnoremap s< 5<C-w><
-nnoremap s+ 5<C-w>+
-nnoremap s- 5<C-w>-
-
-nnoremap st :tabnew<CR>
-nnoremap sn gt
-nnoremap sp gT
+" nnoremap sh <C-w>h
+" nnoremap sj <C-w>j
+" nnoremap sk <C-w>k
+" nnoremap sl <C-w>l
+" nnoremap sw <C-w>w
+"
+" nnoremap sH <C-w>H
+" nnoremap sJ <C-w>J
+" nnoremap sK <C-w>K
+" nnoremap sL <C-w>L
+" nnoremap sR <C-w>R
+"
+" nnoremap s= <C-w>=
+" nnoremap s> 5<C-w>>
+" nnoremap s< 5<C-w><
+" nnoremap s+ 5<C-w>+
+" nnoremap s- 5<C-w>-
+"
+" nnoremap st :tabnew<CR>
+" nnoremap sn gt
+" nnoremap sp gT
 
 
 " --------------------
