@@ -139,7 +139,6 @@ let g:coc_global_extensions = [
     \'coc-highlight',
     \'coc-jedi',
     \'coc-diagnostic',
-    \'coc-explorer',
     \'coc-vimlsp',
     \'coc-sh',
     \'coc-lua',
