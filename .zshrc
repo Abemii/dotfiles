@@ -39,13 +39,20 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zinit light "chrissicool/zsh-256color"
-zinit light "zdharma-continuum/fast-syntax-highlighting"
+zinit ice wait'1a' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
 zinit light "ascii-soup/zsh-url-highlighter"
 zinit light "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # ZSH port of Fish shell's history search feature
-zinit light "zsh-users/zsh-history-substring-search"
+zinit ice wait'1b' lucid atinit"
+bindkey "$key[Up]" history-substring-search-up
+bindkey "$key[Down]" history-substring-search-down
+bindkey '^[k' history-substring-search-up
+bindkey '^[j' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+"; zinit light "zsh-users/zsh-history-substring-search"
 
 # prompt
 zinit light "mafredri/zsh-async"
@@ -53,12 +60,12 @@ zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # enhancd -  A next-generation cd command with an interactive filter
-zinit light "b4b4r07/enhancd"
+zinit ice wait'2' lucid pick 'init.zsh'; zinit light "b4b4r07/enhancd"
 ENHANCD_FILTER=fzf; export ENHANCD_FILTER
 ENHANCD_HOOK_AFTER_CD=ls
 
 # interactive jq
-zinit light "reegnz/jq-zsh-plugin"
+zinit ice wait'1' lucid; zinit light "reegnz/jq-zsh-plugin"
 
 # vi keybind
 bindkey -v
@@ -68,7 +75,6 @@ function vi-yank-xclip {
     zle vi-yank
     echo "$CUTBUFFER" | xsel --clipboard --input
 }
-
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
 
@@ -79,12 +85,8 @@ SAVEHIST=6000000
 setopt hist_ignore_dups
 setopt share_history
 
-# command history search
-autoload history-search-end
-zle -N history-beginning-search-bachward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+setopt auto_list
+setopt auto_menu
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -139,11 +141,6 @@ alias l='ls -CF'
 if [ ! -f ~/.zshrc.zwc ] || [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
     zcompile ~/.zshrc
 fi
-
-# # profiler
-# if (which zprof > /dev/null 2>&1) ;then
-#     zprof
-# fi
 
 setopt extended_history
 
