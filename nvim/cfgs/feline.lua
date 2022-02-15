@@ -330,11 +330,16 @@ require'feline'.setup {
             'packer',
             'NvimTree',
             'fugitive',
-            'fugitiveblame',
-            'fern'
+            'fugitiveblame'
         },
         buftypes = {'terminal'},
         bufnames = {}
+    },
+    disable = {
+        filetypes = {
+            'fern',
+            'vista'
+        }
     }
 }
 
