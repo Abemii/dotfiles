@@ -1,5 +1,7 @@
 # dotfiles
 
+asdfasfas
+
 ## setup
 
 ```bash
@@ -50,3 +52,7 @@ sudo apt install nvidia-cuda-toolkit
 ## Docker
 
 Create zsh + neovim env in the project docker container.
+
+```bash
+docker run -it --rm --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority -e HOME=/root -v $HOME:$HOME -w $PWD -u $(id -u):$(id -g) -v /etc/passwd:/etc/passwd:ro neovim
+```

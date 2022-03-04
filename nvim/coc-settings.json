@@ -9,6 +9,11 @@
           "directory": "/tmp/ccls"
         }
       }
+    },
+    "efm": {
+      "command": "/home/abemi/go/bin/efm-langserver",
+      "args": [],
+      "filetypes": ["markdown"]
     }
   },
   "jedi.enable": true,
@@ -17,9 +22,12 @@
   "diagnostic.enable": true,
   "diagnostic.errorSign": "!!",
   "diagnostic.warningSign": "==",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualText": false,
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {
-    "python": "flake8"
+    "python": "flake8",
+    "markdown": "textlint"
   },
   "diagnostic-languageserver.linters": {
     "flake8": {
@@ -52,6 +60,32 @@
         "C": "info",
         "N": "hint"
       }
+    },
+    "textlint": {
+      "sourceName": "textlint",
+      "command": "textlint",
+      "debounce": 200,
+      "rootPatterns": [".textlintrc"],
+      "args": [
+        "-f",
+        "unix",
+        "--stdin"
+      ],
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "formatLines": 1,
+      "formatPattern": [
+        "(.*):(\\d+):(\\d+): (.*) \\[([A-Z])rror\\/(.*)\\]$",
+        {
+          "line": 2,
+          "column": 3,
+          "security": 5,
+          "message": 4
+        }
+      ],
+      "securities": {
+        "E": "error"
+      }
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
@@ -71,14 +105,4 @@
       "args": ["-"]
     }
   }
-  // "pyright.enable": false
-  // "python.formatting.provider": "black",
-  // "python.formatting.blackPath": "/home/abemi/anaconda3/envs/neovim/bin/black",
-  // "python.formatting.blackArgs": ["-q", "--skip-string-normalization", "--line-length 119", "-"],
-  // "python.sortImports.path": "/home/abemi/anaconda3/envs/neovim/bin/isort",
-  // "python.sortImports.args": ["-q", "-"],
-  // "python.linting.enabled": false,
-  // "pyright.disableCompletion": true,
-  // "pyright.disableDiagnostics": true,
-  // "pyright.organizeImports.provider": "isort"
 }

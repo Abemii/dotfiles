@@ -21,6 +21,8 @@ nnoremap <silent> <leader>,G :GFiles?<CR>
 nnoremap <silent> <leader>,b :Buffers<CR>
 nnoremap <silent> <leader>,h :History<CR>
 nnoremap <silent> <leader>,r :Rg<CR>
+nnoremap <silent> <leader>,m :Marks<CR>
+nnoremap <silent> <leader>,c :Colors<CR>
 
 " Comment codes
 autocmd FileType python,shell set commentstring=#\ %s
@@ -130,6 +132,7 @@ nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impu
 
 nnoremap <silent> " :Fern . -reveal=% -drawer -toggle -width=35<CR>
 let g:fern#renderer = 'nerdfont'
+let g:fern#default_exclude = '__pycache__'
 augroup my-glyph-palette
     autocmd! *
     autocmd FileType fern call glyph_palette#apply()
@@ -284,3 +287,19 @@ let g:blamer_prefix = ' > '
 " highlight GitGutterAdd ctermfg=green
 " highlight GitGutterChange ctermfg=blue
 " highlight GitGutterDelete ctermfg=red
+
+
+" ----------------------------
+" treesitter
+" ----------------------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+
+nmap <space><space>x <Plug>JupyterExecute
+nmap <space><space>X <Plug>JupyterExecuteAll

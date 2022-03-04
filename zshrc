@@ -59,6 +59,10 @@ zinit light "mafredri/zsh-async"
 zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
+# fzf
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf-bin
+
 # enhancd -  A next-generation cd command with an interactive filter
 zinit ice wait'2' lucid pick 'init.zsh'; zinit light "b4b4r07/enhancd"
 ENHANCD_FILTER=fzf; export ENHANCD_FILTER

@@ -5,7 +5,7 @@
 " Install vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  silent execute '!sh -c "curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -32,10 +32,23 @@ Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in
 Plug 'tpope/vim-fugitive'                 " Git wrapper
 " Plug 'airblade/vim-gitgutter'
 Plug 'kassio/neoterm'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'tpope/vim-repeat'
+Plug 'ekickx/clipboard-image.nvim'
+
+
+" --------------------
+" fuzzy finder
+" --------------------
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Plug 'vim-denops/denops.vim'
+" Plug 'Shougo/ddu.vim'
+" Plug 'Shougo/ddu-ui-ff'
+" Plug 'Shougo/ddu-source-file_rec'
+" Plug 'Shougo/ddu-filter-matcher_substring'
+" Plug 'Shougo/ddu-kind-file'
+
 
 " --------------------
 " Fancy appearance
@@ -49,6 +62,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'feline-nvim/feline.nvim'            " Very cool status line
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'glepnir/dashboard-nvim'
 
 " --------------------
 " Language support, auto completion
@@ -65,6 +80,7 @@ Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt 
 " Plug 'APZelos/blamer.nvim'                " VS Code's GitLens
 " Plug 'antoyo/vim-licenses'
 Plug 'Abemii/vim-black-macchiato', {'branch': 'fix_avoid_overwrite'}     " partial formatter for python
+Plug 'deton/jasegment.vim'
 
 " --------------------
 " Markdown 

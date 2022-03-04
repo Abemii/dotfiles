@@ -86,7 +86,7 @@ set shell=zsh
 set hidden                                       " can open new file even if current file is not saved
 set nobackup                                     " no backup files
 set noswapfile
-set cmdheight=2
+set cmdheight=1
 set updatetime=300
 set shortmess+=c
 
