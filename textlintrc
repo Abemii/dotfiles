@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "ja-no-weak-phrase": false
+    },
+    "ginger": true,
+    "no-dead-link": true
+  }
+}
