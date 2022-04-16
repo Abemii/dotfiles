@@ -540,4 +540,16 @@ if ! { type convert > /dev/null 2>&1; } then
     fi
 fi
 
+
+echoI "Install textlint"
+if ! { npm list --global | grep textlint >/dev/null 2>&1 }; then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo npm install -g \
+            textlint \
+            textlint-rule-preset-ja-technical-writing \
+            textlint-rule-ginger \
+            textlint-rule-no-dead-link
+    fi
+fi
+
 echoI "Finished"
