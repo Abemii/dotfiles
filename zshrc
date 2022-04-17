@@ -1,13 +1,12 @@
 autoload -Uz promptinit && promptinit
 
-[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/anaconda3
-export PATH=$ANACONDA_PATH/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
 export GOPATH=/usr/local/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export EDITOR=nvim
+[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/anaconda3
 [[ ! -v PYTHON3_HOST_PROG ]] && export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python # for neovim in docker container
 
 # direnv
