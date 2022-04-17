@@ -9,11 +9,6 @@
           "directory": "/tmp/ccls"
         }
       }
-    },
-    "efm": {
-      "command": "/home/abemi/go/bin/efm-langserver",
-      "args": [],
-      "filetypes": ["markdown"]
     }
   },
   "jedi.enable": true,
