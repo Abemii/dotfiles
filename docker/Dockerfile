@@ -29,6 +29,7 @@ RUN add-apt-repository ppa:neovim-ppa/stable -y && \
     python3 \
     python3-dev \
     python3-pip \
+    python3-venv \
     python-is-python3 \
     ripgrep \
     silversearcher-ag \
@@ -87,8 +88,9 @@ RUN git clone --depth=1 https://github.com/Abemii/dotfiles.git /tmp/dotfiles && 
     rm -rf /tmp/dotfiles
 RUN curl -fLo ${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-RUN nvim -u ~/.config/nvim/plug.vim +PlugInstall +qa
-RUN nvim -u ~/.config/nvim/plug.vim +'CocInstall -sync coc-json coc-highlight coc-jedi coc-diagnostic coc-vimlsp coc-sh coc-lua' +qa
+RUN nvim --headless -u ~/.config/nvim/plug.vim +PlugInstall +qa
+RUN nvim --headless -u ~/.config/nvim/plug.vim +'CocInstall -sync coc-json coc-highlight coc-jedi coc-diagnostic coc-vimlsp coc-sh coc-lua' +qa
+RUN nvim --headless -u ~/.config/nvim/plug.vim +'TSInstallSync all' +qa
 RUN mv ~/.config/nvim/coc-settings.json ~/.config/nvim/coc-settings.tmp.json && \
     jq < ~/.config/nvim/coc-settings.tmp.json \
     '."jedi.executable.command" = "jedi-language-server" | \

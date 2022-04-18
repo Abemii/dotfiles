@@ -203,7 +203,7 @@ fi
 # create symlink to zshrc
 if [ ! -L ~/.zshrc ]; then
     echoI "create symbolic link to ~/.zshrc"
-    ln -s $(pwd)/.zshrc ~/.zshrc
+    ln -s $(pwd)/zshrc ~/.zshrc
 fi
 
 
@@ -379,7 +379,7 @@ fi
 echoI "Setup tmux"
 echo "create symbolic link to ~/.tmux.conf" 
 if [ ! -L ~/.tmux.conf ]; then
-    ln -s $(pwd)/.tmux.conf ~/.tmux.conf
+    ln -s $(pwd)/tmux.conf ~/.tmux.conf
 fi
 
 
