@@ -37,10 +37,38 @@ if $IS_LINUX; then
     fi
 fi
 
-exit 0
-
 # install software
 echoI "Install software"
+
+brew_install () {
+    software_name=$1
+    echoI "Install ${software_name} ..."
+    if ! { brew list | grep ${software_name} > /dev/null 2>&1; } then
+        brew install ${software_name}
+        if [[ $? -eq 0 ]]; then
+            echo "${software_name} is successfully installed."
+        else
+            echoE "failed to install ${software_name}."
+        fi
+    else
+        echo "${software_name} is already installed."
+    fi
+}
+
+brew_install_cask () {
+    software_name=$1
+    echoI "install ${software_name} ..."
+    if ! { brew list --cask | grep ${software_name} > /dev/null 2>&1; } then
+        brew install --cask ${software_name}
+        if [[ $? -eq 0 ]]; then
+            echo "${software_name} is successfully installed."
+        else
+            echoE "failed to install ${software_name}."
+        fi
+    else
+        echo "${software_name} is already installed."
+    fi
+}
 
 if $IS_MAC; then
     echo "Install homebrew"
@@ -48,50 +76,17 @@ if $IS_MAC; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
     fi
 
-    echo "Install coreutils"
-    if ! { brew list | grep coreutils > /dev/null 2>&1; } then
-        brew install coreutils
-    fi
-
-    echo "Install wget"
-    if ! { type wget > /dev/null 2>&1; } then
-        brew install wget
-    fi
-
-    echo "Install iterm2"
-    if ! { brew cask list | grep iterm2 > /dev/null 2>&1; } then
-        brew install --cask iterm2
-    fi
-
-    echo "Install firefox"
-    if [ ! -d "/Applications/Firefox.app" ]; then
-        brew install --cask firefox
-    fi
-
-    echo "Install google-japanese-ime"
-    if ! { brew cask list | grep google-japanese-ime > /dev/null 2>&1; } then
-        brew install --cask google-japanese-ime
-    fi
-
-    echo "Install scroll-reverser"
-    if ! { brew cask list | grep scroll-reverser > /dev/null 2>&1; } then
-        brew install --cask scroll-reverser
-    fi
-
-    echo "Install karabiner-elements"
-    if ! { brew cask list | grep karabiner-elements > /dev/null 2>&1; } then
-        brew install --cask  karabiner-elements
-    fi
-
-    echo "Install dropbox"
-    if [ ! -d "/Applications/Dropbox.app" ]; then
-        brew install --cask dropbox
-    fi
-
-    echo "Install ip"
-    if ! { type ip > /dev/null 2>&1; } then
-        brew install iproute2mac
-    fi
+    brew_install coreutils
+    brew_install wget
+    brew_install iproute2mac
+    brew_install_cask alacritty
+    [[ ! -L ~/.config/alacritty ]] && ln -s $(pwd)/alacritty ~/.config/alacritty
+    brew_install_cask firefox
+    brew_install_cask google-japanese-ime
+    brew_install_cask scroll-reverser
+    brew_install_cask karabiner-elements
+    brew_install_cask shiftit
+    brew_install_cask dropbox
 
 fi
 
@@ -228,15 +223,12 @@ conda_dst="${HOME}/anaconda3"
 if [ ! -d $conda_dst ]; then
     echo "install anaconda3 ...."
     if $IS_MAC; then
-        anaconda_installer=Miniconda3-latest-MacOSX-x86_64.sh
-        # anaconda_installer="Anaconda3-2019.07-MacOSX-x86_64.sh"
+        conda_installer=Miniconda3-latest-MacOSX-x86_64.sh
     elif $IS_LINUX; then
-        anaconda_installer=Miniconda3-latest-Linux-x86_64.sh
-        # anaconda_installer="Anaconda3-2019.07-Linux-x86_64.sh"
+        conda_installer=Miniconda3-latest-Linux-x86_64.sh
     fi
-    # wget https://repo.anaconda.com/archive/$anaconda_installer -P tmp
-    wget https://repo.anaconda.com/miniconda/$anaconda_installer -P tmp
-    bash tmp/$anaconda_installer -b -p $conda_dst
+    wget https://repo.anaconda.com/miniconda/$conda_installer -P tmp
+    bash tmp/$conda_installer -b -p $conda_dst
 
     echo "update conda ...."
     export PATH=$conda_dst/bin:$PATH
