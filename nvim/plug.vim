@@ -86,12 +86,5 @@ Plug 'deton/jasegment.vim'
 " Markdown 
 " --------------------
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'jszakmeister/markdown2ctags'
-
-" --------------------
-" Build 
-" --------------------
-Plug 'thinca/vim-quickrun', {'on': 'QuickRun'}
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
 call plug#end()

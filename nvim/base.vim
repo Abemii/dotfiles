@@ -93,11 +93,13 @@ set ttyfast                                      " terminal acceleration
 set clipboard=unnamedplus                        " use system clipboard
 
 " tab/indent
+set expandtab                                    " expand tabs into spaces
 set tabstop=4                                    " 4 whitespaces for tabs visual presentation
 set shiftwidth=4                                 " shift lines by 4 spaces
-set smarttab                                     " set tabs for a shifttabs logic
-set expandtab                                    " expand tabs into spaces
+set softtabstop=4
 set autoindent                                   " indent when moving to the next line
+set smartindent
+
 set backspace=indent,eol,start                   " backspace removes all
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:.   " Indent guides settings
 
