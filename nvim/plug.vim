@@ -28,7 +28,7 @@ Plug 'lambdalisue/fern-mapping-git.vim'
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 " Plug 'majutsushi/tagbar'                  " Class/module browser
 " Plug 'szw/vim-tags'                       " Ctags generator for Vim
-Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in Vim/NeoVim.
+" Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in Vim/NeoVim.
 Plug 'tpope/vim-fugitive'                 " Git wrapper
 " Plug 'airblade/vim-gitgutter'
 Plug 'kassio/neoterm'
@@ -68,7 +68,7 @@ Plug 'glepnir/dashboard-nvim'
 " --------------------
 " Language support, auto completion
 " --------------------
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdcommenter'           " Easy code documentation
 Plug 'jiangmiao/auto-pairs'               " pairs
 Plug 'tpope/vim-surround'                 " surroundings
@@ -93,5 +93,37 @@ Plug 'jszakmeister/markdown2ctags'
 " --------------------
 Plug 'thinca/vim-quickrun', {'on': 'QuickRun'}
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
+
+" --------------------
+" lsp
+" --------------------
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
+" --------------------
+" ddc
+" --------------------
+Plug 'Shougo/ddc.vim'
+Plug 'vim-denops/denops.vim'
+Plug 'Shougo/pum.vim'
+Plug 'Shougo/ddc-around'
+Plug 'LumaKernel/ddc-file'
+Plug 'Shougo/ddc-matcher_head'
+Plug 'Shougo/ddc-sorter_rank'
+Plug 'Shougo/ddc-converter_remove_overlap'
+Plug 'Shougo/ddc-nvim-lsp'
+Plug 'Shougo/ddc-omni'
+Plug 'matsui54/denops-signature_help'
+Plug 'matsui54/denops-popup-preview.vim'
+
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
+" --------------------
+" snippets
+" --------------------
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 
 call plug#end()
