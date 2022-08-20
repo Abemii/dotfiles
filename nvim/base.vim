@@ -50,7 +50,6 @@ nnoremap <C-H> <C-W><C-H>
 " --------------------
 
 " window settings
-set numberwidth
 set number relativenumber                        " show line numbers
 set laststatus=2                                 " always show status line
 set showmatch                                    " show matching part of bracket parts (), [], {}
