@@ -50,7 +50,8 @@ nnoremap <C-H> <C-W><C-H>
 " --------------------
 
 " window settings
-set number                                       " show line numbers
+set numberwidth
+set number relativenumber                        " show line numbers
 set laststatus=2                                 " always show status line
 set showmatch                                    " show matching part of bracket parts (), [], {}
 set ruler                                        " show cursor place at the bottom bar.
@@ -60,25 +61,24 @@ set scrolloff=20
 autocmd BufNewFile,BufRead * match Error /\s\+$/ " Show whitespaces at eol
 set foldmethod=indent                            " more indent means a higher fold level
 set nowrap                                       " Wrap lines
-set guicursor=                                   " no special cursor in neovim
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
 
 " split settings
 set splitbelow
 set splitright
 
 set encoding=utf8                                " encoding
-set pumblend=10                                  " transparent
-set winblend=20
 set termguicolors
+set pumblend=15                                  " transparent
+set winblend=15
+
+" no mouse
+set mouse=
 
 " Search/Replace
 set incsearch                                    " incremental search
 set hlsearch                                     " highlight search results
 set ignorecase                                   " Ignore case when searching
 
-let g:python2_host_prog='python2'
 let g:python3_host_prog = empty($PYTHON3_HOST_PROG) ? 'python3' : $PYTHON3_HOST_PROG
 set shell=zsh
 
@@ -119,4 +119,4 @@ augroup vimrc-checktime
     autocmd WinEnter * checktime
 augroup END
 
-syntax enable                                    " enable syntax highlighting
+" syntax enable                                    " enable syntax highlighting

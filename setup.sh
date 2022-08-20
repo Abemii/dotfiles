@@ -241,15 +241,16 @@ fi
 # neovim settings
 echoI "Setup nvim"
 
-if ! { conda env list | grep neovim > /dev/null 2>&1; } then
-    echo "create conda env for neovim...."
-    conda create -y --name neovim python=3.8
-    source activate neovim
-    conda install -y -c conda-forge neovim jedi flake8 isort black yapf jedi-language-server
-    conda deactivate
-else
-    echo "conda neovim env already exists."
-fi
+/usr/bin/pip3 install pynvim jedi flake8 isort black jedi-language-server  # install to ~/.local/bin
+# if ! { conda env list | grep neovim > /dev/null 2>&1; } then
+#     echo "create conda env for neovim...."
+#     conda create -y --name neovim python=3.8
+#     source activate neovim
+#     conda install -y -c conda-forge neovim jedi flake8 isort black jedi-language-server
+#     conda deactivate
+# else
+#     echo "conda neovim env already exists."
+# fi
 
 echoI "create symbolic link to ~/.config/nvim" 
 if [ ! -d ~/.config ]; then

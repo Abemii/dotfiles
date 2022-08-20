@@ -1,4 +1,4 @@
-filetype off
+filetype plugin indent off
 
 ru base.vim
 ru plug.vim

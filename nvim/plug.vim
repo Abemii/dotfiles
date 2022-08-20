@@ -19,7 +19,7 @@ call plug#begin()
 "-------------------=== Code/Project navigation ===-------------
 " Plug 'scrooloose/nerdtree'                " Project and file navigation
 " Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
-Plug 'lambdalisue/fern.vim'               " tree viewer
+Plug 'lambdalisue/fern.vim', {'branch': 'main'}               " tree viewer
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'  " filetype icon
 Plug 'lambdalisue/fern-git-status.vim'    " add git status
 Plug 'lambdalisue/nerdfont.vim'
