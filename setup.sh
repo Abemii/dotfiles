@@ -399,10 +399,16 @@ if ! { type node > /dev/null 2>&1; } then
 fi
 
 
+echoI "Install deno"
+if ! { type deno > /dev/null 2>&1; } then
+    curl -fsSL https://deno.land/install.sh | sh
+fi
+
+
 echoI "Install htop"
 if ! { type htop > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install htop
+        sudo apt install -y htop
     elif $IS_MAC; then
         brew install htop
     fi
@@ -442,7 +448,7 @@ function build_ag_from_source () {
 echoI "Install silversearcher-ag (ag)"
 if ! { type ag > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install silversearcher-ag
+        sudo apt install -y silversearcher-ag
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_ag_from_source $INSTALL_PATH
     elif $IS_MAC; then
@@ -466,7 +472,7 @@ function install_rg () {
 echoI "Install ripgrep (rg)"
 if ! { type rg > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install ripgrep
+        sudo apt install -y ripgrep
     elif $IS_LINUX && ! $IS_SUDOER; then
         install_rg $INSTALL_PATH
     fi
@@ -476,7 +482,7 @@ fi
 echoI "Install filezilla"
 if ! { type filezilla > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install filezilla
+        sudo apt install -y filezilla
     elif $IS_MAC; then
         brew install filezilla
     fi
@@ -486,9 +492,11 @@ fi
 echoI "Install quicktile"
 if ! { type quicktile > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt-get install python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
+        sudo apt-get install -y python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
         sudo pip3 install https://github.com/ssokolow/quicktile/archive/master.zip
-        ln -s $(pwd)/quicktile.cfg ~/.config/
+        if [ ! -L ~/.config/quicktile ]; then
+            ln -s $(pwd)/quicktile.cfg ~/.config/
+        fi
     fi
 fi
 
@@ -496,7 +504,7 @@ fi
 echoI "Install nkf"
 if ! { type nkf > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install nkf
+        sudo apt install -y nkf
     elif $IS_MAC; then
         brew install nkf
     fi
@@ -506,7 +514,7 @@ fi
 echoI "Install autossh"
 if ! { type autossh > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install autossh
+        sudo apt install -y autossh
     elif $IS_MAC; then
         brew install autossh
     fi
@@ -516,7 +524,7 @@ fi
 echoI "Install gimp"
 if $IS_LINUX && ! { type gimp >/dev/null 2>&1; } then
     if $IS_SUDOER; then
-        sudo apt install gimp
+        sudo apt install -y gimp
     fi
 elif $IS_MAC && [ ! -d "/Applications/GIMP-2.10.app" ]; then
     brew install --cask gimp
@@ -526,7 +534,7 @@ fi
 echoI "Install imagemagick"
 if ! { type convert > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        sudo apt install imagemagick
+        sudo apt install -y imagemagick
     elif $IS_MAC; then
         brew install imagemagick
     fi
@@ -534,7 +542,7 @@ fi
 
 
 echoI "Install textlint"
-if ! { npm list --global | grep textlint >/dev/null 2>&1 }; then
+if ! { npm list --global | grep textlint >/dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
         sudo npm install -g \
             textlint \
@@ -543,5 +551,28 @@ if ! { npm list --global | grep textlint >/dev/null 2>&1 }; then
             textlint-rule-no-dead-link
     fi
 fi
+
+
+echoI "Install sshfs"
+if ! { type sshfs > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        sudo apt install -y sshfs
+    elif $IS_MAC; then
+        brew install sshfs
+    fi
+fi
+
+
+echoI "Install mutagen"
+if ! { type mutagen > /dev/null 2>&1; } then
+    if $IS_LINUX && $IS_SUDOER; then
+        MUTAGEN_VERSION="v0.15.0"
+        wget -P /tmp https://github.com/mutagen-io/mutagen/releases/download/${MUTAGEN_VERSION}/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
+        pushd /usr/local/bin
+        tar zxf /tmp/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
+        popd
+    fi
+fi
+
 
 echoI "Finished"
