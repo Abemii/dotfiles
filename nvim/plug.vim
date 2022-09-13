@@ -53,8 +53,9 @@ Plug 'junegunn/fzf.vim'
 " --------------------
 " Fancy appearance
 " --------------------
-Plug 'sonph/onehalf', {'rtp': 'vim/'}     " Atom based color scheme
-Plug 'kien/rainbow_parentheses.vim'       " Highlights matching parenthesis with a rainbow of colors
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}     " Atom based color scheme
+Plug 'joshdick/onedark.vim'                 " I prefer this
+Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis with a rainbow of colors
 " Plug 'ryanoasis/vim-devicons'             " Dev Icons
 " Plug 'vim-airline/vim-airline'            " Very cool status line
 " Plug 'vim-airline/vim-airline-themes'     " Very cool status line theme

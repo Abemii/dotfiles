@@ -1,7 +1,7 @@
 " ---------------------------
 " Color Scheme
 " ---------------------------
-colorscheme onehalfdark
+colorscheme onedark
 
 " ---------------------------
 " junegunn/fzf.vim
