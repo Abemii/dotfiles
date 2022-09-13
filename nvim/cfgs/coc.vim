@@ -148,3 +148,9 @@ augroup black_macchiato
     autocmd FileType python xmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
     autocmd FileType python nmap <silent> <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
 augroup END
+
+
+" ---------------------
+" coc-explorer
+" ---------------------
+nnoremap <silent> " <Cmd>CocCommand explorer<CR>
