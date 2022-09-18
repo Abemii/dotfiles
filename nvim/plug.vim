@@ -86,6 +86,6 @@ Plug 'deton/jasegment.vim'
 " --------------------
 " Markdown 
 " --------------------
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'tag': 'v0.0.10', 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
