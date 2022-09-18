@@ -3,26 +3,37 @@
 " ---------------------------
 colorscheme onedark
 
-" ---------------------------
-" junegunn/fzf.vim
-" ---------------------------
-" use ripgrep
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+" " ---------------------------
+" " junegunn/fzf.vim
+" " ---------------------------
+" " use ripgrep
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
+" 
+" " fzf
+" nnoremap <silent> <leader>,f :Files<CR>
+" nnoremap <silent> <leader>,g :GFiles<CR>
+" nnoremap <silent> <leader>,G :GFiles?<CR>
+" nnoremap <silent> <leader>,b :Buffers<CR>
+" nnoremap <silent> <leader>,h :History<CR>
+" nnoremap <silent> <leader>,r :Rg<CR>
+" nnoremap <silent> <leader>,m :Marks<CR>
+" nnoremap <silent> <leader>,c :Colors<CR>
 
-" fzf
-nnoremap <silent> <leader>,f :Files<CR>
-nnoremap <silent> <leader>,g :GFiles<CR>
-nnoremap <silent> <leader>,G :GFiles?<CR>
-nnoremap <silent> <leader>,b :Buffers<CR>
-nnoremap <silent> <leader>,h :History<CR>
-nnoremap <silent> <leader>,r :Rg<CR>
-nnoremap <silent> <leader>,m :Marks<CR>
-nnoremap <silent> <leader>,c :Colors<CR>
+" ---------------------------
+" nvim-telescope/telescope.nvim
+" ---------------------------
+nnoremap <silent> <leader>,f <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <silent> <leader>,g <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <silent> <leader>,b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <silent> <leader>,h <cmd>lua require('telescope.builtin').oldfiles()<cr>
+nnoremap <silent> <leader>,r <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <silent> <leader>,m <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <silent> <leader>,c <cmd>lua require('telescope.builtin').colorscheme()<cr>
 
 " Comment codes
 autocmd FileType python,shell set commentstring=#\ %s

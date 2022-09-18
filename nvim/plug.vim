@@ -16,6 +16,12 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin()
 
+" --------------------
+" General
+" --------------------
+Plug 'vim-denops/denops.vim'  " required for deno/ts/js
+Plug 'nvim-lua/plenary.nvim'  " required for lua
+
 "-------------------=== Code/Project navigation ===-------------
 " Plug 'scrooloose/nerdtree'                " Project and file navigation
 " Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
@@ -42,7 +48,7 @@ Plug 'ekickx/clipboard-image.nvim'
 " --------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'vim-denops/denops.vim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " Plug 'Shougo/ddu.vim'
 " Plug 'Shougo/ddu-ui-ff'
 " Plug 'Shougo/ddu-source-file_rec'
@@ -60,7 +66,6 @@ Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis wi
 " Plug 'vim-airline/vim-airline'            " Very cool status line
 " Plug 'vim-airline/vim-airline-themes'     " Very cool status line theme
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'feline-nvim/feline.nvim'            " Very cool status line
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -82,6 +87,7 @@ Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt 
 " Plug 'antoyo/vim-licenses'
 Plug 'smbl64/vim-black-macchiato'         " partial formatter for python
 Plug 'deton/jasegment.vim'
+Plug 'IMOKURI/apyrori.nvim'               " python auto import
 
 " --------------------
 " Markdown 
