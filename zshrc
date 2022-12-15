@@ -10,7 +10,7 @@ export EDITOR=nvim
 [[ ! -v PYTHON3_HOST_PROG ]] && export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python # for neovim in docker container
 
 # deno
-export DENO_INSTALL="/home/abemi/.deno"
+export DENO_INSTALL="${HOME}/.deno"
 if [ ! -d "${DENO_INSTALL}" ]; then
     # install deno
     curl -fsSL https://deno.land/install.sh | sh
