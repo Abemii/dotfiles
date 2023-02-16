@@ -114,7 +114,7 @@ local comps = {
             provider = {
               name = 'file_info',
               opts = {
-                type = 'relative-short',
+                type = 'unique',
                 file_readonly_icon = '  ',
                 -- file_readonly_icon = '  ',
                 -- file_readonly_icon = '  ',
@@ -325,21 +325,8 @@ require'feline'.setup {
     colors = { bg = colors.bg, fg = colors.fg },
     components = components,
     vi_mode_colors = vi_mode_colors,
-    force_inactive = {
-        filetypes = {
-            'packer',
-            'NvimTree',
-            'fugitive',
-            'fugitiveblame'
-        },
-        buftypes = {'terminal'},
-        bufnames = {}
-    },
     disable = {
-        filetypes = {
-            'fern',
-            'vista'
-        }
+        buftypes = {'terminal', 'nofile'},
     }
 }
 
