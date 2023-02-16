@@ -583,4 +583,12 @@ if ! { type mutagen > /dev/null 2>&1; } then
 fi
 
 
+echoI "Install trash-cli"
+if ! { type trash > /dev/null 2>&1; } then
+    if $IS_DEBIAN && $IS_SUDOER; then
+        sudo apt install -y trash-cli
+    fi
+fi
+
+
 echoI "Finished"
