@@ -70,6 +70,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'feline-nvim/feline.nvim'            " Very cool status line
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'glepnir/dashboard-nvim'
+Plug 'levouh/tint.nvim'
 
 " --------------------
 " Language support, auto completion
