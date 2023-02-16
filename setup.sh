@@ -570,7 +570,7 @@ if ! { type mutagen > /dev/null 2>&1; } then
         MUTAGEN_VERSION="v0.15.0"
         wget -P /tmp https://github.com/mutagen-io/mutagen/releases/download/${MUTAGEN_VERSION}/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
         pushd /usr/local/bin
-        tar zxf /tmp/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
+        sudo tar zxf /tmp/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
         popd
     fi
 fi
