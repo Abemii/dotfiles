@@ -12,6 +12,8 @@ echoE () {
 
 # ostype
 IS_LINUX=false
+IS_DEBIAN=false
+IS_ARCH=false
 IS_MAC=false
 if [ "`uname`" == "Darwin" ]; then
     IS_MAC=true
@@ -19,6 +21,11 @@ if [ "`uname`" == "Darwin" ]; then
 elif [ "`uname`" == "Linux" ]; then
     IS_LINUX=true
     echoI "LInux"
+    if ! { type apt >/dev/null 2>&1; } then
+        IS_DEBIAN=true
+    elif ! { type pacman >/dev/null 2>&1; } then
+        IS_ARCH=true
+    fi
 else
     echoE "FAIL"
     exit 1
@@ -90,7 +97,7 @@ if $IS_MAC; then
 
 fi
 
-if $IS_LINUX && $IS_SUDOER; then
+if $IS_DEBIAN && $IS_SUDOER; then
     # to save yanked to clipboard in neovim
     if ! { type xclip > /dev/null 2>&1; } then
         sudo apt install -y xclip
@@ -169,7 +176,7 @@ function build_zsh_from_source () {
 # install zsh and set as default shell
 if ! { type zsh > /dev/null 2>&1; } then
     echoI "ZSH is not installed. Install zsh...."
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y zsh
         echo "change default shell to zsh...."
         sudo sh -c "echo $(which zsh) >> /etc/shells"
@@ -205,7 +212,7 @@ fi
 # install nvim
 echoI "Install nvim"
 if ! { type nvim > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y neovim
     elif $IS_LINUX && ! $IS_SUDOER; then
         wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P $HOME
@@ -297,7 +304,7 @@ function build_universal_ctags_from_source () {
 
 echoI "Install ctags"
 if ! { type ctags > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         # sudo apt install -y exuberant-ctags
         sudo apt install -y universal-ctags
     elif $IS_LINUX && ! $IS_SUDOER; then
@@ -359,7 +366,7 @@ function build_tmux_from_source () {
 
 echoI "Install tmux"
 if ! { type tmux > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y tmux
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_tmux_from_source $INSTALL_PATH
@@ -391,7 +398,7 @@ echoI "Install node"
 if ! { type node > /dev/null 2>&1; } then
     if $IS_LINUX && ! $IS_SUDOER; then
         install_node $INSTALL_PATH
-    elif $IS_LINUX && $IS_SUDOER; then
+    elif $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y nodejs npm
         sudo npm install n -g -y
         sudo n stable
@@ -408,7 +415,7 @@ fi
 
 echoI "Install htop"
 if ! { type htop > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y htop
     elif $IS_MAC; then
         brew install htop
@@ -419,7 +426,7 @@ fi
 # # install nvtop
 # echoI "Install nvtop"
 # if ! { type nvtop > /dev/null 2>&1; } then
-#     if $IS_LINUX && $IS_SUDOER; then
+#     if $IS_DEBIAN && $IS_SUDOER; then
 #         sudo apt install nvtop
 #     fi
 # fi
@@ -448,7 +455,7 @@ function build_ag_from_source () {
 
 echoI "Install silversearcher-ag (ag)"
 if ! { type ag > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y silversearcher-ag
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_ag_from_source $INSTALL_PATH
@@ -472,7 +479,7 @@ function install_rg () {
 
 echoI "Install ripgrep (rg)"
 if ! { type rg > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y ripgrep
     elif $IS_LINUX && ! $IS_SUDOER; then
         install_rg $INSTALL_PATH
@@ -482,7 +489,7 @@ fi
 
 echoI "Install filezilla"
 if ! { type filezilla > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y filezilla
     elif $IS_MAC; then
         brew install filezilla
@@ -492,7 +499,7 @@ fi
 
 echoI "Install quicktile"
 if ! { type quicktile > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt-get install -y python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
         sudo pip3 install https://github.com/ssokolow/quicktile/archive/master.zip
         if [ ! -L ~/.config/quicktile ]; then
@@ -504,7 +511,7 @@ fi
 
 echoI "Install nkf"
 if ! { type nkf > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y nkf
     elif $IS_MAC; then
         brew install nkf
@@ -514,7 +521,7 @@ fi
 
 echoI "Install autossh"
 if ! { type autossh > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y autossh
     elif $IS_MAC; then
         brew install autossh
@@ -523,7 +530,7 @@ fi
 
 
 echoI "Install gimp"
-if $IS_LINUX && ! { type gimp >/dev/null 2>&1; } then
+if $IS_DEBIAN && ! { type gimp >/dev/null 2>&1; } then
     if $IS_SUDOER; then
         sudo apt install -y gimp
     fi
@@ -534,7 +541,7 @@ fi
 
 echoI "Install imagemagick"
 if ! { type convert > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y imagemagick
     elif $IS_MAC; then
         brew install imagemagick
@@ -556,7 +563,7 @@ fi
 
 echoI "Install sshfs"
 if ! { type sshfs > /dev/null 2>&1; } then
-    if $IS_LINUX && $IS_SUDOER; then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y sshfs
     elif $IS_MAC; then
         brew install sshfs
