@@ -640,4 +640,12 @@ if ! { type discord > /dev/null 2>&1; } then
     fi
 fi
 
+echoI "Install hackgen"
+if `fc-list | grep HackGen >/dev/null 2>&1` then
+    if $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S ttc-hackgen
+    fi
+fi
+
+
 echoI "Finished"
