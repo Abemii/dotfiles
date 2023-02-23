@@ -21,10 +21,12 @@ if [ "`uname`" == "Darwin" ]; then
 elif [ "`uname`" == "Linux" ]; then
     IS_LINUX=true
     echoI "LInux"
-    if ! { type apt >/dev/null 2>&1; } then
+    if `type apt >/dev/null 2>&1`; then
         IS_DEBIAN=true
-    elif ! { type pacman >/dev/null 2>&1; } then
+	echoI "Debian"
+    elif `type pacman >/dev/null 2>&1`; then
         IS_ARCH=true
+	echoI "Arch"
     fi
 else
     echoE "FAIL"
@@ -34,7 +36,8 @@ fi
 # check if you have sudo priviledge in linux
 IS_SUDOER=false
 if $IS_LINUX; then
-    if `id $USER | grep "sudo" > /dev/null 2>&1`; then
+    # if `id $USER | grep "sudo" > /dev/null 2>&1`; then
+    if `sudo -l -U $USER >/dev/null 2>&1`; then
         IS_SUDOER=true
         echoI "You are sudoer."
     else
@@ -97,15 +100,21 @@ if $IS_MAC; then
 
 fi
 
-if $IS_DEBIAN && $IS_SUDOER; then
-    # to save yanked to clipboard in neovim
-    if ! { type xclip > /dev/null 2>&1; } then
+# to save yanked to clipboard in neovim
+if ! { type xclip > /dev/null 2>&1; } then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y xclip
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S xclip
     fi
+fi
 
-    # for pbcopy alias
-    if ! { type xsel > /dev/null 2>&1; } then
+# for pbcopy alias
+if ! { type xsel > /dev/null 2>&1; } then
+    if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y xsel
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S xsel
     fi
 fi
 
@@ -181,6 +190,11 @@ if ! { type zsh > /dev/null 2>&1; } then
         echo "change default shell to zsh...."
         sudo sh -c "echo $(which zsh) >> /etc/shells"
         chsh -s $(which zsh)
+    elif $IS_ARCH && $IS_SUDOER; then
+	    yes | yay -S -y zsh
+        echo "change default shell to zsh...."
+        sudo sh -c "echo $(which zsh) >> /etc/shells"
+        chsh -s $(which zsh)
     elif $IS_LINUX && ! $IS_SUDOER; then 
         build_zsh_from_source $INSTALL_PATH
         echo "change default shell to zsh...."
@@ -214,6 +228,8 @@ echoI "Install nvim"
 if ! { type nvim > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y neovim
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S -y neovim
     elif $IS_LINUX && ! $IS_SUDOER; then
         wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P $HOME
         chmod u+x $HOME/nvim.appimage
@@ -225,16 +241,18 @@ fi
 
 
 # install python3 (anaconda)
-echoI "Install anaconda"
-conda_dst="${HOME}/anaconda3"
+echoI "Install miniconda3"
+conda_dst="${HOME}/miniconda3"
 if [ ! -d $conda_dst ]; then
-    echo "install anaconda3 ...."
+    echo "install miniconda3 ...."
     if $IS_MAC; then
         conda_installer=Miniconda3-latest-MacOSX-x86_64.sh
     elif $IS_LINUX; then
         conda_installer=Miniconda3-latest-Linux-x86_64.sh
     fi
-    wget https://repo.anaconda.com/miniconda/$conda_installer -P tmp
+    if [ ! -f "tmp/${conda_installer}" ]; then
+        wget https://repo.anaconda.com/miniconda/$conda_installer -P tmp
+    fi
     bash tmp/$conda_installer -b -p $conda_dst
 
     echo "update conda ...."
@@ -248,7 +266,7 @@ fi
 # neovim settings
 echoI "Setup nvim"
 
-/usr/bin/pip3 install pynvim jedi flake8 isort black jedi-language-server  # install to ~/.local/bin
+# /usr/bin/pip3 install pynvim jedi flake8 isort black jedi-language-server  # install to ~/.local/bin
 # if ! { conda env list | grep neovim > /dev/null 2>&1; } then
 #     echo "create conda env for neovim...."
 #     conda create -y --name neovim python=3.8
@@ -259,12 +277,12 @@ echoI "Setup nvim"
 #     echo "conda neovim env already exists."
 # fi
 
-echoI "create symbolic link to ~/.config/nvim" 
 if [ ! -d ~/.config ]; then
     mkdir ~/.config
 fi
 
 if [ ! -L ~/.config/nvim ]; then
+    echoI "create symbolic link to ~/.config/nvim" 
     ln -s $(pwd)/nvim/ ~/.config/
 fi
 
@@ -307,6 +325,9 @@ if ! { type ctags > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         # sudo apt install -y exuberant-ctags
         sudo apt install -y universal-ctags
+    elif $IS_ARCH && $IS_SUDOER; then
+        # sudo apt install -y exuberant-ctags
+        yes | yay -S universal-ctags
     elif $IS_LINUX && ! $IS_SUDOER; then
         # build_exuberant_ctags_from_source $INSTALL_PATH
         build_universal_ctags_from_source $INSTALL_PATH
@@ -368,6 +389,8 @@ echoI "Install tmux"
 if ! { type tmux > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y tmux
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S tmux
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_tmux_from_source $INSTALL_PATH
     elif $IS_MAC; then
@@ -377,11 +400,10 @@ fi
 
 
 echoI "Setup tmux"
-echo "create symbolic link to ~/.tmux.conf" 
 if [ ! -L ~/.tmux.conf ]; then
+    echo "create symbolic link to ~/.tmux.conf" 
     ln -s $(pwd)/tmux.conf ~/.tmux.conf
 fi
-
 
 function install_node () {
     INSTALL_DIR=$1
@@ -403,6 +425,8 @@ if ! { type node > /dev/null 2>&1; } then
         sudo npm install n -g -y
         sudo n stable
         sudo apt purge -y nodejs npm
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S nodejs npm
     fi
 fi
 
@@ -417,6 +441,8 @@ echoI "Install htop"
 if ! { type htop > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y htop
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S htop
     elif $IS_MAC; then
         brew install htop
     fi
@@ -457,6 +483,8 @@ echoI "Install silversearcher-ag (ag)"
 if ! { type ag > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y silversearcher-ag
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S the_silver_searcher 
     elif $IS_LINUX && ! $IS_SUDOER; then
         build_ag_from_source $INSTALL_PATH
     elif $IS_MAC; then
@@ -481,6 +509,8 @@ echoI "Install ripgrep (rg)"
 if ! { type rg > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y ripgrep
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S ripgrep
     elif $IS_LINUX && ! $IS_SUDOER; then
         install_rg $INSTALL_PATH
     fi
@@ -523,6 +553,8 @@ echoI "Install autossh"
 if ! { type autossh > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y autossh
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S autossh
     elif $IS_MAC; then
         brew install autossh
     fi
@@ -534,6 +566,10 @@ if $IS_DEBIAN && ! { type gimp >/dev/null 2>&1; } then
     if $IS_SUDOER; then
         sudo apt install -y gimp
     fi
+elif $IS_ARCH && ! { type gimp >/dev/null 2>&1; } then
+    if $IS_SUDOER; then
+        yes | yay -S gimp
+    fi
 elif $IS_MAC && [ ! -d "/Applications/GIMP-2.10.app" ]; then
     brew install --cask gimp
 fi
@@ -543,6 +579,8 @@ echoI "Install imagemagick"
 if ! { type convert > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y imagemagick
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S imagemagick
     elif $IS_MAC; then
         brew install imagemagick
     fi
@@ -565,6 +603,8 @@ echoI "Install sshfs"
 if ! { type sshfs > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y sshfs
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S sshfs
     elif $IS_MAC; then
         brew install sshfs
     fi
@@ -574,7 +614,7 @@ fi
 echoI "Install mutagen"
 if ! { type mutagen > /dev/null 2>&1; } then
     if $IS_LINUX && $IS_SUDOER; then
-        MUTAGEN_VERSION="v0.15.0"
+        MUTAGEN_VERSION="v0.17.0"
         wget -P /tmp https://github.com/mutagen-io/mutagen/releases/download/${MUTAGEN_VERSION}/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
         pushd /usr/local/bin
         sudo tar zxf /tmp/mutagen_linux_amd64_${MUTAGEN_VERSION}.tar.gz
@@ -587,8 +627,17 @@ echoI "Install trash-cli"
 if ! { type trash > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y trash-cli
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S trash-cli
     fi
 fi
 
+
+echoI "Install discord"
+if ! { type discord > /dev/null 2>&1; } then
+    if $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S discord
+    fi
+fi
 
 echoI "Finished"

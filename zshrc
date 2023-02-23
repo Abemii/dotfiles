@@ -53,13 +53,13 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # ZSH port of Fish shell's history search feature
 zinit ice wait'1b' lucid atinit"
-bindkey "$key[Up]" history-substring-search-up
-bindkey "$key[Down]" history-substring-search-down
 bindkey '^[k' history-substring-search-up
 bindkey '^[j' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 "; zinit light "zsh-users/zsh-history-substring-search"
+# bindkey "$key[Up]" history-substring-search-up
+# bindkey "$key[Down]" history-substring-search-down
 
 # prompt
 zinit light "mafredri/zsh-async"
@@ -67,8 +67,8 @@ zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # fzf
-zinit ice from"gh-r" as"program"
-zinit light junegunn/fzf-bin
+# zinit ice from"gh-r" as"program"
+# zinit light junegunn/fzf-bin
 
 # enhancd -  A next-generation cd command with an interactive filter
 zinit ice wait'2' lucid pick 'init.zsh'; zinit light "b4b4r07/enhancd"
