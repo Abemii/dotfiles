@@ -90,6 +90,8 @@ Plug 'smbl64/vim-black-macchiato'         " partial formatter for python
 Plug 'deton/jasegment.vim'
 Plug 'IMOKURI/apyrori.nvim'               " python auto import
 
+Plug 'github/copilot.vim'
+
 " --------------------
 " Markdown 
 " --------------------
