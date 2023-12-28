@@ -3,27 +3,6 @@
 " ---------------------------
 colorscheme onedark
 
-" " ---------------------------
-" " junegunn/fzf.vim
-" " ---------------------------
-" " use ripgrep
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"   \   <bang>0)
-" 
-" " fzf
-" nnoremap <silent> <leader>,f :Files<CR>
-" nnoremap <silent> <leader>,g :GFiles<CR>
-" nnoremap <silent> <leader>,G :GFiles?<CR>
-" nnoremap <silent> <leader>,b :Buffers<CR>
-" nnoremap <silent> <leader>,h :History<CR>
-" nnoremap <silent> <leader>,r :Rg<CR>
-" nnoremap <silent> <leader>,m :Marks<CR>
-" nnoremap <silent> <leader>,c :Colors<CR>
-
 " ---------------------------
 " nvim-telescope/telescope.nvim
 " ---------------------------
@@ -50,97 +29,9 @@ nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impu
 nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
 nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
 
-" " --------------------------
-" " Airline settings
-" " --------------------------
-" let g:airline#extensions#tabline#enabled=1
-" let g:airline#extensions#tabline#formatter='unique_tail_improved'
-" let g:airline_powerline_fonts=1
-" let g:airline#extensions#coc#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline_theme='bubblegum'
-" let g:airline_section_c = airline#section#create(['file'])
-
-
-" " -----------------------
-" " DevIcon settings
-" " -----------------------
-" " loading the plugin 
-" let g:webdevicons_enable = 1
-" 
-" " adding the flags to NERDTree 
-" let g:webdevicons_enable_nerdtree = 1
-" 
-" " adding to vim-airline's tabline
-" " let g:webdevicons_enable_airline_tabline = 1
-" 
-" " adding to vim-airline's statusline
-" " let g:webdevicons_enable_airline_statusline = 1
-" 
-" " turn on/off file node glyph decorations (not particularly useful)
-" let g:WebDevIconsUnicodeDecorateFileNodes = 1
-" 
-" " use double-width(1) or single-width(0) glyphs 
-" " only manipulates padding, has no effect on terminal or set(guifont) font
-" let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-" 
-" " whether or not to show the nerdtree brackets around flags 
-" let g:webdevicons_conceal_nerdtree_brackets = 0
-" 
-" " the amount of space to use after the glyph character (default ' ')
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-" 
-" " Force extra padding in NERDTree so that the filetype icons line up vertically
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
-" 
-" " change the default character when no match found
-" let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
-" 
-" " set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
-" " disabled by default with no value
-" let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-" 
-" " enable folder/directory glyph flag (disabled by default with 0)
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" 
-" " enable open and close folder/directory glyph flags (disabled by default with 0)
-" let g:DevIconsEnableFoldersOpenClose = 1
-" 
-" " enable pattern matching glyphs on folder/directory (enabled by default with 1)
-" let g:DevIconsEnableFolderPatternMatching = 1
-" 
-" " enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
-" let g:DevIconsEnableFolderExtensionPatternMatching = 0
-
-
-" -----------------------
-" NERDTree settings
-" -----------------------
-" let g:NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
-" let g:NERDTreeWinSize=35
-" let g:NERDTreeChDirMode=2
-" let g:NERDTreeHijackNetrw=0
-" let g:NERDTreeCascadeOpenSingleChildDir=1
-" autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
-"
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif  " Automatically quit vim if NERDTree is last and only buffer
-" let g:NERDTreeDirArrows = 1
-" let g:NERDTreeDirArrowExpandable = '▶'
-" let g:NERDTreeDirArrowCollapsible = '▼'
-"
-" let g:NERDTreeMinimalUI = 1
-"
-" let g:NERDTreeShowHidden = 1
-"
-" " nerdtree shortcut
-"  nnoremap <silent> " :NERDTreeToggle<CR>
-
-
 " --------------------
 " Fern settings
 " --------------------
-
 nnoremap <silent> " :Fern . -reveal=% -drawer -toggle -width=35<CR>
 let g:fern#renderer = 'nerdfont'
 let g:fern#default_exclude = '__pycache__'
@@ -274,30 +165,9 @@ nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gc :Git commit<CR><CR>
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>gl :Gclog<CR>
 " nnoremap <leader>gb :Git blame<CR>
-
-
-" ----------------------------
-" APZelos/blamer.nvim
-" ----------------------------
-nnoremap <silent> <leader>gb :BlamerToggle<CR>
-let g:blamer_enabled = 0
-let g:blamer_delay = 500
-let g:blamer_prefix = ' > '
-
-
-" " ----------------------------
-" " airblade/vim-gitgutter
-" " ----------------------------
-" nnoremap g[ :GitGutterPrevHunk<CR>
-" nnoremap g] :GitGutterNextHunk<CR>
-" nnoremap gh :GitGutterLineHighlightsToggle<CR>
-" nnoremap gp :GitGutterPreviewHunk<CR>
-" highlight GitGutterAdd ctermfg=green
-" highlight GitGutterChange ctermfg=blue
-" highlight GitGutterDelete ctermfg=red
 
 
 " ----------------------------
@@ -305,7 +175,7 @@ let g:blamer_prefix = ' > '
 " ----------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","zsh","markdown","css","yaml","toml","vue","html","cpp","python","diff","java","jq","latex","make"},
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
