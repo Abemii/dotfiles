@@ -5,8 +5,9 @@ export PATH=$HOME/local/bin:$PATH
 export GOPATH=/usr/local/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=/usr/local/nvim-linux64/bin:${PATH}
 export EDITOR=nvim
-[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/anaconda3
+[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/miniconda3
 [[ ! -v PYTHON3_HOST_PROG ]] && export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python # for neovim in docker container
 
 # deno
@@ -126,7 +127,8 @@ alias history="history -E 1"
 if type autossh > /dev/null 2>&1; then
     alias ssh='autossh -M 0'
 fi
-alias pbcopy=${commands[pbcopy]:-"xsel --clipboard --input"}
+# alias pbcopy=${commands[pbcopy]:-"xsel --clipboard --input"}
+alias pbcopy=${commands[pbcopy]:-"xclip -selection clipboard"}
 ## git
 alias gs='git status'
 alias ga='git add'

@@ -175,7 +175,7 @@ nnoremap <leader>gl :Gclog<CR>
 " ----------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","zsh","markdown","css","yaml","toml","vue","html","cpp","python","diff","java","jq","latex","make"},
+  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","markdown","css","yaml","toml","vue","html","cpp","python","diff","java","jq","latex","make"},
   highlight = {
     enable = true,              -- false will disable the whole extension
   },

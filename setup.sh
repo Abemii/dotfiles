@@ -10,6 +10,11 @@ echoE () {
     echo -e "\e[31m$1\e[m"
 }
 
+TMP_DIR=$(mktemp -d)
+NJOBS=${NJOBS:-5}
+export PATH="${HOME}/local/bin:$PATH"
+GNU_MIRROR="https://ftp.jaist.ac.jp/pub/GNU"
+
 # ostype
 IS_LINUX=false
 IS_DEBIAN=false
@@ -20,16 +25,17 @@ if [ "`uname`" == "Darwin" ]; then
     echoI "MacOS"
 elif [ "`uname`" == "Linux" ]; then
     IS_LINUX=true
-    echoI "LInux"
-    if `type apt >/dev/null 2>&1`; then
+    echoI "Linux"
+    OS_ID=$(cat /etc/os-release | grep -E '^ID=' | sed -e 's/^ID=\(.*\)$/\1/')
+    if [ "${OS_ID}" = "ubuntu" ]; then
         IS_DEBIAN=true
-	echoI "Debian"
-    elif `type pacman >/dev/null 2>&1`; then
+        echoI "Debian"
+    elif [ "${OS_ID}" = "arch" ]; then
         IS_ARCH=true
-	echoI "Arch"
+        echoI "Arch"
     fi
 else
-    echoE "FAIL"
+    echoE "FAILURE: Unsupported OS."
     exit 1
 fi
 
@@ -143,41 +149,31 @@ fi
 function build_zsh_from_source () {
     INSTALL_DIR=$1
 
-    # download ncurses
-    mkdir -p tmp
-    pushd tmp
-        # install ncurses
-        NCURSES_VERSION="6.2"
-        wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz
-        tar zxf ncurses-${NCURSES_VERSION}.tar.gz
-        pushd ncurses-${NCURSES_VERSION}
-            export CXXFLAGS=' -fPIC'
-            export CFLAGS=' -fPIC'
-            # mkdir build
-            # pushd build
-                ./configure --prefix=$INSTALL_DIR --enable-shared
-                make
-                make install
-            # popd
-        popd
+    # install ncurses
+    NCURSES_VERSION="6.2"
+    wget -O ${TMP_DIR}/ncurses-${NCURSES_VERSION}.tar.gz -nc ${GNU_MIRROR}/ncurses/ncurses-${NCURSES_VERSION}.tar.gz
+    tar zxf ${TMP_DIR}/ncurses-${NCURSES_VERSION}.tar.gz -C ${TMP_DIR}
+    pushd ${TMP_DIR}/ncurses-${NCURSES_VERSION}
+        export CXXFLAGS=' -fPIC'
+        export CFLAGS=' -fPIC'
+        ./configure --prefix=$INSTALL_DIR --enable-shared
+        make -j ${NJOBS}
+        make install
+    popd
 
-        # install zsh
-        ZSH_INSTALL_VERSION="5.7.1"
-        wget -O zsh-${ZSH_INSTALL_VERSION}.tar.xz https://sourceforge.net/projects/zsh/files/zsh/${ZSH_INSTALL_VERSION}/zsh-${ZSH_INSTALL_VERSION}.tar.xz/download
-        tar xf zsh-${ZSH_INSTALL_VERSION}.tar.xz
-        pushd zsh-${ZSH_INSTALL_VERSION}
-            # mkdir build
-            # pushd build
-                export PATH=$INSTALL_PATH/bin:$PATH
-                export LD_LIBRARY_PATH=$INSTALL_PATH/lib:$LD_LIBRARY_PATH
-                export CFLAGS=-I$INSTALL_PATH/include
-                export CPPFLAGS=-I$INSTALL_PATH/include
-                export LDFLAGS=-L$INSTALL_PATH/lib
-                ./configure --prefix=$INSTALL_DIR --enable-shared
-                make
-                make install
-            # popd
-        popd
+    # install zsh
+    ZSH_VERSION="5.9"
+    wget -O ${TMP_DIR}/zsh-${ZSH_VERSION}.tar.xz -nc https://www.zsh.org/pub/zsh-${ZSH_VERSION}.tar.xz
+    tar xf ${TMP_DIR}/zsh-${ZSH_VERSION}.tar.xz -C ${TMP_DIR}
+    pushd ${TMP_DIR}/zsh-${ZSH_VERSION}
+        export PATH=$INSTALL_PATH/bin:$PATH
+        export LD_LIBRARY_PATH=$INSTALL_PATH/lib:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+        export CFLAGS=-I$INSTALL_PATH/include
+        export CPPFLAGS=-I$INSTALL_PATH/include
+        export LDFLAGS=-L$INSTALL_PATH/lib
+        ./configure --prefix=$INSTALL_DIR --enable-shared
+        make -j ${NJOBS}
+        make install
     popd
 }
 
@@ -219,12 +215,16 @@ fi
 # create symlink to zshrc
 if [ ! -L ~/.zshrc ]; then
     echoI "create symbolic link to ~/.zshrc"
-    ln -s $(pwd)/zshrc ~/.zshrc
+    # ln -s $(pwd)/zshrc ~/.zshrc
 fi
 
 
 # install nvim
 echoI "Install nvim"
+if $IS_LINUX && ! $IS_SUDOER && [ -f $HOME/nvim.appimage ]; then
+    alias nvim='eval $HOME/nvim.appimage'
+fi
+
 if ! { type nvim > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
         sudo apt install -y neovim
@@ -250,10 +250,8 @@ if [ ! -d $conda_dst ]; then
     elif $IS_LINUX; then
         conda_installer=Miniconda3-latest-Linux-x86_64.sh
     fi
-    if [ ! -f "tmp/${conda_installer}" ]; then
-        wget https://repo.anaconda.com/miniconda/$conda_installer -P tmp
-    fi
-    bash tmp/$conda_installer -b -p $conda_dst
+    wget https://repo.anaconda.com/miniconda/$conda_installer -P ${TMP_DIR}
+    bash ${TMP_DIR}/$conda_installer -b -p $conda_dst
 
     echo "update conda ...."
     export PATH=$conda_dst/bin:$PATH
@@ -283,39 +281,66 @@ fi
 
 if [ ! -L ~/.config/nvim ]; then
     echoI "create symbolic link to ~/.config/nvim" 
-    ln -s $(pwd)/nvim/ ~/.config/
+    # ln -s $(pwd)/nvim/ ~/.config/
 fi
 
 
-function build_exuberant_ctags_from_source () {
-    INSTALL_DIR=$1
-    CTAGS_VERSION="5.8"
-
-    mkdir -p tmp
-    pushd tmp
-        # install ctags
-        wget http://prdownloads.sourceforge.net/ctags/ctags-${CTAGS_VERSION}.tar.gz
-        tar zxf ctags-${CTAGS_VERSION}.tar.gz
-        pushd ctags-${CTAGS_VERSION}
-            # mkdir build
-            # pushd build
-                ./configure --prefix=$INSTALL_DIR
-                make
-                make install
-            # popd
-        popd
-    popd
-}
-
 function build_universal_ctags_from_source () {
     INSTALL_DIR=$1
-    CTAGS_VERSION="p5.9.20220206.0"
+    CTAGS_VERSION="6.1.0"
 
-    git clone --depth 1 -b ${CTAGS_VERSION} https://github.com/universal-ctags/ctags.git /tmp/ctags
-    pushd /tmp/ctags
+    if ! { type autoconf > /dev/null 2>&1; } then
+        # build m4 (prerequisite of autoconf)
+        M4_VERSION="1.4.19"
+        wget -O ${TMP_DIR}/m4-${M4_VERSION}.tar.gz ${GNU_MIRROR}/m4/m4-${M4_VERSION}.tar.gz
+        tar zxf ${TMP_DIR}/m4-${M4_VERSION}.tar.gz -C ${TMP_DIR}
+        pushd ${TMP_DIR}/m4-${M4_VERSION}
+            ./configure --prefix=${INSTALL_DIR}
+            make -j ${NJOBS}
+            make install
+        popd
+
+        # build autoconf (prerequisite of universal-ctags)
+        AUTOCONF_VERSION="2.72"
+        wget -O ${TMP_DIR}/autoconf-${AUTOCONF_VERSION}.tar.gz ${GNU_MIRROR}/autoconf/autoconf-${AUTOCONF_VERSION}.tar.gz
+        tar zxf ${TMP_DIR}/autoconf-${AUTOCONF_VERSION}.tar.gz -C ${TMP_DIR}
+        pushd ${TMP_DIR}/autoconf-${AUTOCONF_VERSION}
+            ./configure --prefix=${INSTALL_DIR}
+            make -j ${NJOBS}
+            make install
+        popd
+    fi
+
+    if ! { type automake > /dev/null 2>&1; } then
+        # build automake (prerequisite of universal-ctags)
+        AUTOMAKE_VERSION="1.16.5"
+        wget -O ${TMP_DIR}/automake-${AUTOMAKE_VERSION}.tar.gz ${GNU_MIRROR}/automake/automake-${AUTOMAKE_VERSION}.tar.gz
+        tar zxf ${TMP_DIR}/automake-${AUTOMAKE_VERSION}.tar.gz -C ${TMP_DIR}
+        pushd ${TMP_DIR}/automake-${AUTOMAKE_VERSION}
+            ./configure --prefix=${INSTALL_DIR}
+            make -j ${NJOBS}
+            make install
+        popd
+    fi
+
+    if ! { type pkg-config > /dev/null 2>&1; } then
+        # build pkg-config (prerequisite of universal-ctags)
+        PKG_CONFIG_VERSION="0.29.2"
+        wget -O ${TMP_DIR}/pkg-config-${PKG_CONFIG_VERSION}.tar.gz https://pkgconfig.freedesktop.org/releases/pkg-config-${PKG_CONFIG_VERSION}.tar.gz
+        tar zxf ${TMP_DIR}/pkg-config-${PKG_CONFIG_VERSION}.tar.gz -C ${TMP_DIR}
+        pushd ${TMP_DIR}/pkg-config-${PKG_CONFIG_VERSION}
+            ./configure --prefix=${INSTALL_DIR} --with-internal-glib
+            make -j ${NJOBS}
+            make install
+        popd
+    fi
+
+    wget -O ${TMP_DIR}/universal-ctags-${CTAGS_VERSION}.tar.gz https://github.com/universal-ctags/ctags/releases/download/v${CTAGS_VERSION}/universal-ctags-${CTAGS_VERSION}.tar.gz
+    tar zxf ${TMP_DIR}/universal-ctags-${CTAGS_VERSION}.tar.gz -C ${TMP_DIR}
+    pushd ${TMP_DIR}/universal-ctags-${CTAGS_VERSION}
         ./autogen.sh
         ./configure --prefix=${INSTALL_DIR}
-        make
+        make -j ${NJOBS}
         make install # may require extra privileges depending on where to install
     popd
 }
@@ -323,13 +348,10 @@ function build_universal_ctags_from_source () {
 echoI "Install ctags"
 if ! { type ctags > /dev/null 2>&1; } then
     if $IS_DEBIAN && $IS_SUDOER; then
-        # sudo apt install -y exuberant-ctags
         sudo apt install -y universal-ctags
     elif $IS_ARCH && $IS_SUDOER; then
-        # sudo apt install -y exuberant-ctags
         yes | yay -S universal-ctags
     elif $IS_LINUX && ! $IS_SUDOER; then
-        # build_exuberant_ctags_from_source $INSTALL_PATH
         build_universal_ctags_from_source $INSTALL_PATH
     elif $IS_MAC; then
         brew install ctags
@@ -339,48 +361,38 @@ fi
 
 function build_tmux_from_source () {
     INSTALL_DIR=$1
-    OPENSSL_VERSION="1.1.1c"
+    OPENSSL_VERSION="3.0.9"
     LIBEVENT_VERSION="2.1.12-stable"
     TMUX_VERSION="3.1b"
 
-    mkdir -p tmp
-    pushd tmp
-        # install openssl
-        wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
-        tar zxf openssl-${OPENSSL_VERSION}.tar.gz
-        pushd openssl-${OPENSSL_VERSION}
-            # mkdir build
-            # pushd build
-                ./config --prefix=$INSTALL_DIR --openssldir=$INSTALL_DIR shared
-                make
-                make install
-            # popd
-        popd
+    # install openssl
+    # wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz -P ${TMP_DIR}
+    # tar zxf ${TMP_DIR}/openssl-${OPENSSL_VERSION}.tar.gz -C ${TMP_DIR}
+    # pushd ${TMP_DIR}/openssl-${OPENSSL_VERSION}
+    #     ./config --prefix=$INSTALL_DIR --openssldir=$INSTALL_DIR shared
+    #     make -j ${NJOBS}
+    #     make install
+    # popd
 
-        # install libevent
+    # install libevent
+    if ! { ldconfig -p | grep libevent > /dev/null 2>&1; } then
         wget https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz --no-check-certificate
         tar zxf libevent-${LIBEVENT_VERSION}.tar.gz
         pushd libevent-${LIBEVENT_VERSION}
-            # mkdir build
-            # pushd build
-                ./configure --prefix=$INSTALL_DIR
-                make
-                make install
-            # popd
+            CFLAGS="-I${INSTALL_DIR}/include ${CFLAGS}" LDFLAGS="-L${INSTALL_DIR}/lib64 ${LDFLAGS}" ./configure --prefix=$INSTALL_DIR
+            make -j ${NJOBS}
+            make install
         popd
+    fi
 
-        # install tmux
-        wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz --no-check-certificate
-        tar zxf tmux-${TMUX_VERSION}.tar.gz
-        pushd tmux-${TMUX_VERSION}
-            # mkdir build
-            # pushd build
-               CFLAGS="-I/${INSTALL_DIR}/include/ncurses $CFLAGS"
-               ./configure --prefix=$INSTALL_DIR
-               make
-               make install
-            # popd
-        popd
+    # install tmux
+    wget -P ${TMP_DIR} https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz --no-check-certificate
+    tar zxf ${TMP_DIR}/tmux-${TMUX_VERSION}.tar.gz -C ${TMP_DIR}
+    pushd ${TMP_DIR}/tmux-${TMUX_VERSION}
+        export CFLAGS="-I/${INSTALL_DIR}/include/ncurses $CFLAGS"
+        ./configure --prefix=$INSTALL_DIR
+        make -j ${NJOBS}
+        make install
     popd
 }
 
@@ -402,17 +414,15 @@ fi
 echoI "Setup tmux"
 if [ ! -L ~/.tmux.conf ]; then
     echo "create symbolic link to ~/.tmux.conf" 
-    ln -s $(pwd)/tmux.conf ~/.tmux.conf
+   #  ln -s $(pwd)/tmux.conf ~/.tmux.conf
 fi
 
 function install_node () {
     INSTALL_DIR=$1
-    NODE_VERSION=${2:-v16.14.0}
-    wget https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz -P tmp
-    pushd tmp
-        tar Jxf node-${NODE_VERSION}-linux-x64.tar.xz
-        rsync -avzP node-${NODE_VERSION}-linux-x64/* $INSTALL_DIR/
-    popd
+    NODE_VERSION=${2:-v20.11.1}
+    wget -O ${TMP}/node-${NODE_VERSION}-linux-x64.tar.xz https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.xz
+    tar Jxf ${TMP}/node-${NODE_VERSION}-linux-x64.tar.xz -C ${INSTALL_DIR}
+    ln -s ${INSTALL_DIR}/node-${NODE_VERSION}-linux-x64/bin/node ${INSTALL_DIR}/bin/node
 }
 
 
@@ -430,8 +440,28 @@ if ! { type node > /dev/null 2>&1; } then
     fi
 fi
 
+echoI "Install curl"
+if ! { type curl >/dev/null 2>&1; } then
+    if $IS_DEBIAN && $IS_SUDOER; then
+        sudo apt install -y curl
+    elif $IS_ARCH && $IS_SUDOER; then
+        yes | yay -S curl
+    elif $IS_LINUX && ! $IS_SUDOER; then
+        CURL_VERSION="8.6.0"
+        wget -P ${TMP_DIR} https://curl.se/download/curl-${CURL_VERSION}.tar.gz
+        tar zxf ${TMP_DIR}/curl-${CURL_VERSION}.tar.gz -C ${TMP_DIR}
+        pushd ${TMP_DIR}/curl-${CURL_VERSION}
+            ./configure --prefix=$INSTALL_PATH --with-openssl
+            make -j ${NJOBS}
+            make install
+        popd
+    elif $IS_MAC; then
+        brew install curl
+    fi
+fi
 
 echoI "Install deno"
+export PATH="${HOME}/.deno/bin:$PATH"
 if ! { type deno > /dev/null 2>&1; } then
     curl -fsSL https://deno.land/install.sh | sh
 fi
@@ -462,19 +492,14 @@ function build_ag_from_source () {
     INSTALL_DIR=$1
     AG_VERSION=${2:-2.2.0}
 
-    mkdir -p tmp
-    pushd tmp
-        # install ctags
-        wget https://geoff.greer.fm/ag/releases/the_silver_searcher-${AG_VERSION}.tar.gz
-        tar zxf the_silver_searcher-${AG_VERSION}.tar.gz
-        pushd the_silver_searcher-${AG_VERSION}
-            # mkdir build
-            # pushd build
-                ./configure --prefix=$INSTALL_DIR
-                make
-                make install
-            # popd
-        popd
+    # install ctags
+    wget -P ${TMP_DIR} https://geoff.greer.fm/ag/releases/the_silver_searcher-${AG_VERSION}.tar.gz
+    tar zxf ${TMP_DIR}/the_silver_searcher-${AG_VERSION}.tar.gz -C ${TMP_DIR}
+    pushd ${TMP_DIR}/the_silver_searcher-${AG_VERSION}
+        export PKG_CONFIG_PATH=${INSTALL_DIR}/lib/pkgconfig
+        CFLAGS="-I${INSTALL_DIR}/include ${CFLAGS}" LDFLAGS="-L${INSTALL_DIR}/lib64 -L/lib/x86_64-linux-gnu {LDFLAGS}" ./configure --prefix=$INSTALL_DIR
+        make -j ${NJOBS}
+        make install
     popd
 }
 
@@ -497,11 +522,9 @@ function install_rg () {
     INSTALL_DIR=$1
     RG_VERSION=${2:-13.0.0}
 
-    wget https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -P /tmp
-    pushd /tmp
-        tar zxf ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz
-        cp ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl/rg ${INSTALL_DIR}/bin/
-    popd
+    wget https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -P ${TMP_DIR}
+    tar zxf ${TMP_DIR}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -C ${TMP_DIR}
+    cp ${TMP_DIR}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl/rg ${INSTALL_DIR}/bin/
 }
 
 
@@ -533,7 +556,7 @@ if ! { type quicktile > /dev/null 2>&1; } then
         sudo apt-get install -y python3 python3-pip python3-setuptools python3-gi python3-xlib python3-dbus gir1.2-glib-2.0 gir1.2-gtk-3.0 gir1.2-wnck-3.0
         sudo pip3 install https://github.com/ssokolow/quicktile/archive/master.zip
         if [ ! -L ~/.config/quicktile ]; then
-            ln -s $(pwd)/quicktile.cfg ~/.config/
+            echo ln -s $(pwd)/quicktile.cfg ~/.config/
         fi
     fi
 fi
@@ -641,11 +664,15 @@ if ! { type discord > /dev/null 2>&1; } then
 fi
 
 echoI "Install hackgen"
-if `fc-list | grep HackGen >/dev/null 2>&1` then
+if `fc-list | grep HackGen >/dev/null 2>&1`; then
     if $IS_ARCH && $IS_SUDOER; then
         yes | yay -S ttc-hackgen
     fi
 fi
+
+
+echoI "Download source code pro nerd font"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
 
 
 echoI "Finished"
