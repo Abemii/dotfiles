@@ -339,6 +339,7 @@ function build_zsh_from_source () {
         unset CPPFLAGS
         unset LDFLAGS
     popd
+    unset ZSH_VERSION
 }
 
 
@@ -446,7 +447,6 @@ fi
 if ! { conda env list | grep neovim > /dev/null 2>&1; } then
     echo "create conda env for neovim...."
     conda create -y --name neovim python=3.10
-    export SHELL=$(which bash)
     . ${HOME}/miniconda3/etc/profile.d/conda.sh
     conda activate neovim
     pip install pynvim jedi jedi-language-server flake8 isort black black-macchiato
