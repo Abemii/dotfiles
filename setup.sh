@@ -185,17 +185,17 @@ if $IS_LINUX && ! $IS_SUDOER; then
         popd
     fi
 
-    if ! { type gettext > /dev/null 2>&1; } then
-        # build gettext (prerequisite of universal-ctags)
-        GETTEXT_VERSION="0.22.5"
-        wget -O ${TMP_DIR}/gettext-${GETTEXT_VERSION}.tar.gz ${GNU_MIRROR}/gettext/gettext-${GETTEXT_VERSION}.tar.gz
-        tar zxf ${TMP_DIR}/gettext-${GETTEXT_VERSION}.tar.gz -C ${TMP_DIR}
-        pushd ${TMP_DIR}/gettext-${GETTEXT_VERSION}
-            ./configure --prefix=${INSTALL_DIR}
-            make -j ${NJOBS}
-            make install
-        popd
-    fi
+    # if ! { type gettext > /dev/null 2>&1; } then
+    #     # build gettext (prerequisite of git)
+    #     GETTEXT_VERSION="0.22.5"
+    #     wget -O ${TMP_DIR}/gettext-${GETTEXT_VERSION}.tar.gz ${GNU_MIRROR}/gettext/gettext-${GETTEXT_VERSION}.tar.gz
+    #     tar zxf ${TMP_DIR}/gettext-${GETTEXT_VERSION}.tar.gz -C ${TMP_DIR}
+    #     pushd ${TMP_DIR}/gettext-${GETTEXT_VERSION}
+    #         ./configure --prefix=${INSTALL_DIR}
+    #         make -j ${NJOBS}
+    #         make install
+    #     popd
+    # fi
 fi
 
 
@@ -207,31 +207,32 @@ if ! { type git > /dev/null 2>&1; } then
     elif $IS_ARCH && $IS_SUDOER; then
         yes | yay -S git
     elif $IS_LINUX && ! $IS_SUDOER; then
-        # install zlib-devel if not installed
-        ZLIB_VERSION="1.3.1"
-        wget -P ${TMP_DIR} http://www.zlib.net/zlib-${ZLIB_VERSION}.tar.gz
-        tar zxf ${TMP_DIR}/zlib-${ZLIB_VERSION}.tar.gz -C ${TMP_DIR}
-        pushd ${TMP_DIR}/zlib-${ZLIB_VERSION}
-            ./configure --prefix=${INSTALL_PATH}
-            make -j ${NJOBS}
-            make install
-        popd
+        # # install zlib-devel if not installed
+        # ZLIB_VERSION="1.3.1"
+        # wget -P ${TMP_DIR} http://www.zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+        # tar zxf ${TMP_DIR}/zlib-${ZLIB_VERSION}.tar.gz -C ${TMP_DIR}
+        # pushd ${TMP_DIR}/zlib-${ZLIB_VERSION}
+        #     ./configure --prefix=${INSTALL_PATH}
+        #     make -j ${NJOBS}
+        #     make install
+        # popd
 
-        GIT_VERSION="2.44.0"
-        wget -O ${TMP_DIR}/git-${GIT_VERSION}.tar.gz https://github.com/git/git/archive/refs/tags/v${GIT_VERSION}.tar.gz
-        tar zxf ${TMP_DIR}/git-${GIT_VERSION}.tar.gz -C ${TMP_DIR}
-        pushd ${TMP_DIR}/git-${GIT_VERSION}
-            export CFLAGS="-I${INSTALL_PATH}/include"
-            export CPPFLAGS="-I${INSTALL_PATH}/include"
-            export LDFLAGS="-L${INSTALL_PATH}/lib"
-            make configure
-            ./configure --prefix=${INSTALL_PATH}
-            make -j ${NJOBS}
-            make install
-            unset CFLAGS
-            unset CPPFLAGS
-            unset LDFLAGS
-        popd
+        # GIT_VERSION="2.44.0"
+        # wget -O ${TMP_DIR}/git-${GIT_VERSION}.tar.gz https://github.com/git/git/archive/refs/tags/v${GIT_VERSION}.tar.gz
+        # tar zxf ${TMP_DIR}/git-${GIT_VERSION}.tar.gz -C ${TMP_DIR}
+        # pushd ${TMP_DIR}/git-${GIT_VERSION}
+        #     export CFLAGS="-I${INSTALL_PATH}/include"
+        #     export CPPFLAGS="-I${INSTALL_PATH}/include"
+        #     export LDFLAGS="-L${INSTALL_PATH}/lib"
+        #     make configure
+        #     ./configure --prefix=${INSTALL_PATH}
+        #     make -j ${NJOBS}
+        #     make install
+        #     unset CFLAGS
+        #     unset CPPFLAGS
+        #     unset LDFLAGS
+        # popd
+        :  # do nothing because git is already installed
     elif $IS_MAC; then
         brew install git
     fi
@@ -282,6 +283,7 @@ fi
 # --------------------------------------------------
 echoI "Install miniconda3"
 conda_dst="${HOME}/miniconda3"
+export PATH=$conda_dst/bin:$PATH
 if [ ! -d $conda_dst ]; then
     echo "install miniconda3 ...."
     if $IS_MAC; then
@@ -293,7 +295,6 @@ if [ ! -d $conda_dst ]; then
     bash ${TMP_DIR}/$conda_installer -b -p $conda_dst
 
     echo "update conda ...."
-    export PATH=$conda_dst/bin:$PATH
     conda update -y -n base -c defaults conda
 else
     echo "miniconda3 already exists."
@@ -445,6 +446,7 @@ fi
 if ! { conda env list | grep neovim > /dev/null 2>&1; } then
     echo "create conda env for neovim...."
     conda create -y --name neovim python=3.10
+    export SHELL=$(which bash)
     . ${HOME}/miniconda3/etc/profile.d/conda.sh
     conda activate neovim
     pip install pynvim jedi jedi-language-server flake8 isort black black-macchiato
@@ -628,8 +630,9 @@ fi
 
 
 # install all pluging in nvim
-export PYTHON3_HOST_PROG=${HOME}/miniconda3/envs/neovim/bin/python
-nvim -u ${script_dir}/nvim/plug.vim -c "PlugInstall" -c "q" -c "q"
+# export PYTHON3_HOST_PROG=${HOME}/miniconda3/envs/neovim/bin/python
+# nvim -u ${script_dir}/nvim/plug.vim -c "q" -c "q"
+# nvim -c "PlugInstall" -c "q" -c "q"
 
 
 function build_tmux_from_source () {
@@ -652,9 +655,7 @@ function build_tmux_from_source () {
         wget -P ${TMP_DIR} https://github.com/libevent/libevent/releases/download/release-${LIBEVENT_VERSION}/libevent-${LIBEVENT_VERSION}.tar.gz --no-check-certificate
         tar zxf ${TMP_DIR}/libevent-${LIBEVENT_VERSION}.tar.gz -C ${TMP_DIR}
         pushd ${TMP_DIR}/libevent-${LIBEVENT_VERSION}
-            PKG_CONFIG_PATH="${HOME}/miniconda3/lib/pkgconfig:${PKG_CONFIG_PATH}" \
-            CFLAGS="-I${INSTALL_DIR}/include ${CFLAGS}" \
-            LDFLAGS="-L${INSTALL_DIR}/lib64 ${LDFLAGS}" \
+            export PKG_CONFIG_PATH="${HOME}/miniconda3/lib/pkgconfig:${PKG_CONFIG_PATH}"
             ./configure --prefix=$INSTALL_DIR
             make -j ${NJOBS}
             make install
