@@ -378,8 +378,8 @@ if [ ! -L ~/.zshrc ]; then
 fi
 
 # load zshrc in zsh shell
-export LD_LIBRARY_PATH=${HOME}/miniconda3/lib:${LD_LIBRARY_PATH}
-zsh -c "source ~/.zshrc"
+# export LD_LIBRARY_PATH=${HOME}/miniconda3/lib:${LD_LIBRARY_PATH}
+# zsh -c "source ~/.zshrc"
 
 
 # --------------------------------------------------
