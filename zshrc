@@ -85,7 +85,8 @@ bindkey -v
 # Yank to the system clipboard
 function vi-yank-xclip {
     zle vi-yank
-    echo "$CUTBUFFER" | xsel --clipboard --input
+    # echo "$CUTBUFFER" | xsel --clipboard --input
+    echo "$CUTBUFFER" | xclip -selection clipboard
 }
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
