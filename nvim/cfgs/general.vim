@@ -3,17 +3,6 @@
 " ---------------------------
 colorscheme onedark
 
-" ---------------------------
-" nvim-telescope/telescope.nvim
-" ---------------------------
-nnoremap <silent> <leader>,f <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <silent> <leader>,g <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <silent> <leader>,b <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <silent> <leader>,h <cmd>lua require('telescope.builtin').oldfiles()<cr>
-nnoremap <silent> <leader>,r <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <silent> <leader>,m <cmd>lua require('telescope.builtin').marks()<cr>
-nnoremap <silent> <leader>,c <cmd>lua require('telescope.builtin').colorscheme()<cr>
-
 " Comment codes
 autocmd FileType python,shell set commentstring=#\ %s
 
