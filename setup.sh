@@ -47,14 +47,14 @@ fi
 # check if you have sudo priviledge in linux
 IS_SUDOER=false
 if $IS_LINUX; then
+    export INSTALL_PATH="${HOME}/local"
+    export PATH="${INSTALL_PATH}/bin:$PATH"
     # if `id $USER | grep "sudo" > /dev/null 2>&1`; then
     if `sudo -l -U $USER >/dev/null 2>&1`; then
         IS_SUDOER=true
         echoI "You are sudoer."
     else
         echoE "You are not sudoer."
-        export INSTALL_PATH="${HOME}/local"
-        export PATH="${INSTALL_PATH}/bin:$PATH"
     fi
 fi
 
@@ -888,7 +888,7 @@ elif `fc-list | grep HackGen >/dev/null 2>&1`; then
         if [ ! -d ${HOME}/.local/share/fonts ]; then
             mkdir -p ${HOME}/.local/share/fonts
         fi
-        cp -r ${TMP_DIR}/HackGen_NF_v${HACKGEN_VERSION} ~/.fonts/HackGen_NF
+        cp -r ${TMP_DIR}/HackGen_NF_v${HACKGEN_VERSION} ${HOME}/.local/share/fonts/HackGen_NF
     fi
 
     fc-cache -fv

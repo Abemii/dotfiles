@@ -12,6 +12,18 @@ function vim.getVisualSelection()
 	end
 end
 
+function vim.getCursorText()
+	vim.cmd('noau normal! "xyiw"')
+	local text = vim.fn.getreg('x')
+	vim.fn.setreg('x', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
 
 local keymap = vim.keymap.set
 local tb = require('telescope.builtin')
@@ -29,6 +41,10 @@ end, opts)
 keymap('n', '<leader>,r', ':Telescope live_grep<cr>', opts)
 keymap('v', '<leader>,r', function()
 	local text = vim.getVisualSelection()
+	tb.live_grep({ default_text = text })
+end, opts)
+keymap('n', '<leader>,R', function()
+	local text = vim.getCursorText()
 	tb.live_grep({ default_text = text })
 end, opts)
 keymap('n', '<leader>,m', ':Telescope marks<cr>', opts)

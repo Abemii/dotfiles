@@ -164,9 +164,20 @@ nnoremap <leader>gl :Gclog<CR>
 " ----------------------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","markdown","css","yaml","toml","vue","html","cpp","python","diff","java","jq","latex","make"},
+  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","markdown","css","yaml","toml","html","cpp","python","diff","java","jq","make"},
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
 }
 EOF
+
+
+" ----------------------------
+" custom functions
+" ----------------------------
+
+function! s:modifiable_windo(cmd)
+  windo if &modifiable | execute a:cmd | endif
+endfunction
+
+command! -nargs=1 ModWindo call s:modifiable_windo(<q-args>)

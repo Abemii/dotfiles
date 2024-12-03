@@ -46,7 +46,7 @@
                 "setup.py"
             ],
             "args": [
-                "--max-line-length=88",
+                "--max-line-length=119",
                 "--extend-ignore=E203",
                 "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
                 "-"
@@ -112,6 +112,7 @@
             "command": "black",
             "args": [
                 "-q",
+                "--line-length=119",
                 "-"
             ]
         },
@@ -119,6 +120,7 @@
             "command": "isort",
             "args": [
                 "-q",
+                "--line-length=119",
                 "--profile",
                 "black",
                 "-"

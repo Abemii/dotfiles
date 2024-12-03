@@ -47,7 +47,7 @@ Plug 'ggandor/lightspeed.nvim'
 " --------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 " Plug 'Shougo/ddu.vim'
 " Plug 'Shougo/ddu-ui-ff'
 " Plug 'Shougo/ddu-source-file_rec'
@@ -62,7 +62,8 @@ Plug 'joshdick/onedark.vim'                 " I prefer this
 Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis with a rainbow of colors
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'feline-nvim/feline.nvim'            " Very cool status line
+Plug 'freddiehaddad/feline.nvim'            " Very cool status line
+Plug 'rebelot/heirline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'levouh/tint.nvim'
 
@@ -84,6 +85,9 @@ Plug 'deton/jasegment.vim'
 Plug 'IMOKURI/apyrori.nvim'               " python auto import
 
 Plug 'github/copilot.vim'
+
+" Copilot Chat
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 
 " --------------------
 " Markdown 
