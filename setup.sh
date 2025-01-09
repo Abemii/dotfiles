@@ -424,7 +424,7 @@ if ! { type nvim > /dev/null 2>&1; } then
     elif $IS_ARCH && $IS_SUDOER; then
         yes | yay -S -y neovim
     elif $IS_LINUX && ! $IS_SUDOER; then
-        NVIM_VERSION="0.9.5"
+        NVIM_VERSION="0.10.3"
         wget -P ${TMP_DIR} https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux64.tar.gz
         tar zxf ${TMP_DIR}/nvim-linux64.tar.gz -C ${INSTALL_PATH}
         ln -s ${INSTALL_PATH}/nvim-linux64/bin/nvim ${INSTALL_PATH}/bin/nvim
@@ -594,7 +594,7 @@ if ! { type rg > /dev/null 2>&1; } then
     elif $IS_ARCH && $IS_SUDOER; then
         yes | yay -S ripgrep
     elif $IS_LINUX && ! $IS_SUDOER; then
-        RG_VERSION="13.0.0"
+        RG_VERSION="14.1.1"
         wget https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -P ${TMP_DIR}
         tar zxf ${TMP_DIR}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz -C ${INSTALL_PATH}
         ln -s ${INSTALL_PATH}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl/rg ${INSTALL_PATH}/bin/rg

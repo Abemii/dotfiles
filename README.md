@@ -62,3 +62,42 @@ docker build -t neovim docker --build-arg JOBS=4 --build-arg MAINTAINER="abemii"
 ```bash
 docker run -it --rm --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority -e HOME=/root -v $HOME:$HOME -w $PWD -u $(id -u):$(id -g) -v /etc/passwd:/etc/passwd:ro neovim
 ```
+
+## Remote
+
+### Copy files from docker container to host
+
+```bash
+docker run -it --rm ubuntu:22.04
+
+# container
+apt-get update
+apt-get install -y silversearcher-ag universal-ctags
+
+# host
+mkdir -p bin/../lib/x86_64-linux-gnu
+docker cp <container>:/usr/bin/rg bin/
+docker cp <container>:/usr/bin/ctags-universal bin/
+
+# dependencies
+docker cp <container>:/usr/lib/x86_64-linux-gnu/libpcre.so.3 lib/x86_64-linux-gnu
+docker cp <container>:/usr/lib/x86_64-linux-gnu/libpcre.so.3.13.3 lib/x86_64-linux-gnu
+```
+
+### Copy files to remote server
+
+```bash
+rsync -avzPR .././dotfiles/setup_remote_nvim.sh <server>:
+rsync -avzPR .././dotfiles/bin <server>:
+rsync -avzPR .././dotfiles/lib <server>:
+# pre-installed plugins
+rsync -avzPR ~/./.local/share/nvim/plugged <server>:
+rsync -avzPR nvim <server>:.config/
+```
+
+### Setup on remote server
+
+```bash
+cd dotfiles
+./setup_remote_nvim.sh
+```

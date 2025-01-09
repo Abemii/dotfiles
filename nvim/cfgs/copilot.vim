@@ -4,9 +4,9 @@ imap <silent> <M-i> <Plug>(copilot-next)
 imap <silent> <M-o> <Plug>(copilot-previous)
 
 
-lua << EOF
-require("CopilotChat").setup {
-  debug = true, -- Enable debugging
-  -- See Configuration section for rest
-}
-EOF
+" lua << EOF
+" require("CopilotChat").setup {
+"   debug = true, -- Enable debugging
+"   -- See Configuration section for rest
+" }
+" EOF

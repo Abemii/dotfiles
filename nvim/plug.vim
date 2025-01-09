@@ -87,8 +87,9 @@ Plug 'IMOKURI/apyrori.nvim'               " python auto import
 Plug 'github/copilot.vim'
 
 " Copilot Chat
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
-
+" Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+" Plug 'MunifTanjim/nui.nvim'  " plugin ui
+" Plug 'amitds1997/remote-nvim.nvim'
 " --------------------
 " Markdown 
 " --------------------
