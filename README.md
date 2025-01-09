@@ -87,9 +87,7 @@ docker cp <container>:/usr/lib/x86_64-linux-gnu/libpcre.so.3.13.3 lib/x86_64-lin
 ### Copy files to remote server
 
 ```bash
-rsync -avzPR .././dotfiles/setup_remote_nvim.sh <server>:
-rsync -avzPR .././dotfiles/bin <server>:
-rsync -avzPR .././dotfiles/lib <server>:
+rsync -avzPR .././dotfiles/{setup_remote_nvim.sh,bin,lib} <server>:
 # pre-installed plugins
 rsync -avzPR ~/./.local/share/nvim/plugged <server>:
 rsync -avzPR nvim <server>:.config/
@@ -100,4 +98,17 @@ rsync -avzPR nvim <server>:.config/
 ```bash
 cd dotfiles
 ./setup_remote_nvim.sh
+```
+
+### Install `jedi-language-server` for CoC.nvim
+
+example using `python3.12-venv`:
+
+```bash
+sudo apt-get update && sudo apt-get install python3.12-venv
+python3 -m venv ~/.jedi-language-server
+source ~/.jedi-language-server/bin/activate
+pip install jedi-language-server
+ln -s ~/.jedi-language-server/bin/jedi-language-server ~/.local/bin/jedi-language-server
+deactivate
 ```
