@@ -47,7 +47,6 @@ Plug 'kassio/neoterm'
 Plug 'joshdick/onedark.vim'                 " I prefer this
 Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis with a rainbow of colors
 Plug 'rebelot/heirline.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'levouh/tint.nvim'
 
 " --------------------

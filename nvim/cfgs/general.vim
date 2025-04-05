@@ -97,19 +97,6 @@ nnoremap <silent> <leader><leader> :ZoomToggle<CR>
 
 
 " ----------------------------
-" treesitter
-" ----------------------------
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"vim","dockerfile","json","lua","gitignore","bash","markdown","css","yaml","toml","html","cpp","python","diff","java","jq","make"},
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
-EOF
-
-
-" ----------------------------
 " custom functions
 " ----------------------------
 
