@@ -37,9 +37,6 @@ Plug 'ggandor/lightspeed.nvim'
 " --------------------
 " fuzzy finder
 " --------------------
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 " Plug 'Shougo/ddu.vim'
 " Plug 'Shougo/ddu-ui-ff'
 " Plug 'Shougo/ddu-source-file_rec'

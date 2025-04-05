@@ -20,5 +20,6 @@ require("lazy").setup({
   spec = {
       { import = "plugins.runtime" },
       { import = "plugins.fern" },
+      { import = "plugins.telescope" }
   },
 })
