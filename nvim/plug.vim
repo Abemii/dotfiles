@@ -48,7 +48,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'terryma/vim-multiple-cursors'       " multiple selection
 Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
 Plug 'smbl64/vim-black-macchiato'         " partial formatter for python
-Plug 'deton/jasegment.vim'
 Plug 'IMOKURI/apyrori.nvim'               " python auto import
 
 Plug 'github/copilot.vim'

@@ -32,5 +32,6 @@ require("lazy").setup({
         { import = "plugins.editing" },
         { import = "plugins.spellcheck" },
         { import = "plugins.lang_python" },
+        { import = "plugins.lang_ja" }
     },
 })
