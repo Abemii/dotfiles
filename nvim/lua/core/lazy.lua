@@ -26,5 +26,6 @@ require("lazy").setup({
         { import = "plugins.feline" },
         { import = "plugins.treesitter" },
         { import = "plugins.ui" },
+        { import = "plugins.markdown" },
     },
 })

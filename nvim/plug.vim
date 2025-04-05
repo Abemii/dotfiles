@@ -65,9 +65,5 @@ Plug 'github/copilot.vim'
 " Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 " Plug 'MunifTanjim/nui.nvim'  " plugin ui
 " Plug 'amitds1997/remote-nvim.nvim'
-" --------------------
-" Markdown 
-" --------------------
-Plug 'iamcco/markdown-preview.nvim', { 'tag': 'v0.0.10', 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
