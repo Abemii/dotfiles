@@ -25,5 +25,6 @@ require("lazy").setup({
         { import = "plugins.git" },
         { import = "plugins.feline" },
         { import = "plugins.treesitter" },
+        { import = "plugins.ui" },
     },
 })

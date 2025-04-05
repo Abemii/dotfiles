@@ -41,14 +41,7 @@ Plug 'kassio/neoterm'
 " Plug 'Shougo/ddu-kind-file'
 
 
-" --------------------
-" Fancy appearance
-" --------------------
-Plug 'joshdick/onedark.vim'                 " I prefer this
-Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis with a rainbow of colors
 Plug 'rebelot/heirline.nvim'
-Plug 'levouh/tint.nvim'
-
 " --------------------
 " Language support, auto completion
 " --------------------
