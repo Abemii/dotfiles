@@ -27,5 +27,6 @@ require("lazy").setup({
         { import = "plugins.treesitter" },
         { import = "plugins.ui" },
         { import = "plugins.markdown" },
+        { import = "plugins.neoterm" },
     },
 })

@@ -28,7 +28,6 @@ Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in
 " --------------------
 " Code/Project navigation
 " --------------------
-Plug 'kassio/neoterm'
 
 
 " --------------------
