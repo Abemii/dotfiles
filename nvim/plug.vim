@@ -25,12 +25,6 @@ Plug 'nvim-lua/plenary.nvim'  " required for lua
 " --------------------
 " code/project navigation
 " --------------------
-Plug 'lambdalisue/fern.vim', {'branch': 'main'}               " tree viewer
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'  " filetype icon
-Plug 'lambdalisue/fern-git-status.vim'    " add git status
-Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/glyph-palette.vim'
-Plug 'lambdalisue/fern-mapping-git.vim'
 Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in Vim/NeoVim.
 
 " --------------------
