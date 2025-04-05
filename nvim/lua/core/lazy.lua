@@ -28,5 +28,6 @@ require("lazy").setup({
         { import = "plugins.ui" },
         { import = "plugins.markdown" },
         { import = "plugins.neoterm" },
+        { import = "plugins.copilot" },
     },
 })
