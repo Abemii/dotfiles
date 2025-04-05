@@ -2,15 +2,6 @@
 autocmd FileType python,shell set commentstring=#\ %s
 
 " ----------------------------
-" heavenshell/vim-pydocstring
-" ----------------------------
-" keymap
-nmap <silent> <C-_> <Plug>(pydocstring)
-" formatter
-let g:pydocstring_formatter = 'google'
-
-
-" ----------------------------
 " Zoom / Restore window.
 " ----------------------------
 function! s:ZoomToggle() abort

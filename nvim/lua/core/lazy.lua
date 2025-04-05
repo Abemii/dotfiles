@@ -31,5 +31,6 @@ require("lazy").setup({
         { import = "plugins.copilot" },
         { import = "plugins.editing" },
         { import = "plugins.spellcheck" },
+        { import = "plugins.lang_python" },
     },
 })
