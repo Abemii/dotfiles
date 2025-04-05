@@ -28,10 +28,8 @@ Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in
 " --------------------
 " Code/Project navigation
 " --------------------
-Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'tpope/vim-fugitive'                 " Git wrapper
 Plug 'kassio/neoterm'
-Plug 'ggandor/lightspeed.nvim'
 
 
 " --------------------

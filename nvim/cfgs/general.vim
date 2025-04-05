@@ -6,18 +6,6 @@ colorscheme onedark
 " Comment codes
 autocmd FileType python,shell set commentstring=#\ %s
 
-" ---------------------------
-" Comfortable Motion settings
-" ---------------------------
-let g:comfortable_motion_scroll_down_key="j"
-let g:comfortable_motion_scroll_up_key="k"
-let g:comfortable_motion_no_default_key_mappings=1
-let g:comfortable_motion_impulse_multiplier=1  " Feel free to increase/decrease this value.
-nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 1)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -1)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-
 " -----------------------
 " EasyAlign settings
 " -----------------------
