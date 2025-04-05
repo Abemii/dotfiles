@@ -30,5 +30,6 @@ require("lazy").setup({
         { import = "plugins.neoterm" },
         { import = "plugins.copilot" },
         { import = "plugins.editing" },
+        { import = "plugins.spellcheck" },
     },
 })
