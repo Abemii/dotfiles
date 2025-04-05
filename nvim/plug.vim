@@ -45,11 +45,6 @@ Plug 'rebelot/heirline.nvim'
 " Language support, auto completion
 " --------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdcommenter'           " Easy code documentation
-Plug 'jiangmiao/auto-pairs'               " pairs
-Plug 'tpope/vim-surround'                 " surroundings
-Plug 'tpope/vim-repeat'
-Plug 'junegunn/vim-easy-align'            " a simple, easy-to-use Vim alignment plugin.
 Plug 'terryma/vim-multiple-cursors'       " multiple selection
 Plug 'kamykn/spelunker.vim'               " spell check
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }  " auto completion of pydocstring
