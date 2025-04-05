@@ -22,5 +22,6 @@ require("lazy").setup({
         { import = "plugins.fern" },
         { import = "plugins.telescope" },
         { import = "plugins.motion" },
+        { import = "plugins.git" },
     },
 })

@@ -28,7 +28,6 @@ Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in
 " --------------------
 " Code/Project navigation
 " --------------------
-Plug 'tpope/vim-fugitive'                 " Git wrapper
 Plug 'kassio/neoterm'
 
 
@@ -48,7 +47,6 @@ Plug 'kassio/neoterm'
 Plug 'joshdick/onedark.vim'                 " I prefer this
 Plug 'kien/rainbow_parentheses.vim'         " Highlights matching parenthesis with a rainbow of colors
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lewis6991/gitsigns.nvim'
 Plug 'freddiehaddad/feline.nvim'            " Very cool status line
 Plug 'rebelot/heirline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

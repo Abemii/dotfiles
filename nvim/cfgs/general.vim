@@ -97,18 +97,6 @@ nnoremap <silent> <leader><leader> :ZoomToggle<CR>
 
 
 " ----------------------------
-" tpope/vim-fugitive
-" ----------------------------
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gc :Git commit<CR><CR>
-nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gd :Gvdiffsplit<CR>
-nnoremap <leader>gl :Gclog<CR>
-" nnoremap <leader>gb :Git blame<CR>
-
-
-" ----------------------------
 " treesitter
 " ----------------------------
 lua <<EOF
