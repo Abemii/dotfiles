@@ -23,5 +23,6 @@ require("lazy").setup({
         { import = "plugins.telescope" },
         { import = "plugins.motion" },
         { import = "plugins.git" },
+        { import = "plugins.feline" },
     },
 })
