@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- load plugins
 require("lazy").setup({
   spec = {
+      { import = "plugins.runtime" },
       { import = "plugins.fern" },
   },
 })

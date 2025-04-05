@@ -19,8 +19,6 @@ call plug#begin()
 " --------------------
 " general
 " --------------------
-Plug 'vim-denops/denops.vim'  " required for deno/ts/js
-Plug 'nvim-lua/plenary.nvim'  " required for lua
 
 " --------------------
 " code/project navigation
