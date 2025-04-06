@@ -23,7 +23,6 @@ call plug#begin()
 " --------------------
 " code/project navigation
 " --------------------
-Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in Vim/NeoVim.
 
 " --------------------
 " Code/Project navigation
@@ -40,16 +39,10 @@ Plug 'liuchengxu/vista.vim'               " View and search LSP symbols, tags in
 " Plug 'Shougo/ddu-kind-file'
 
 
-Plug 'rebelot/heirline.nvim'
 " --------------------
 " Language support, auto completion
 " --------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'terryma/vim-multiple-cursors'       " multiple selection
-Plug 'chiphogg/vim-prototxt'              " syntax highlight for caffe prototxt files
-Plug 'IMOKURI/apyrori.nvim'               " python auto import
-
-Plug 'github/copilot.vim'
 
 " Copilot Chat
 " Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
