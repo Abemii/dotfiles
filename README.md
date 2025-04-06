@@ -112,3 +112,17 @@ pip install jedi-language-server
 ln -s ~/.jedi-language-server/bin/jedi-language-server ~/.local/bin/jedi-language-server
 deactivate
 ```
+
+### Launch development mode
+
+Add the following to `~/.zshrc`:
+
+```bash
+nvim-dev() {
+  XDG_CONFIG_HOME=~/dotfiles_new \
+  XDG_DATA_HOME=~/.nvim/.local/share \
+  XDG_STATE_HOME=~/.nvim/.local/state \
+  XDG_CACHE_HOME=~/.nvim/.cache \
+  nvim "$@"
+}
+```
