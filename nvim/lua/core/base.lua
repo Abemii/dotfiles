@@ -6,8 +6,10 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Remap ; and : for easier access
-keymap({ "n", "v" }, ";", ":", opts)
-keymap({ "n", "v" }, ":", ";", opts)
+vim.cmd("nnoremap ; :")
+vim.cmd("nnoremap : ;")
+vim.cmd("vnoremap ; :")
+vim.cmd("vnoremap : ;")
 
 -- Move by display lines instead of logical lines
 keymap("", "j", "gj", opts)
@@ -78,11 +80,11 @@ vim.opt.ttyfast = true
 vim.opt.clipboard = "unnamedplus"
 
 -- tab/indent
-vim.opt.expandtab = true                 -- expand tabs into spaces
-vim.opt.tabstop = 4                      -- 4 whitespaces for tabs visual presentation
-vim.opt.shiftwidth = 4                   -- shift lines by 4 spaces
+vim.opt.expandtab = true  -- expand tabs into spaces
+vim.opt.tabstop = 4       -- 4 whitespaces for tabs visual presentation
+vim.opt.shiftwidth = 4    -- shift lines by 4 spaces
 vim.opt.softtabstop = 4
-vim.opt.autoindent = true               -- indent when moving to the next line
+vim.opt.autoindent = true -- indent when moving to the next line
 vim.opt.smartindent = true
 
 -- backspace removes all
@@ -90,21 +92,21 @@ vim.opt.backspace = { "indent", "eol", "start" }
 
 -- Indent guides settings
 vim.opt.listchars = {
-  tab = ">\\ ",      -- tab character visual
-  trail = "•",       -- trailing spaces
-  extends = "#",     -- line overflow
-  nbsp = ".",        -- non-breaking space
+    tab = ">\\ ", -- tab character visual
+    trail = "•", -- trailing spaces
+    extends = "#", -- line overflow
+    nbsp = ".", -- non-breaking space
 }
 vim.opt.list = true
 
 -- auto comment off
 vim.api.nvim_create_augroup("auto_comment_off", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = "auto_comment_off",
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "o", "r" })  -- disable auto comment continuation
-  end,
+    group = "auto_comment_off",
+    pattern = "*",
+    callback = function()
+        vim.opt_local.formatoptions:remove({ "o", "r" }) -- disable auto comment continuation
+    end,
 })
 
 -- Auto update
@@ -114,10 +116,13 @@ vim.opt.autowrite = true
 -- Automatically check file updates when enter in window.
 vim.api.nvim_create_augroup("vimrc_checktime", { clear = true })
 vim.api.nvim_create_autocmd("WinEnter", {
-  group = "vimrc_checktime",
-  pattern = "*",
-  command = "checktime",
+    group = "vimrc_checktime",
+    pattern = "*",
+    command = "checktime",
 })
 
 -- enable syntax highlighting
 -- vim.cmd("syntax enable")
+
+-- nvim-cmp で画面が揺れないようにする
+vim.opt.signcolumn = "yes"
