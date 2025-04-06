@@ -20,6 +20,7 @@ require("lazy").setup({
     spec = {
         { import = "plugins.runtime" },
         { import = "plugins.fern" },
+        { import = "plugins.aerial" },
         { import = "plugins.telescope" },
         { import = "plugins.motion" },
         { import = "plugins.git" },
