@@ -85,7 +85,16 @@ Plug 'deton/jasegment.vim'
 Plug 'IMOKURI/apyrori.nvim'               " python auto import
 
 Plug 'github/copilot.vim'
+Plug 'f-person/git-blame.nvim'
 
+" -- for avante
+Plug 'stevearc/dressing.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+
+" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+
+" -- for avante
 " Copilot Chat
 " Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 " Plug 'MunifTanjim/nui.nvim'  " plugin ui

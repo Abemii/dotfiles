@@ -171,6 +171,14 @@ else
     echoI "-- nvim is already installed."
 fi
 
+# --------------------------------------------------
+# copy libjasson and libyaml
+# --------------------------------------------------
+mkdir -p ${INSTALL_DIR}/lib/x86_64-linux-gnu
+for lib in libjansson.so.4 libjansson.so.4.13.0 libyaml-0.so.2 libyaml-0.so.2.0.6; do
+    cp ${SCRIPT_DIR}/lib/x86_64-linux-gnu/${lib} ${INSTALL_DIR}/lib/x86_64-linux-gnu/${lib}
+done
+
 
 # --------------------------------------------------
 # FINISH
@@ -183,7 +191,7 @@ echo "export PATH=\"${HOME}/.deno/bin:\$PATH\""
 echo "export LD_LIBRARY_PATH=\"${INSTALL_DIR}/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH\""
 echo "source ${HOME}/.nvm/nvm.sh"
 echo ""
-echoI "You may need to change `shell`"
+echoI "You may need to change \`shell\`"
 echo "    :set shell=/bin/bash"
 echo ""
 echoI "Run `nvim`"

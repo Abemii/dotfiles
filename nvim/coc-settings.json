@@ -32,13 +32,48 @@
     "diagnostic.virtualText": false,
     "diagnostic-languageserver.enable": true,
     "diagnostic-languageserver.filetypes": {
-        "python": "flake8",
+        "python": "ruff",
         "markdown": "textlint"
     },
     "diagnostic-languageserver.linters": {
-        "flake8": {
-            "sourceName": "flake8",
-            "command": "flake8",
+        // "flake8": {
+        //     "sourceName": "flake8",
+        //     "command": "flake8",
+        //     "debounce": 200,
+        //     "rootPatterns": [
+        //         ".git",
+        //         "pyproject.toml",
+        //         "setup.py"
+        //     ],
+        //     "args": [
+        //         "--max-line-length=119",
+        //         "--extend-ignore=E203",
+        //         "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
+        //         "-"
+        //     ],
+        //     "offsetLine": 0,
+        //     "offsetColumn": 0,
+        //     "formatLines": 1,
+        //     "formatPattern": [
+        //         "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
+        //         {
+        //             "line": 1,
+        //             "column": 2,
+        //             "security": 3,
+        //             "message": 4
+        //         }
+        //     ],
+        //     "securities": {
+        //         "W": "info",
+        //         "E": "warning",
+        //         "F": "info",
+        //         "C": "info",
+        //         "N": "hint"
+        //     }
+        // },
+        "ruff": {
+            "sourceName": "ruff",
+            "command": "ruff",
             "debounce": 200,
             "rootPatterns": [
                 ".git",
@@ -46,16 +81,16 @@
                 "setup.py"
             ],
             "args": [
-                "--max-line-length=119",
-                "--extend-ignore=E203",
-                "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
-                "-"
+                "check",
+                "--output-format",
+                "concise",
+                "-",
             ],
             "offsetLine": 0,
             "offsetColumn": 0,
             "formatLines": 1,
             "formatPattern": [
-                "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
+                ".*:(\\d+):(\\d+): ([A-Z])(.*)(\\r|\\n)*$",
                 {
                     "line": 1,
                     "column": 2,
@@ -102,34 +137,42 @@
     },
     "diagnostic-languageserver.formatFiletypes": {
         "python": [
-            "black",
-            "isort",
-            "docformatter"
+            // "black",
+            // "isort",
+            // "docformatter",
+            "ruff"
         ]
     },
     "diagnostic-languageserver.formatters": {
-        "black": {
-            "command": "black",
+        // "black": {
+        //     "command": "black",
+        //     "args": [
+        //         "-q",
+        //         "--line-length=119",
+        //         "-"
+        //     ]
+        // },
+        // "isort": {
+        //     "command": "isort",
+        //     "args": [
+        //         "-q",
+        //         "--line-length=119",
+        //         "--profile",
+        //         "black",
+        //         "-"
+        //     ]
+        // },
+        // "docformatter": {
+        //     "command": "docformatter",
+        //     "args": [
+        //         "-"
+        //     ]
+        // },
+        "ruff": {
+            "command": "ruff",
             "args": [
-                "-q",
-                "--line-length=119",
-                "-"
-            ]
-        },
-        "isort": {
-            "command": "isort",
-            "args": [
-                "-q",
-                "--line-length=119",
-                "--profile",
-                "black",
-                "-"
-            ]
-        },
-        "docformatter": {
-            "command": "docformatter",
-            "args": [
-                "-"
+                "format",
+                "-",
             ]
         }
     },
