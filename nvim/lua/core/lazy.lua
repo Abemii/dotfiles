@@ -35,7 +35,7 @@ require("lazy").setup({
         { import = "plugins.lang_python" },
         { import = "plugins.lang_ja" },
         { import = "plugins.lsp" },
-        { import = "plugins.null_ls" },
         { import = "plugins.comp" },
+        { import = "plugins.format_lint" },
     },
 })

@@ -113,6 +113,16 @@ ln -s ~/.jedi-language-server/bin/jedi-language-server ~/.local/bin/jedi-languag
 deactivate
 ```
 
+example using `uv`
+
+```bash
+uv venv ~/.jedi-language-server
+. ~/.jedi-language-server/bin/activate
+uv pip install jedi-language-server
+ln -s ~/.jedi-language-server/bin/jedi-language-server ~/.local/bin/jedi-language-server
+deactivate
+```
+
 ### Launch development mode
 
 Add the following to `~/.zshrc`:

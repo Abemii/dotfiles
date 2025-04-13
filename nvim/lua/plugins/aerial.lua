@@ -25,8 +25,10 @@ return {
             -- 自動で aerial を attach（vista#RunForNearestMethodOrFunction 相当）
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
-                    local bufnr = args.buf
-                    require("aerial").attach(bufnr)
+                    local ok, aerial = pcall(require, "aerial")
+                    if ok and aerial.attach then
+                      aerial.attach(args.buf)
+                    end
                 end,
             })
 

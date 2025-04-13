@@ -126,3 +126,27 @@ vim.api.nvim_create_autocmd("WinEnter", {
 
 -- nvim-cmp で画面が揺れないようにする
 vim.opt.signcolumn = "yes"
+
+-- ZoomToggle
+vim.api.nvim_create_user_command("ZoomToggle", function()
+    local zoomed = vim.t.zoomed
+    if zoomed then
+        vim.cmd(vim.t.zoom_winrestcmd)
+        vim.t.zoomed = false
+    else
+        vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
+        vim.cmd("resize")
+        vim.cmd("vertical resize")
+        vim.t.zoomed = true
+    end
+end, {})
+
+vim.keymap.set("n", "<leader><leader>", ":ZoomToggle<CR>", { noremap = true, silent = true })
+
+-- ModWindo
+vim.api.nvim_create_user_command("ModWindo", function(opts)
+    local cmd = opts.args
+    vim.cmd([[
+    windo if &modifiable | execute ']] .. cmd .. [[' | endif
+  ]])
+end, { nargs = 1 })
