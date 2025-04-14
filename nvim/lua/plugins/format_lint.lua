@@ -10,16 +10,22 @@ return {
                 -- フォーマッタをファイルタイプごとに定義
                 formatters_by_ft = {
                     python = { "ruff_format", "isort" },
-                    markdown = { "prettier" },
-                    lua = { "stylua" },
                     sh = { "shfmt" },
-                    json = { "jq" },
+                    cpp = { "clang_format" },
+                    c = { "clang_format" },
+                    h = { "clang_format" },
+                    hpp = { "clang_format" },
+                    lua = { "stylua" },
                 },
-                -- format_on_save を無効にする
+                -- format_on_save を無効nvm_install_dirにする
                 format_on_save = false,
+                formatters = {
+                  auto = {
+                    lsp_fallback = true,
+                  },
+                },
             })
 
-            -- 明示的に実行するキー設定
             vim.keymap.set("n", "<leader>f", function()
                 conform.format({ async = true })
             end, { desc = "Format buffer with conform" })
@@ -37,12 +43,13 @@ return {
         config = function()
             local lint = require("lint")
 
-            lint.linters_by_ft = {
-                python = { "ruff" },
-                markdown = { "textlint" },
-                json = { "jsonlint" },
-                sh = { "shellcheck" },
-            }
+            local linters_by_ft = {}
+
+            if vim.fn.executable("ruff") == 1 then
+                linters_by_ft.python = { "ruff" }
+            end
+
+            lint.linters_by_ft = linters_by_ft
 
             -- 自動実行
             vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {

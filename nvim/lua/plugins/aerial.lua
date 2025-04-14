@@ -19,9 +19,6 @@ return {
         config = function(_, opts)
             require("aerial").setup(opts)
 
-            -- ステータスラインに現在の関数名を表示（vistaの NearestMethodOrFunction 相当）
-            vim.o.statusline = vim.o.statusline .. "%{%v:lua.require'aerial'.get_location()%}"
-
             -- 自動で aerial を attach（vista#RunForNearestMethodOrFunction 相当）
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
@@ -32,9 +29,7 @@ return {
                 end,
             })
 
-            -- キーマップ（Vista と似た操作）
-            vim.keymap.set("n", "<C-f><C-v>", "<cmd>AerialToggle<CR>", { silent = true })
-            vim.keymap.set("n", "<C-f><C-s>", "<cmd>AerialNavToggle<CR>", { silent = true })
+            vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
         end,
     },
 }

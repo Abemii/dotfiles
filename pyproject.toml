@@ -1,0 +1,11 @@
+[project]
+name = "nvim-host"
+requires-python = ">=3.10"
+version = "0.1.0"
+description = "Neovim python3_host_prog environment"
+
+dependencies = [
+  "pynvim",
+  "ruff",
+  "isort"
+]

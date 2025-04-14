@@ -1,14 +1,8 @@
 autoload -Uz promptinit && promptinit
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/local/bin:$PATH
-export GOPATH=/usr/local/go
-export PATH=$GOPATH/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=/usr/local/nvim-linux64/bin:${PATH}
 export EDITOR=nvim
-[[ ! -v ANACONDA_PATH ]] && export ANACONDA_PATH=$HOME/miniconda3
-[[ ! -v PYTHON3_HOST_PROG ]] && export PYTHON3_HOST_PROG=$ANACONDA_PATH/envs/neovim/bin/python # for neovim in docker container
+export PYTHON3_HOST_PROG=$(dirname $(realpath $0))/.venv/bin/python
 
 # deno
 export DENO_INSTALL="${HOME}/.deno"
@@ -68,8 +62,8 @@ zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # fzf
-# zinit ice from"gh-r" as"program"
-# zinit light junegunn/fzf-bin
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf-bin
 
 # enhancd -  A next-generation cd command with an interactive filter
 zinit ice wait'2' lucid pick 'init.zsh'; zinit light "b4b4r07/enhancd"
@@ -143,10 +137,6 @@ alias gt='git tree'
 alias gm='git merge'
 alias grs='git reset --staged'
 
-# RPROMPT='%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}'
-
-alias station='eval $HOME/Station-1.65.0-x86_64.AppImage'
-
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -162,19 +152,3 @@ setopt extended_glob
 setopt equals
 setopt magic_equal_subst
 setopt numeric_glob_sort
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('${ANACONDA_PATH}/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "${ANACONDA_PATH}/etc/profile.d/conda.sh" ]; then
-        . "${ANACONDA_PATH}/etc/profile.d/conda.sh"
-    else
-        export PATH="${ANACONDA_PATH}/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<

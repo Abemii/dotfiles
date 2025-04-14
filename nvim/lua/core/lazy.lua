@@ -38,4 +38,9 @@ require("lazy").setup({
         { import = "plugins.comp" },
         { import = "plugins.format_lint" },
     },
+}, {
+    change_detection = {
+        enabled = true,
+        notify = false,
+    },
 })
