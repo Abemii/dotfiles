@@ -26,8 +26,12 @@ return {
             }, ",")
 
             -- Fern launcher mapping (same as: nnoremap <silent> " :Fern ...)
-            vim.keymap.set("n", [["]], [[:Fern . -reveal=% -drawer -toggle -width=35<CR>]],
-                { silent = true, noremap = true })
+            vim.keymap.set(
+                "n",
+                [["]],
+                [[:Fern . -reveal=% -drawer -toggle -width=35<CR>]],
+                { silent = true, noremap = true }
+            )
 
             -- glyph_palette autocmd (for fern, nerdtree, startify)
             vim.api.nvim_create_augroup("my_glyph_palette", { clear = true })

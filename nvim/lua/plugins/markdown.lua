@@ -2,7 +2,9 @@ return {
     {
         "iamcco/markdown-preview.nvim",
         ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
+        build = function()
+            vim.fn["mkdp#util#install"]()
+        end,
         config = function()
             -- もとの Vim 設定を Lua に変換してそのまま反映
             vim.g.mkdp_auto_start = 0

@@ -36,7 +36,7 @@ vim.opt.wrap = false
 -- Highlight trailing whitespace
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     pattern = "*",
-    command = "match Error /\\s\\+$/"
+    command = "match Error /\\s\\+$/",
 })
 
 -- Split behavior
@@ -80,9 +80,9 @@ vim.opt.ttyfast = true
 vim.opt.clipboard = "unnamedplus"
 
 -- tab/indent
-vim.opt.expandtab = true  -- expand tabs into spaces
-vim.opt.tabstop = 4       -- 4 whitespaces for tabs visual presentation
-vim.opt.shiftwidth = 4    -- shift lines by 4 spaces
+vim.opt.expandtab = true -- expand tabs into spaces
+vim.opt.tabstop = 4 -- 4 whitespaces for tabs visual presentation
+vim.opt.shiftwidth = 4 -- shift lines by 4 spaces
 vim.opt.softtabstop = 4
 vim.opt.autoindent = true -- indent when moving to the next line
 vim.opt.smartindent = true

@@ -20,9 +20,9 @@ return {
                 -- format_on_save を無効nvm_install_dirにする
                 format_on_save = false,
                 formatters = {
-                  auto = {
-                    lsp_fallback = true,
-                  },
+                    auto = {
+                        lsp_fallback = true,
+                    },
                 },
             })
 

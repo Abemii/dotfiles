@@ -6,7 +6,7 @@ return {
                 min_width = 30,
                 default_direction = "prefer_left",
             },
-            attach_mode = "window",                   -- bufferごとに表示
+            attach_mode = "window", -- bufferごとに表示
             backends = { "lsp", "treesitter", "markdown" }, -- vista_default_executive 相当
             show_guides = true,
             icons = {
@@ -24,7 +24,7 @@ return {
                 callback = function(args)
                     local ok, aerial = pcall(require, "aerial")
                     if ok and aerial.attach then
-                      aerial.attach(args.buf)
+                        aerial.attach(args.buf)
                     end
                 end,
             })

@@ -1,7 +1,7 @@
 return {
     {
         "kamykn/spelunker.vim",
-        event = "VeryLazy",       -- 適宜調整可（必要なら filetype にもできる）
+        event = "VeryLazy", -- 適宜調整可（必要なら filetype にもできる）
         init = function()
             vim.opt.spell = false -- set nospell
 
@@ -34,8 +34,17 @@ return {
 
             vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
                 group = "spelunker",
-                pattern = { "*.vim", "*.js", "*.jsx", "*.json", "*.md",
-                    "*.py", "*.cpp", "*.hpp", "*.cc", "*.h"
+                pattern = {
+                    "*.vim",
+                    "*.js",
+                    "*.jsx",
+                    "*.json",
+                    "*.md",
+                    "*.py",
+                    "*.cpp",
+                    "*.hpp",
+                    "*.cc",
+                    "*.h",
                 },
                 callback = function()
                     vim.cmd("call spelunker#check()")
@@ -44,8 +53,17 @@ return {
 
             vim.api.nvim_create_autocmd("CursorHold", {
                 group = "spelunker",
-                pattern = { "*.vim", "*.js", "*.jsx", "*.json", "*.md",
-                    "*.py", "*.cpp", "*.hpp", "*.cc", "*.h"
+                pattern = {
+                    "*.vim",
+                    "*.js",
+                    "*.jsx",
+                    "*.json",
+                    "*.md",
+                    "*.py",
+                    "*.cpp",
+                    "*.hpp",
+                    "*.cc",
+                    "*.h",
                 },
                 callback = function()
                     vim.cmd("call spelunker#check_displayed_words()")
