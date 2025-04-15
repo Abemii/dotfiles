@@ -24,7 +24,7 @@ export SCRIPT_DIR=$(dirname $(realpath $0))
 # install uv
 # --------------------------------------------------
 echoI "install uv"
-if { ! type uv >/dev/null 2>&1; }; then
+if ! { type uv >/dev/null 2>&1; }; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
     # check if uv is installed
@@ -46,7 +46,7 @@ echoI "Create nvim python host program"
 # install to ${SCRIPT_DIR}/.venv-nvim
 if [ ! -d "${SCRIPT_DIR}/.venv" ]; then
     uv sync
-    for bin in ruff isort; do
+    for bin in ruff isort trash-put; do
         ln -sf "${SCRIPT_DIR}/.venv/bin/${bin}" "${INSTALL_DIR}/bin/${bin}"
     done
     export PYTHON3_HOST_PROG="${SCRIPT_DIR}/.venv/bin/python"

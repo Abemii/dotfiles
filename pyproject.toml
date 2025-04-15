@@ -7,5 +7,6 @@ description = "Neovim python3_host_prog environment"
 dependencies = [
   "pynvim",
   "ruff",
-  "isort"
+  "isort",
+  "trash-cli",
 ]
