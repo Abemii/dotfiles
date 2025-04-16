@@ -43,17 +43,34 @@ fi
 # create nvim python host program
 # --------------------------------------------------
 echoI "Create nvim python host program"
-# install to ${SCRIPT_DIR}/.venv-nvim
-if [ ! -d "${SCRIPT_DIR}/.venv" ]; then
-    uv sync
-    for bin in ruff isort trash-put; do
-        ln -sf "${SCRIPT_DIR}/.venv/bin/${bin}" "${INSTALL_DIR}/bin/${bin}"
-    done
-    export PYTHON3_HOST_PROG="${SCRIPT_DIR}/.venv/bin/python"
+# install to ${HOME}/.venv-nvim
+if [ ! -d "${HOME}/.venv-nvim" ]; then
+    VIRTUAL_ENV=${HOME}/.venv-nvim uv sync --active
     echoI "-- nvim python host program is created."
 else
     echoI "-- nvim python host program is already created."
 fi
+export PYTHON3_HOST_PROG="${HOME}/.venv-nvim/bin/python"
+
+# --------------------------------------------------
+# create symbolic link of ruff, isort, and trash-put
+# --------------------------------------------------
+echoI "Create symbolic link of ruff, isort, and trash-put"
+for bin in ruff isort trash-put; do
+    if [ ! -e "${INSTALL_DIR}/bin/${bin}" ]; then
+        ln -sf "${HOME}/.venv-nvim/bin/${bin}" "${INSTALL_DIR}/bin/${bin}"
+        echoI "-- symbolic link of ${bin} is created."
+    else
+        echoI "-- symbolic link of ${bin} is already created."
+    fi
+
+    if { type ${bin} >/dev/null 2>&1; }; then
+        echoI "-- ${bin} is installed."
+    else
+        echoE "-- ${bin} is not installed."
+        exit 1
+    fi
+done
 
 # --------------------------------------------------
 # install node and npm
@@ -79,7 +96,7 @@ if [ $IS_NVM_DIR_INSTALLED -eq 0 ]; then
     NVM_VERSION="v0.40.1"
     curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
 
-    if [ -z "${XDG_CONFIG_HOME}" ]; then
+    if [ -z "${XDG_CONFIG_HOME:-}" ]; then
         export NVM_DIR="${HOME}/.nvm"
     else
         export NVM_DIR="${XDG_CONFIG_HOME}/nvm"
@@ -275,14 +292,31 @@ else
 fi
 
 # --------------------------------------------------
+# create synbolic linkt of nvim config
+# --------------------------------------------------
+echoI "Create symbolic link of nvim config"
+if [ ! -d "${HOME}/.config/nvim" ]; then
+    mkdir -p ${HOME}/.config
+    ln -sf ${SCRIPT_DIR}/nvim ${HOME}/.config/nvim
+    echoI "-- symbolic link of nvim config is created."
+else
+    echoI "-- symbolic link of nvim config is already created."
+fi
+
+# --------------------------------------------------
 # FINISH
 # --------------------------------------------------
 echoI "Complete!"
-echoI "Please run the following command."
-echo ""
-echo "export PATH=\"${INSTALL_DIR}/bin:\$PATH\""
-echo "export PATH=\"${HOME}/.deno/bin:\$PATH\""
-echo "export LD_LIBRARY_PATH=\"${INSTALL_DIR}/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH\""
-echo "source ${HOME}/.nvm/nvm.sh"
-echo ""
-echoI "Run 'nvim'"
+
+cat <<EOF
+# Add the following lines to your shell configuration file (e.g., ~/.bashrc, ~/.zshrc)
+
+export PATH="${INSTALL_DIR}/bin:\$PATH"
+export PATH="\${HOME}/.deno/bin:\$PATH"
+export PYTHON3_HOST_PROG="\${HOME}/.venv-nvim/bin/python"
+source \${HOME}/.nvm/nvm.sh
+
+# then run
+
+nvim
+EOF
