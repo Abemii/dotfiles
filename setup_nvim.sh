@@ -147,7 +147,7 @@ fi
 echoI "Install deno"
 export PATH="${HOME}/.deno/bin:$PATH"
 if ! { type deno >/dev/null 2>&1; }; then
-    curl -fsSL https://deno.land/install.sh | sh
+    curl -fsSL https://deno.land/install.sh | sh -s -- -y --no-modify-path
 
     # check if deno is installed
     if { type deno >/dev/null 2>&1; }; then

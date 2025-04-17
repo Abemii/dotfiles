@@ -79,6 +79,25 @@ vim.opt.shortmess:append("c")
 vim.opt.ttyfast = true
 vim.opt.clipboard = "unnamedplus"
 
+if os.getenv("USE_OSC52") == "true" then
+    vim.notify("USE_OSC52 is true: Enabling OSC52 copy only", vim.log.levels.INFO)
+    vim.g.clipboard = {
+        name = "osc52-copy-only",
+        copy = {
+            ["+"] = require("vim.ui.clipboard.osc52").copy,
+            ["*"] = require("vim.ui.clipboard.osc52").copy,
+        },
+        paste = {
+            ["+"] = function()
+                return ""
+            end,
+            ["*"] = function()
+                return ""
+            end,
+        },
+    }
+end
+
 -- tab/indent
 vim.opt.expandtab = true -- expand tabs into spaces
 vim.opt.tabstop = 4 -- 4 whitespaces for tabs visual presentation
