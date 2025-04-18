@@ -28,7 +28,7 @@ return {
             -- Fern launcher mapping (same as: nnoremap <silent> " :Fern ...)
             vim.keymap.set(
                 "n",
-                [["]],
+                [[']],
                 [[:Fern . -reveal=% -drawer -toggle -width=35<CR>]],
                 { silent = true, noremap = true }
             )

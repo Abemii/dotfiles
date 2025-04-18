@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 
 -- Key mappings
 local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local keymap_opts = { noremap = true, silent = true }
 
 -- Remap ; and : for easier access
 vim.cmd("nnoremap ; :")
@@ -12,14 +12,14 @@ vim.cmd("vnoremap ; :")
 vim.cmd("vnoremap : ;")
 
 -- Move by display lines instead of logical lines
-keymap("", "j", "gj", opts)
-keymap("", "k", "gk", opts)
+keymap("", "j", "gj", keymap_opts)
+keymap("", "k", "gk", keymap_opts)
 
 -- Window navigation
-keymap("n", "<C-J>", "<C-W><C-J>", opts)
-keymap("n", "<C-K>", "<C-W><C-K>", opts)
-keymap("n", "<C-L>", "<C-W><C-L>", opts)
-keymap("n", "<C-H>", "<C-W><C-H>", opts)
+keymap("n", "<C-J>", "<C-W><C-J>", keymap_opts)
+keymap("n", "<C-K>", "<C-W><C-K>", keymap_opts)
+keymap("n", "<C-L>", "<C-W><C-L>", keymap_opts)
+keymap("n", "<C-H>", "<C-W><C-H>", keymap_opts)
 
 -- General UI settings
 vim.opt.number = true
@@ -77,25 +77,27 @@ vim.opt.cmdheight = 1
 vim.opt.updatetime = 300
 vim.opt.shortmess:append("c")
 vim.opt.ttyfast = true
-vim.opt.clipboard = "unnamedplus"
 
-if os.getenv("USE_OSC52") == "true" then
-    vim.notify("USE_OSC52 is true: Enabling OSC52 copy only", vim.log.levels.INFO)
-    vim.g.clipboard = {
-        name = "osc52-copy-only",
-        copy = {
-            ["+"] = require("vim.ui.clipboard.osc52").copy,
-            ["*"] = require("vim.ui.clipboard.osc52").copy,
-        },
-        paste = {
-            ["+"] = function()
-                return ""
-            end,
-            ["*"] = function()
-                return ""
-            end,
-        },
-    }
+-- Clipboard settings
+local use_osc52 = (os.getenv("USE_OSC52") == "true")
+if use_osc52 then
+    vim.opt.clipboard = ""
+    vim.api.nvim_create_autocmd("TextYankPost", {
+        callback = function()
+            local regname = vim.v.event.regname
+            if regname == "x" then
+                local lines = vim.fn.getreg("x", 1, true)
+                local osc52_copy = require("vim.ui.clipboard.osc52").copy("+")
+                osc52_copy(lines)
+            end
+        end,
+    })
+    keymap("n", "<leader>y", '"xyy', { noremap = true, desc = "Yank line to x (clipboard)" })
+    keymap("v", "<leader>y", '"xy', { noremap = true, desc = "Yank selection to x (clipboard)" })
+    vim.notify("Clipboard mode: OSC52 only on register 'x' yank", vim.log.levels.INFO)
+else
+    vim.opt.clipboard = "unnamedplus"
+    vim.notify("Clipboard mode: unnamedplus", vim.log.levels.INFO)
 end
 
 -- tab/indent
@@ -160,7 +162,7 @@ vim.api.nvim_create_user_command("ZoomToggle", function()
     end
 end, {})
 
-vim.keymap.set("n", "<leader><leader>", ":ZoomToggle<CR>", { noremap = true, silent = true })
+keymap("n", "<leader><leader>", ":ZoomToggle<CR>", { noremap = true, silent = true })
 
 -- ModWindo
 vim.api.nvim_create_user_command("ModWindo", function(opts)
