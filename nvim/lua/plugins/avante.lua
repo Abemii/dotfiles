@@ -6,14 +6,26 @@ return {
         opts = {
             -- add any opts here
             -- for example
-            provider = "openai",
-            openai = {
-                endpoint = "https://api.openai.com/v1",
-                model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-                timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+            provider = "claude",
+            -- auto_suggestions_provider = "copilot",
+
+            -- openai = {
+            --     endpoint = "https://api.openai.com/v1",
+            --     model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+            --     timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+            --     temperature = 0,
+            --     max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --     --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+            -- },
+            behaviour = {
+                enable_cursor_planning_mode = true, -- Whether to enable Cursor Planning Mode. Default to false.
+            },
+            claude = {
+                endpoint = "https://api.anthropic.com",
+                model = "claude-3-7-sonnet-20250219",
                 temperature = 0,
-                max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-                --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+                max_tokens = 4096,
+                -- disable_tools = true,
             },
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -30,7 +42,7 @@ return {
             "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
             "ibhagwan/fzf-lua", -- for file_selector provider fzf
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            -- "zbirenbaum/copilot.lua", -- for providers='copilot'
             {
                 -- support for image pasting
                 "HakonHarnes/img-clip.nvim",

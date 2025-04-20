@@ -37,7 +37,7 @@ require("lazy").setup({
         { import = "plugins.lsp" },
         { import = "plugins.comp" },
         { import = "plugins.format_lint" },
-        -- { import = "plugins.avante" },
+        { import = "plugins.avante" },
     },
 }, {
     change_detection = {
