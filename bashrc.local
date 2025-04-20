@@ -1,0 +1,81 @@
+export PATH=$HOME/.local/bin:$PATH
+export PATH=${HOME}/.deno/bin:$PATH
+export PYTHON3_HOST_PROG="${HOME}/.venv-nvim/bin/python"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+FZF_INSTALL_DIR="${HOME}/.fzf/bin"
+export PATH="${FZF_INSTALL_DIR}:${PATH}"
+
+# --------------------------------------------------
+# install fzf if not installed
+# --------------------------------------------------
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "[bashrc] Installing fzf..."
+
+    mkdir -p "$FZF_INSTALL_DIR"
+    FZF_VERSION="0.61.1" # 必要に応じて更新
+    FZF_URL="https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+
+    tmpdir="$(mktemp -d)"
+    curl -sL "$FZF_URL" -o "$tmpdir/fzf.tar.gz"
+    tar -xzf "$tmpdir/fzf.tar.gz" -C "$tmpdir"
+    mv "$tmpdir/fzf" "$FZF_INSTALL_DIR/fzf"
+    chmod +x "$FZF_INSTALL_DIR/fzf"
+    rm -rf "$tmpdir"
+
+    echo "[bashrc] fzf installed to $FZF_INSTALL_DIR"
+fi
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
+# --------------------------------------------------
+# alias
+# --------------------------------------------------
+alias diff="${commands[colordiff]:-diff} -u"
+alias ls="ls -F --color"
+# alias history="history -E 1"
+# if type autossh >/dev/null 2>&1; then
+#     alias ssh='autossh -M 0'
+# fi
+# alias pbcopy=${commands[pbcopy]:-"xsel --clipboard --input"}
+# alias pbcopy=${commands[pbcopy]:-"xclip -selection clipboard"}
+# alias pbcopy="$(command -v pbcopy || echo 'xclip -selection clipboard')"
+## git
+alias gs='git status'
+alias ga='git add'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias gca='git commit --amend --no-edit'
+gp() {
+    git push origin "${1:-$(git symbolic-ref --short HEAD)}"
+}
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gt='git tree'
+alias gta='git tree --all'
+alias gm='git merge'
+alias grs='git reset --staged'
+alias gf='git fetch --all'
+
+# add git tree command to ~/.gitconfig if not already defined
+if ! git config --global alias.tree >/dev/null; then
+    git config --global alias.tree "log --graph --all --format=%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s"
+fi
+
+# --------------------------------------------------
+# history
+# --------------------------------------------------
+# Share bash history across sessions
+export HISTFILE=~/.bash_history
+export HISTSIZE=100000
+export HISTFILESIZE=200000
+shopt -s histappend
+case "$PROMPT_COMMAND" in
+  *"history -a"*) ;;  # すでに含まれていたら何もしない
+  *)
+    PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+    ;;
+esac

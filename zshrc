@@ -2,13 +2,13 @@ autoload -Uz promptinit && promptinit
 
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=nvim
-export PYTHON3_HOST_PROG=$(dirname $(realpath $0))/.venv/bin/python
+export PYTHON3_HOST_PROG=${HOME}.venv-nvim/bin/python
 
 # deno
 export DENO_INSTALL="${HOME}/.deno"
 if [ ! -d "${DENO_INSTALL}" ]; then
     # install deno
-    curl -fsSL https://deno.land/install.sh | sh
+    curl -fsSL https://deno.land/install.sh | sh -s -- -y --no-modify-path
 fi
 export PATH="$DENO_INSTALL/bin:$PATH"
 
@@ -40,7 +40,8 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-zinit light "chrissicool/zsh-256color"
+export TERM=xterm-256color
+# zinit light "chrissicool/zsh-256color"
 zinit ice wait'1a' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
 zinit light "ascii-soup/zsh-url-highlighter"
 zinit light "zsh-users/zsh-autosuggestions"
@@ -62,8 +63,13 @@ zinit light "sindresorhus/pure"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
 
 # fzf
-zinit ice from"gh-r" as"program"
-zinit light junegunn/fzf-bin
+zinit ice from"gh-r" as"program" \
+    pick"fzf" \
+    atclone"./install --bin" \
+    atpull"%atclone"
+zinit light junegunn/fzf
+
+source <(fzf --zsh)
 
 # enhancd -  A next-generation cd command with an interactive filter
 zinit ice wait'2' lucid pick 'init.zsh'; zinit light "b4b4r07/enhancd"
@@ -95,8 +101,6 @@ setopt share_history
 setopt auto_list
 setopt auto_menu
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # env dependent settings
 case ${OSTYPE} in
     darwin*)
@@ -123,19 +127,26 @@ if type autossh > /dev/null 2>&1; then
     alias ssh='autossh -M 0'
 fi
 # alias pbcopy=${commands[pbcopy]:-"xsel --clipboard --input"}
-alias pbcopy=${commands[pbcopy]:-"xclip -selection clipboard"}
-## git
 alias gs='git status'
 alias ga='git add'
 alias gco='git checkout'
 alias gcm='git commit -m'
 alias gca='git commit --amend --no-edit'
-alias gp='git push'
-alias gpo='git push origin'
+gp() {
+    git push origin "${1:-$(git symbolic-ref --short HEAD)}"
+}
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias gt='git tree'
+alias gta='git tree --all'
 alias gm='git merge'
 alias grs='git reset --staged'
+alias gf='git fetch --all'
+
+# add git tree command to ~/.gitconfig if not already defined
+if ! git config --global alias.tree >/dev/null; then
+    git config --global alias.tree "log --graph --all --format=%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s"
+fi
 
 alias ll='ls -alF'
 alias la='ls -A'
