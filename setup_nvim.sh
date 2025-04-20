@@ -292,7 +292,7 @@ else
 fi
 
 # --------------------------------------------------
-# create synbolic linkt of nvim config
+# create synbolic link of nvim config
 # --------------------------------------------------
 echoI "Create symbolic link of nvim config"
 if [ ! -d "${HOME}/.config/nvim" ]; then
