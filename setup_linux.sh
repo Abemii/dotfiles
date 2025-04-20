@@ -32,6 +32,14 @@ fi
 # install software
 echoI "Install software"
 
+# -------------------------------------------------
+# install essential packages
+# -------------------------------------------------
+if $IS_SUDOER; then
+    sudo apt-get update
+    sudo apt-get install -y curl wget build-essential pkg-config unzip git file
+fi
+
 # ---------------------------------------------------
 # install wezterm for osc52
 # ---------------------------------------------------
@@ -80,12 +88,3 @@ elif ! { fc-list | grep HackGen >/dev/null 2>&1; }; then
 else
     echoI "-- HackGen is already installed."
 fi
-
-# install essential packages
-# if $IS_DEBIAN && $IS_SUDOER; then
-#     sudo apt-get update
-#     sudo apt-get install -y wget build-essential unzip
-# fi
-
-# install neovim related
-# ${SCRIPT_DIR}/setup_nvim.sh
