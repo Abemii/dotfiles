@@ -2,7 +2,7 @@ autoload -Uz promptinit && promptinit
 
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=nvim
-export PYTHON3_HOST_PROG=${HOME}.venv-nvim/bin/python
+export PYTHON3_HOST_PROG=${HOME}/.venv-nvim/bin/python
 
 # deno
 export DENO_INSTALL="${HOME}/.deno"
@@ -163,3 +163,5 @@ setopt extended_glob
 setopt equals
 setopt magic_equal_subst
 setopt numeric_glob_sort
+
+source ${XDG_CONFIG_HOME}/nvm/nvm.sh

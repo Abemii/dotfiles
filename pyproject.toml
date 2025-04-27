@@ -9,4 +9,5 @@ dependencies = [
   "ruff",
   "isort",
   "trash-cli",
+  "jupyter-client>=8.6.3",
 ]
