@@ -4,34 +4,20 @@ return {
         event = "VeryLazy",
         version = false, -- Never set this value to "*"! Never!
         opts = {
-            -- -- add any opts here
-            -- -- for example
-            -- provider = "claude",
-            -- -- auto_suggestions_provider = "copilot",
-
-            -- -- openai = {
-            -- --     endpoint = "https://api.openai.com/v1",
-            -- --     model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-            -- --     timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-            -- --     temperature = 0,
-            -- --     max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-            -- --     --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-            -- -- },
-            -- behaviour = {
-            --     enable_cursor_planning_mode = true, -- Whether to enable Cursor Planning Mode. Default to false.
-            -- },
-            -- claude = {
-            --     endpoint = "https://api.anthropic.com",
-            --     model = "claude-3-7-sonnet-20250219",
-            --     temperature = 0,
-            --     max_tokens = 4096,
-            --     -- disable_tools = true,
-            -- },
             provider = "copilot",
-            copilot = {
-                model = "claude-3.7-sonnet",
+            providers = {
+                copilot = {
+                    model = "claude-sonnet-4.5",
+                    encpoint = "https://api.githubcopilot.com",
+                    allow_insecure = false,
+                    timeout = 30 * 30 * 1000,  -- 30 minutes
+                    extra_request_body = {
+                        temperature = 0,
+                        max_completion_tokens = 1000000,
+                        reasoning_effort = "high",
+                    },
+                },
             },
-            auto_suggestions_provider = "copilot", -- 一応設定しておく
             file_selector = {
                 provider = "telescope",
             },
@@ -80,9 +66,9 @@ return {
                 -- Make sure to set this up properly if you have lazy=true
                 "MeanderingProgrammer/render-markdown.nvim",
                 opts = {
-                    file_types = { "markdown", "Avante" },
+                    file_types = { "Avante" },
                 },
-                ft = { "markdown", "Avante" },
+                ft = { "Avante" },
             },
         },
     },

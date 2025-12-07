@@ -22,14 +22,9 @@ return {
                 automatic_installation = true,
             })
 
-            -- LSPconfig setup
-            local lspconfig = require("lspconfig")
-
-            lspconfig.pyright.setup({})
-            lspconfig.clangd.setup({})
-            lspconfig.jsonls.setup({})
-            lspconfig.bashls.setup({})
-            lspconfig.lua_ls.setup({
+            -- LSP setup using new Nvim 0.11+ approach
+            -- Configure lua_ls with custom settings
+            vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
                         diagnostics = { globals = { "vim" } },
@@ -38,6 +33,13 @@ return {
                     },
                 },
             })
+
+            -- Enable language servers
+            vim.lsp.enable("pyright") -- Python
+            vim.lsp.enable("clangd") -- C++
+            vim.lsp.enable("jsonls") -- JSON
+            vim.lsp.enable("bashls") -- shell script
+            vim.lsp.enable("lua_ls") -- Lua
 
             -- Always show signcolumn
             vim.opt.signcolumn = "yes"
