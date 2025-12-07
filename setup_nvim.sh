@@ -275,10 +275,10 @@ fi
 # --------------------------------------------------
 echoI "Install nvim"
 if ! { type nvim >/dev/null 2>&1; }; then
-    NVIM_VERSION="0.10.3"
-    wget -P ${TMP_DIR} https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux64.tar.gz
-    tar zxf ${TMP_DIR}/nvim-linux64.tar.gz -C ${INSTALL_DIR}
-    ln -s ${INSTALL_DIR}/nvim-linux64/bin/nvim ${INSTALL_DIR}/bin/nvim
+    NVIM_VERSION="v0.11.5"
+    wget -P ${TMP_DIR} https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux-x86_64.tar.gz
+    tar zxf ${TMP_DIR}/nvim-linux-x86_64.tar.gz -C ${INSTALL_DIR}
+    ln -s ${INSTALL_DIR}/nvim-linux-x86_64/bin/nvim ${INSTALL_DIR}/bin/nvim
 
     # check if nvim is installed
     if { type nvim >/dev/null 2>&1; }; then
